@@ -26,7 +26,7 @@ export default function Navbar() {
             { href: '#reserva', label: t.nav.bookings }
           ].map(item => (
             <li key={item.href}>
-              <a href__={item.href} className="text-white/60 hover:text-primary text-[0.75rem] font-semibold uppercase tracking-[2px] transition-all duration-500">{item.label}</a>
+              <a href={item.href} className="text-white/60 hover:text-primary text-[0.75rem] font-semibold uppercase tracking-[2px] transition-all duration-500">{item.label}</a>
             </li>
           ))}
         </ul>
@@ -51,7 +51,7 @@ export default function Navbar() {
             </div>
           )}
         </div>
-        <a href__="#reserva" className="px-4 py-2 border border-primary rounded text-primary text-[0.75rem] font-bold uppercase tracking-[1px] hover:bg-primary hover:text-black transition-all duration-500"> [cite: 59]
+        <a href="#reserva" className="px-4 py-2 border border-primary rounded text-primary text-[0.75rem] font-bold uppercase tracking-[1px] hover:bg-primary hover:text-black transition-all duration-500"> [cite: 59]
           {t.nav.cta}
         </a>
       </div>
