@@ -1,201 +1,62 @@
-export const WHATSAPP_LINK = "https://wa.me/573043741941"; [cite: 33]
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;500;600;700;800;900&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-export const fleetData = [
-  {
-    id: "corvette-c8",
-    name: "Chevrolet Corvette C8",
-    category: "exotic",
-    categoryLabel: { es: "Exotic Sport", en: "Exotic Sport", it: "Sport Esotico", de: "Exotischer Sport", fr: "Sport Exotique" },
-    priceCOP: 2500000,
-    transmission: "Ocho Marchas",
-    fuel: "Premium",
-    passengers: 2,
-    hp: "495 HP",
-    engine: "6.2L V8 DI",
-    tag: "Hypercar",
-    image: "https://images.unsplash.com/photo-1600712242805-5f78671b24da?auto=format&fit=crop&w=800&q=80",
-    status: "available",
-    returnDate: null
-  },
-  {
-    id: "tahoe-z71",
-    name: "Chevrolet Tahoe Z71",
-    category: "suv",
-    categoryLabel: { es: "SUV Premium", en: "Premium SUV", it: "SUV Premium", de: "Premium SUV", fr: "SUV Premium" },
-    priceCOP: 1100000,
-    transmission: "Automática",
-    fuel: "Premium",
-    passengers: 7,
-    hp: null,
-    engine: null,
-    tag: "Elite VIP",
-    image: "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&w=800&q=80", [cite: 34]
-    status: "available",
-    returnDate: null
-  },
-  { [cite: 34]
-    id: "prado-txl",
-    name: "Toyota Prado TXL",
-    category: "suv",
-    categoryLabel: { es: "SUV Ejecutiva", en: "Executive SUV", it: "SUV Esecutiva", de: "Executive SUV", fr: "SUV Exécutif" },
-    priceCOP: 650000,
-    transmission: "Aut / Sec",
-    fuel: "Diésel",
-    passengers: 7,
-    hp: null,
-    engine: null,
-    tag: "4x4 Premium",
-    image: "https://images.unsplash.com/photo-1559416523-140ddc3d238c?auto=format&fit=crop&w=800&q=80", [cite: 35]
-    status: "available",
-    returnDate: null
-  },
-  {
-    id: "prado-tx", [cite: 35]
-    name: "Toyota Prado TX",
-    category: "suv",
-    categoryLabel: { es: "SUV Ejecutiva", en: "Executive SUV", it: "SUV Esecutiva", de: "Executive SUV", fr: "SUV Exécutif" },
-    priceCOP: 650000,
-    transmission: "Automática",
-    fuel: "Diésel",
-    passengers: 7,
-    hp: null,
-    engine: null,
-    tag: "4x4 Elite",
-    image: "https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?auto=format&fit=crop&w=800&q=80", [cite: 35]
-    status: "available",
-    returnDate: null
-  },
-  {
-    id: "prado-4x4",
-    name: "Toyota Prado 4X4", [cite: 36]
-    category: "suv",
-    categoryLabel: { es: "SUV Ejecutiva", en: "Executive SUV", it: "SUV Esecutiva", de: "Executive SUV", fr: "SUV Exécutif" },
-    priceCOP: 650000,
-    transmission: "Automática",
-    fuel: "Diésel / Gas",
-    passengers: 7,
-    hp: "201 HP",
-    engine: "2.8L Turbo",
-    tag: "All-Terrain",
-    image: "https://images.unsplash.com/photo-1519641471654-76ce0107ad1b?auto=format&fit=crop&w=800&q=80", [cite: 36]
-    status: "available",
-    returnDate: null
-  },
-  {
-    id: "prado-blindada",
-    name: "Toyota Prado Blindada",
-    category: "suv", [cite: 36]
-    categoryLabel: { es: "Seguridad VIP", en: "VIP Security", it: "Sicurezza VIP", de: "VIP-Sicherheit", fr: "Sécurité VIP" },
-    priceCOP: 650000,
-    transmission: "Automática",
-    fuel: "Diésel",
-    passengers: 7,
-    hp: "201 HP",
-    engine: null,
-    armor: "Nivel 2+",
-    tag: "🛡️ Blindado 2+", [cite: 36]
-    image: "https://images.unsplash.com/photo-1502877338535-766e1452684a?auto=format&fit=crop&w=800&q=80", [cite: 37]
-    status: "available",
-    returnDate: null
-  },
-  {
-    id: "cx9",
-    name: "Mazda CX-9",
-    category: "suv", [cite: 37]
-    categoryLabel: { es: "SUV Premium", en: "Premium SUV", it: "SUV Premium", de: "Premium SUV", fr: "SUV Premium" },
-    priceCOP: 550000,
-    transmission: "SkyActiv-Drive",
-    fuel: "Premium",
-    passengers: 7,
-    hp: null,
-    engine: null,
-    tag: "Familiar Luxury",
-    image: "https://images.unsplash.com/photo-1616789916523-8d18e1af7ea6?auto=format&fit=crop&w=800&q=80", [cite: 37]
-    status: "available",
-    returnDate: null
-  },
-  {
-    id: "q5",
-    name: "Audi Q5",
-    category: "suv",
-    categoryLabel: { es: "SUV Premium", en: "Premium SUV", it: "SUV Premium", de: "Premium SUV", fr: "SUV Premium" }, [cite: 37]
-    priceCOP: 500000,
-    transmission: "S-Tronic",
-    fuel: "Premium",
-    passengers: 5,
-    hp: null,
-    engine: null,
-    tag: "Euro Luxury",
-    image: "https://images.unsplash.com/photo-1544636331-e26879cd4d9b?auto=format&fit=crop&w=800&q=80", [cite: 37]
-    status: "available",
-    returnDate: null
-  },
-  {
-    id: "equinox",
-    name: "Chevrolet Equinox",
-    category: "suv",
-    categoryLabel: { es: "SUV Media", en: "Mid SUV", it: "SUV Media", de: "Mittelklasse SUV", fr: "SUV Moyen" }, [cite: 38]
-    priceCOP: 400000,
-    transmission: "Automática",
-    fuel: "Corriente",
-    passengers: 5,
-    hp: null,
-    engine: null,
-    tag: "Confort Urbano",
-    image: "https://images.unsplash.com/photo-1494976388531-d1058494cdd8?auto=format&fit=crop&w=800&q=80", [cite: 38]
-    status: "available",
-    returnDate: null
-  },
-  {
-    id: "mazda3",
-    name: "Mazda 3",
-    category: "sport",
-    categoryLabel: { es: "Sedán Premium", en: "Premium Sedan", it: "Berlina Premium", de: "Premium Limousine", fr: "Berline Premium" },
-    priceCOP: 300000, [cite: 38]
-    transmission: "Triptónico",
-    fuel: "Premium",
-    passengers: 5,
-    hp: "186 HP",
-    engine: "2.5L SkyActiv",
-    tag: "Sport Urbano",
-    image: "https://images.unsplash.com/photo-1580273916550-e323be2ae537?auto=format&fit=crop&w=800&q=80", [cite: 38]
-    status: "available",
-    returnDate: null
+@layer base {
+  :root {
+    --font-montserrat: 'Montserrat', sans-serif;
+    --background: 0 0% 2%;
+    --foreground: 0 0% 100%;
+    --card: 0 0% 3%;
+    --card-foreground: 0 0% 100%;
+    --popover: 0 0% 3%;
+    --popover-foreground: 0 0% 100%;
+    --primary: 0 100% 50%;
+    --primary-foreground: 0 0% 0%;
+    --secondary: 0 0% 8%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 0 0% 10%;
+    --muted-foreground: 0 0% 53%;
+    --accent: 43 72% 48%;
+    --accent-foreground: 0 0% 0%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 10%;
+    --input: 0 0% 10%;
+    --ring: 0 100% 50%;
+    --radius: 0.5rem;
   }
-];
+}
 
-export const reviewsData = [
-  {
-    id: "r1",
-    text: {
-      es: "¡Servicio excelente! Flota impecable en El Poblado. Totalmente recomendado.",
-      en: "Excellent service! Pristine fleet in El Poblado. Totally recommended.",
-      it: "Servizio eccellente! Flotta impeccabile a El Poblado. Totalmente consigliato.",
-      de: "Ausgezeichneter Service! Makellose Flotte in El Poblado. Absolut empfehlenswert.",
-      fr: "Service excellent ! Flotte impeccable à El Poblado. Totalement recommandé." [cite: 39]
-    },
-    author: "Matthew S. (Miami)" [cite: 40]
-  },
-  {
-    id: "r2",
-    text: {
-      es: "La mejor rentadora de Medellín. Autos impecables y atención VIP de primera.",
-      en: "The best rental in Medellín. Impeccable cars and first-class VIP service.",
-      it: "Il mejor noleggio di Medellín. Auto impeccabili e servicio VIP di prima classe.",
-      de: "Die beste Autovermietung in Medellín. Tadellose Autos und erstklassiger VIP-Service.",
-      fr: "La meilleure location de Medellín. Voitures impeccables et service VIP de première classe." [cite: 40]
-    },
-    author: "Juan P. (Bogotá)" [cite: 41]
-  },
-  {
-    id: "r3",
-    text: {
-      es: "Autos de lujo de primer nivel y proceso súper rápido. Volveré sin duda.",
-      en: "Top-notch luxury cars and super fast process. Will definitely return.",
-      it: "Auto di lusso di prim'ordine e processo super veloce. Tornerò sicuramente.",
-      de: "Erstklassige Luxusautos und superschneller Prozess. Komme definitiv wieder.",
-      fr: "Voitures de luxe haut de gamme et processus ultra rapide. Je reviendrai sans aucun doute." [cite: 41]
-    },
-    author: "David K. (London)" [cite: 42]
+@layer base {
+  * {
+    @apply border-border;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    -webkit-font-smoothing: antialiased;
   }
-];
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    @apply bg-background text-foreground font-montserrat;
+    overflow-x: hidden;
+  }
+
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: hsl(var(--background)); }
+  ::-webkit-scrollbar-thumb { background: #1a1a1a; border-radius: 3px; }
+  ::-webkit-scrollbar-thumb:hover { background: hsl(var(--primary)); }
+}
+
+@keyframes scrollReviews {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(calc(-50% - 12px)); }
+}
+
+@keyframes pulse-gold {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.5); }
+  50% { box-shadow: 0 0 20px 8px rgba(212, 175, 55, 0.2); }
+}
