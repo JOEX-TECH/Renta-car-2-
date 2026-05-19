@@ -1,60 +1,52 @@
-import React, { createContext, useContext, useState, useEffect, useCallback } from 'react'; [cite: 42]
-import { translations } from './translations'; [cite: 42, 43]
-const LanguageContext = createContext(); [cite: 43]
+import React, { createContext, useContext, useState, useCallback } from 'react';
+
+const LanguageContext = createContext();
+
+// Diccionario integrado para evitar dependencias faltantes
+const customTranslations = {
+  es: {
+    nav: { services: "Servicios", fleet: "Flota", bookings: "Reservas", cta: "Rent Now" },
+    hero: { title: "ALQUILER DE AUTOS DE LUXE EN", highlight: "MEDELLÍN", suffix: "", subtitle: "EXPERIENCIAS DE CONDUCCIÓN PREMIUM DE ALTA GAMA", btn: "Ver Flota VIP" },
+    services: { sub: "EXCLUSIVIDAD", title: "NUESTROS SERVICIOS VIP", s1t: "Entrega Aeropuerto", s1d: "Despachos directos sin costo en el terminal de Rionegro.", s2t: "Seguridad Máxima", s2d: "Vehículos blindados con esquemas de protección premium.", s3t: "Soporte 24/7", s3d: "Asistencia en ruta y atención bilingüe personalizada." },
+    fleet: { sub: "CATÁLOGO", title: "EXPLORA NUESTRA FLOTA" },
+    priceDay: "Día",
+    form: { sub: "RESERVA", title: "SOLICITA DISPONIBILIDAD", nameLabel: "Nombre Completo", namePlaceholder: "Tu nombre...", daysLabel: "Días comerciales", btn: "Enviar a WhatsApp VIP" },
+    faq: { sub: "SOPORTE", title: "PREGUNTAS FRECUENTES", q1: "¿Qué requisitos solicitan?", a1: "Licencia de conducción vigente, documento de identidad/Pasaporte y una tarjeta de crédito para el hold de garantía.", q2: "¿Tienen entregas en el aeropuerto?", a2: "Sí, coordinamos la entrega y recepción directamente en el Aeropuerto José María Córdova de Rionegro.", q3: "¿Cómo funciona el depósito?", a3: "Se realiza un bloqueo temporal preventivo en tu tarjeta que se libera inmediatamente al devolver el auto." }
+  },
+  en: {
+    nav: { services: "Services", fleet: "Fleet", bookings: "Bookings", cta: "Rent Now" },
+    hero: { title: "LUXURY CAR RENTAL IN", highlight: "MEDELLIN", suffix: "", subtitle: "HIGH-END PREMIUM DRIVING EXPERIENCES", btn: "View VIP Fleet" },
+    services: { sub: "EXCLUSIVITY", title: "OUR VIP SERVICES", s1t: "Airport Delivery", s1d: "Direct drop-offs at Rionegro airport terminals free of charge.", s2t: "Maximum Security", s2d: "Armored vehicles with top-tier security configurations.", s3t: "24/7 Concierge", s3d: "Roadside assistance and personalized bilingual dispatch." },
+    fleet: { sub: "CATALOG", title: "EXPLORE OUR FLEET" },
+    priceDay: "Day",
+    form: { sub: "BOOKING", title: "REQUEST AVAILABILITY", nameLabel: "Full Name", namePlaceholder: "Your name...", daysLabel: "Rental Days", btn: "Send to VIP WhatsApp" },
+    faq: { sub: "SUPPORT", title: "FREQUENTLY ASKED QUESTIONS", q1: "What are the rental requirements?", a1: "Valid driver's license, ID or Passport, and a credit card for the security hold.", q2: "Do you deliver to the airport?", a2: "Yes, we handle direct delivery and pick-up at the Rionegro Airport terminal.", q3: "How does the deposit work?", a3: "A temporary authorization hold is placed on your card and fully released upon car return." }
+  }
+};
 
 export function LanguageProvider({ children }) {
-  const [lang, setLang] = useState('es'); [cite: 44]
-  const [rates, setRates] = useState({ USD: null, EUR: null }); [cite: 45]
-  const [ratesLoaded, setRatesLoaded] = useState(false); [cite: 45]
+  const [lang, setLang] = useState('es');
 
-  useEffect(() => {
-    fetch('https://open.er-api.com/v6/latest/COP')
-      .then(r => r.json())
-      .then(data => {
-        if (data && data.rates) {
-          setRates({ USD: data.rates.USD, EUR: data.rates.EUR });
-          setRatesLoaded(true);
-        }
-      })
-      .catch(() => {
-        setRates({ USD: 1/4200, EUR: 1/4600 });
-        setRatesLoaded(true);
-      });
-  }, []); [cite: 46]
+  const t = customTranslations[lang] || customTranslations.es;
 
-  const t = translations[lang] || translations.es; [cite: 47]
   const formatPrice = useCallback((copPrice) => {
     if (lang === 'es') return `$${Number(copPrice).toLocaleString('es-CO')}`;
-    if (lang === 'en' && rates.USD) {
-      const usd = (copPrice * rates.USD).toFixed(0);
-      return `U$D ${Number(usd).toLocaleString('en-US')}`;
-    }
-    if (['it', 'de', 'fr'].includes(lang) && rates.EUR) {
-      const eur = (copPrice * rates.EUR).toFixed(0);
-      return `€ ${Number(eur).toLocaleString('de-DE')}`;
-    }
-    return `$${Number(copPrice).toLocaleString('es-CO')}`;
-  }, [lang, rates]); [cite: 47]
+    const usd = (copPrice / 4000).toFixed(0);
+    return `U$D ${Number(usd).toLocaleString('en-US')}`;
+  }, [lang]);
 
   const getCurrencyPrice = useCallback((copPrice) => {
     if (lang === 'es') return '';
-    if (lang === 'en' && rates.USD) {
-      const usd = (copPrice * rates.USD).toFixed(0);
-      return `U$D ${Number(usd).toLocaleString('en-US')} / Day`;
-    }
-    if (['it', 'de', 'fr'].includes(lang) && rates.EUR) {
-      const eur = (copPrice * rates.EUR).toFixed(0);
-      return `€ ${Number(eur).toLocaleString('de-DE')} ${t.priceDay}`;
-    }
-    return '';
-  }, [lang, rates, t]); [cite: 48]
+    const usd = (copPrice / 4000).toFixed(0);
+    return `U$D ${Number(usd).toLocaleString('en-US')} / Day`;
+  }, [lang]);
 
   return (
-    <LanguageContext.Provider value={{ lang, setLang, t, rates, ratesLoaded, formatPrice, getCurrencyPrice }}> [cite: 49]
+    <LanguageContext.Provider value={{ lang, setLang, t, formatPrice, getCurrencyPrice, ratesLoaded: true }}>
       {children}
     </LanguageContext.Provider>
   );
-} [cite: 50]
+}
 
 export function useLanguage() {
   return useContext(LanguageContext);
