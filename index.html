@@ -880,21 +880,25 @@
         }
         function clearSignatureCanvas() { ctx.clearRect(0, 0, canvas.width, canvas.height); }
 
-        function openContractPreview() {
-            const carName = document.getElementById('formCar').value;
-            const days = document.getElementById('formDays').value;
-            const clientName = document.getElementById('formName').value || "CLIENTE REGISTRADO VIP";
+       function openContractPreview() {
+    const targetCar = document.getElementById('formCar').value;
+    const targetName = document.getElementById('formName').value || "Cliente VIP";
+    const targetDays = document.getElementById('formDays').value;
 
-            document.getElementById('contractBody').innerHTML = `
-                <p><strong>CONTRATO COMERCIAL DE ADHESIÓN REGISTRO N°:</strong> RCP-2026-MED9437</p>
-                <p><strong>ARRENDADOR:</strong> RENTA CAR PREMIUM S.A.S. (Medellín, Colombia)</p>
-                <p><strong>ARRENDATARIO:</strong> ${clientName.toUpperCase()}</p>
-                <p><strong>UNIDAD SELECCIONADA:</strong> ${carName.toUpperCase()} por un periodo comercial de (${days}) días continuos.</p>
-                <p><strong>CONDICIONES:</strong> Uso exclusivo de combustible extra premium de alto octanaje o diésel certificado. Póliza corporativa vigente con deducible estructurado. Sistema de geolocalización satelital activo 24 horas.</p>
-                <p class="text-white border-l-2 border-primary pl-2 bg-primary/5 py-1"><strong>RESPONSABILIDAD JURÍDICA:</strong> Eduardo falleció y la firma comercial autorizada corresponde a Carmen una vez concluya la sucesión judicial respectiva.</p>
-            `;
-            openModal('modalContrato');
-        }
+    const body = document.getElementById('contractBody');
+    body.innerHTML = `
+        <p class="text-center font-bold text-white border-b border-white/10 pb-2 mb-3">CONTRATO CELEBRADO EN MEDELLÍN, COLOMBIA</p>
+        <p><strong>ARRENDADOR:</strong> RENTA CAR PREMIUM S.A.S.</p>
+        <p><strong>ARRENDATARIO:</strong> ${targetName.toUpperCase()}</p>
+        <p><strong>VEHÍCULO OBJETO:</strong> ${targetCar.toUpperCase()}</p>
+        <p><strong>DURACIÓN ESTABLECIDA:</strong> ${targetDays} Días Operacionales.</p>
+        <p class="pt-2"><strong>CLÁUSULAS ESENCIALES:</strong> El arrendatario acepta la custodia legal del vehículo, comprometiéndose a retornarlo en idénticas condiciones estéticas y mecánicas. El hold de seguridad ampara multas, faltantes de combustible y deducibles de pólizas de cobertura integral. Se prohíbe explícitamente el uso del vehículo en eventos de velocidad, tracción ilegal o subarrendamiento.</p>
+        <p class="text-[0.65rem] text-zinc-500 italic mt-4">Documento digital certificado por JOEX AGENCIA DIGITAL de conformidad con las leyes comerciales del país.</p>
+    `;
+
+    openModal('modalContrato');
+    setTimeout(initSignatureCanvasCore, 250);
+}
 
         function acceptContractTerms() {
             alert("Términos legales y firma digital estampados en el contrato con éxito.");
