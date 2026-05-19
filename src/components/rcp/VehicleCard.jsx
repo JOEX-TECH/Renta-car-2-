@@ -1,47 +1,19 @@
-import React, { useState } from 'react';
-import { useLanguage } from '../../lib/LanguageContext';
-import VehicleGalleryModal from './VehicleGalleryModal';
+iimport React from 'react';
 
-export default function VehicleCard({ car }) {
-  const { lang, formatPrice, getCurrencyPrice } = useLanguage();
-  const [galleryOpen, setGalleryOpen] = useState(false);
+export default function VehicleGalleryModal({ isOpen, onClose, vehicleName, vehicleImage }) {
+  if (!isOpen) return null;
 
   return (
-    <>
-      <div className="bg-zinc-950 border border-white/5 rounded-lg overflow-hidden flex flex-col h-full group relative transition-all duration-300 hover:border-primary/40">
-        
-        <div className="absolute top-4 left-4 z-10 flex flex-col gap-2">
-          <span className="bg-black/90 text-white border border-white/10 text-[0.6rem] font-black uppercase tracking-[1.5px] px-3 py-1 rounded">
-            {car.categoryLabel[lang] || car.categoryLabel.es}
-          </span>
+    <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/90 backdrop-blur-md" onClick={onClose}>
+      <div className="relative max-w-[800px] w-full bg-zinc-950 border border-white/10 rounded-lg overflow-hidden" onClick={e => e.stopPropagation()}>
+        <div className="p-4 border-b border-white/5 flex justify-between items-center bg-black">
+          <h3 className="text-white font-bold text-[0.8rem] uppercase tracking-[1px]">{vehicleName} — HD Gallery</h3>
+          <button onClick={onClose} className="text-white/60 hover:text-white text-md cursor-pointer bg-transparent border-none">✕</button>
         </div>
-
-        <div className="w-full h-[220px] overflow-hidden relative cursor-pointer" onClick={() => setGalleryOpen(true)}>
-          <img src={car.image} alt={car.name} className="w-full h-full object-cover transition-all duration-500 group-hover:scale-102" />
-        </div>
-
-        <div className="p-6 flex flex-col flex-grow bg-zinc-950">
-          <h3 className="text-white text-[1.1rem] font-black uppercase tracking-[0.5px] mb-2">{car.name}</h3>
-          
-          <div className="mb-4">
-            <span className="text-primary text-[1.25rem] font-black">{formatPrice(car.priceCOP)}</span>
-            <span className="text-muted-foreground text-[0.75rem]"> / Día</span>
-          </div>
-
-          <div className="grid grid-cols-2 gap-2 border-t border-white/5 pt-4 mb-6 text-[0.75rem] text-muted-foreground font-light">
-            <div>🕹️ <span className="font-medium text-white/80">{car.transmission}</span></div>
-            <div>⛽ <span className="font-medium text-white/80">{car.fuel}</span></div>
-            <div>👥 <span className="font-medium text-white/80">{car.passengers} Pasajeros</span></div>
-            <div>⚡ <span className="font-medium text-white/80">{car.hp}</span></div>
-          </div>
-
-          <a href="#reserva" className="mt-auto block w-full py-3 bg-transparent border border-white/10 text-white text-[0.7rem] font-black uppercase tracking-[2px] rounded text-center hover:bg-white hover:text-black transition-all">
-            Reservar Ahora
-          </a>
+        <div className="p-2 bg-black flex items-center justify-center">
+          <img src={vehicleImage} alt={vehicleName} className="max-w-full max-h-[65vh] object-contain rounded" />
         </div>
       </div>
-
-      <VehicleGalleryModal isOpen={galleryOpen} onClose={() => setGalleryOpen(false)} vehicleName={car.name} vehicleImage={car.image} />
-    </>
+    </div>
   );
 }
