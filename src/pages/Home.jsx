@@ -1,26 +1,26 @@
-import React, { useState } from 'react'; [cite: 26]
-import Navbar from '@/components/rcp/Navbar'; [cite: 27]
-import Hero from '@/components/rcp/Hero';
-import Services from '@/components/rcp/Services';
-import HowItWorks from '@/components/rcp/HowItWorks';
-import Fleet from '@/components/rcp/Fleet'; [cite: 27]
-import PriceCalculator from '@/components/rcp/PriceCalculator'; [cite: 28]
-import VehicleComparator from '@/components/rcp/VehicleComparator';
-import Promotions from '@/components/rcp/Promotions';
-import Reviews from '@/components/rcp/Reviews';
-import ReservationForm from '@/components/rcp/ReservationForm'; [cite: 28]
-import FAQ from '@/components/rcp/FAQ'; [cite: 29]
-import MapSection from '@/components/rcp/MapSection';
-import Footer from '@/components/rcp/Footer';
-import ChatBot from '@/components/rcp/ChatBot';
-import PaymentModal from '@/components/rcp/PaymentModal'; [cite: 29]
-import ContractPreview from '@/components/rcp/ContractPreview'; [cite: 30]
-import AdminPanel from '@/components/rcp/AdminPanel';
-import { fleetData } from '@/lib/fleetData'; [cite: 30]
+import React, { useState } from 'react';
+import Navbar from '../components/rcp/Navbar';
+import Hero from '../components/rcp/Hero';
+import Services from '../components/rcp/Services';
+import HowItWorks from '../components/rcp/HowItWorks';
+import Fleet from '../components/rcp/Fleet';
+import PriceCalculator from '../components/rcp/PriceCalculator';
+import VehicleComparator from '../components/rcp/VehicleComparator';
+import Promotions from '../components/rcp/Promotions';
+import Reviews from '../components/rcp/Reviews';
+import ReservationForm from '../components/rcp/ReservationForm';
+import FAQ from '../components/rcp/FAQ';
+import MapSection from '../components/rcp/MapSection';
+import Footer from '../components/rcp/Footer';
+import ChatBot from '../components/rcp/ChatBot';
+import PaymentModal from '../components/rcp/PaymentModal';
+import ContractPreview from '../components/rcp/ContractPreview';
+import AdminPanel from '../components/rcp/AdminPanel';
+import { fleetData } from '../lib/fleetData';
 
 export default function Home() {
   const [paymentOpen, setPaymentOpen] = useState(false);
-  const [contractOpen, setContractOpen] = useState(false); [cite: 31]
+  const [contractOpen, setContractOpen] = useState(false);
 
   return (
     <div className="bg-background text-foreground min-h-screen font-montserrat">
@@ -33,7 +33,7 @@ export default function Home() {
       <PriceCalculator />
       <VehicleComparator />
       
-      <div className="flex flex-wrap justify-center gap-4 py-8 px-6">
+      <div className="flex flex-wrap justify-center gap-4 py-8 px-6 bg-black">
         <button onClick={() => setPaymentOpen(true)}
           className="px-6 py-3 border border-accent text-accent text-[0.75rem] font-bold uppercase tracking-[2px] rounded hover:bg-accent hover:text-black transition-all duration-500 cursor-pointer bg-transparent">
           Pre-autorizar Depósito de Garantía
@@ -52,8 +52,8 @@ export default function Home() {
       <ChatBot />
       <AdminPanel />
       
-      <PaymentModal isOpen={paymentOpen} onClose={() => setPaymentOpen(false)} /> [cite: 32]
-      <ContractPreview isOpen={contractOpen} onClose={() => setContractOpen(false)} vehicle={fleetData[0]} days={3} clientName="Cliente VIP" /> [cite: 33]
+      <PaymentModal isOpen={paymentOpen} onClose={() => setPaymentOpen(false)} />
+      <ContractPreview isOpen={contractOpen} onClose={() => setContractOpen(false)} vehicle={fleetData[0]} days={3} clientName="Cliente VIP" />
     </div>
   );
 }
