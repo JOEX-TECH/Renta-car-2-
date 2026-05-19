@@ -90,7 +90,10 @@
 </head>
 <body class="overflow-x-hidden antialiased">
 
-    <iframe id="bg-audio-player" src="https://www.youtube.com/embed/cVjd8SSdgME?autoplay=1&mute=0&loop=1&playlist=cVjd8SSdgME" allow="autoplay"></iframe>
+  audio id="bg-audio-player" autoplay loop>
+    <source src="musica.mp3" type="audio/mpeg">
+    Tu navegador no soporta el elemento de audio.
+</audio>
 
     <nav class="fixed top-0 left-0 w-full z-50 px-4 md:px-12 py-4 flex justify-between items-center transition-all duration-300" style="background: rgba(10, 10, 10, 0.75); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255, 255, 255, 0.05);">
         <div class="flex items-center gap-3">
@@ -1138,6 +1141,14 @@
             const baseMsg = `👋 *SOLICITUD DE ALQUILER REAL*%0A• Auto: ${car}%0A• Cliente: ${name}%0A• Días: ${days}%0A• Lugar: ${lugar}%0A• Teléfono: ${phone}%0A• Valor: $${copTotal.toLocaleString('es-CO')} COP`;
             window.open(`https://wa.me/573043741941?text=${baseMsg}`, '_blank');
         }
+        // Activa la música del repositorio de forma humana al primer clic en la página
+window.addEventListener('click', () => {
+    const audio = document.getElementById('bg-audio-player');
+    if (audio && audio.paused) {
+        audio.play().catch(err => console.log("Autoplay bloqueado hasta interacción:", err));
+    }
+}, { once: true }); // El 'once: true' hace que este detector se apague tras el primer clic
+       
     </script>
 </body>
 </html>
