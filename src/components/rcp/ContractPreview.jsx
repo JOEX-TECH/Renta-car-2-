@@ -26,8 +26,8 @@ export default function ContractPreview({ isOpen, onClose, vehicle, days, client
             <span className="text-white font-bold">CLÁUSULA SEGUNDA — DEVOLUCIÓN:</span> El usuario se compromete a retornar el automotor con el mismo nivel de combustible pactado y en la fecha exacta establecida por la gerencia de despachos.
           </p>
           <p>
-            <span className="text-white font-bold">SITUACIÓN SUCESIÓN / FIRMAS COMERCIALES:</span><br />
-            <span className="text-red-400 font-bold uppercase">⚠️ Eduardo falleció y la firma autorizada es de Carmen cuando salga la respectiva resolución de la sucesión de bienes.</span>
+            <span className="text-white font-bold">SITUACIÓN SUCESIÓN:</span><br />
+            <span className="text-red-400 font-bold uppercase">⚠️ CUALQUIER DAÑO OCASIONADO AL VEHICULO DEBERA DE SER PAGADO POR LOS ARRENDATARIOS.</span>
           </p>
         </div>
 
