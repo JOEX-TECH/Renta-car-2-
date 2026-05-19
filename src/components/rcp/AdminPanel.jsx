@@ -53,7 +53,7 @@ export default function AdminPanel() {
             <span className="text-white font-bold max-w-[60%] truncate">{car.name}</span>
             <button onClick={() => toggleStatus(car.id)}
               className={`px-2 py-1 rounded font-black text-[0.6rem] uppercase tracking-[0.5px] cursor-pointer border-none transition-all ${car.status === 'available' ? 'bg-green-500/20 text-green-400 border border-green-500/30' : 'bg-red-500/20 text-red-400 border border-red-500/30'}`}>
-              {car.status === 'available' ? '🟢 Disponible' : '🔴 En Taller'}
+              {car.status === 'available' ? '🟢 Disponible' : '🔴 NO DISPONIBLE'}
             </button>
           </div>
         ))}
