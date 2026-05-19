@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RENTA CAR PREMIUM — Alquiler de Autos de Lujo en Medellín</title>
-    <meta name="description" content="Alquila los mejores autos de lujo y deportivos en Medellín: Corvette C8, Tahoe Z71, Toyota Prado Blindada, Audi Q5 y más.">
+    <meta name="description" content="La mejor flota de autos de lujo en Medellín. Corvette C8, Tahoe Z71, Prado Blindada y más. Entrega VIP en aeropuerto.">
     <meta name="keywords" content="renta de autos lujo medellín, alquiler carros deportivos medellín, corvette renta medellín, toyota prado alquiler">
     
     <link rel="icon" type="image/jpeg" href="logo.jpeg">
@@ -12,7 +12,7 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -21,14 +21,10 @@
                 extend: {
                     fontFamily: { montserrat: ['Montserrat', 'sans-serif'] },
                     colors: {
-                        primary: '#FF0000',    /* Rojo Deportivo */
-                        accent: '#D4AF37',     /* Dorado VIP */
-                        darkBg: '#050505',     /* Fondo Ultra Negro */
-                        cardBg: '#0D0D0D'      /* Fondo de Tarjetas */
-                    },
-                    letterSpacing: {
-                        superWide: '4px',
-                        ultraWide: '6px'
+                        primary: '#FF0000',
+                        accent: '#D4AF37',
+                        darkBg: '#050505',
+                        cardBg: '#0D0D0D'
                     }
                 }
             }
@@ -41,164 +37,162 @@
             background-color: #050505;
             color: #ffffff;
         }
-        /* Custom Scrollbar */
         ::-webkit-scrollbar { width: 6px; }
         ::-webkit-scrollbar-track { background: #050505; }
         ::-webkit-scrollbar-thumb { background: #1a1a1a; border-radius: 3px; }
         ::-webkit-scrollbar-thumb:hover { background: #FF0000; }
 
-        /* Animaciones del carrusel infinito de testimonios */
+        /* Contenedor de Imagen de Vehículo Sin Deformaciones */
+        .vehicle-img-container {
+            width: 100%;
+            height: 240px;
+            overflow: hidden;
+            position: relative;
+        }
+        .vehicle-img-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .vehicle-card:hover .vehicle-img-container img {
+            transform: scale(1.06);
+        }
+
+        /* Elevación de Tarjetas con Brillo Cromo/Oro */
+        .vehicle-card {
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
+        }
+        .vehicle-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(212, 175, 55, 0.08);
+        }
+
+        /* Reparación Matemática del Riel de Reseñas Infinito */
         @keyframes scrollReviews {
             0% { transform: translateX(0); }
-            100% { transform: translateX(-50%); }
+            100% { transform: translateX(calc(-50% - 12px)); }
         }
-        .animate-scroll {
+        .reviews-track {
             display: flex;
             width: max-content;
-            animation: scrollReviews 35s linear infinite;
+            gap: 24px;
+            animation: scrollReviews 40s linear infinite;
         }
-        .animate-scroll:hover { animation-play-state: paused; }
+        .reviews-track:hover {
+            animation-play-state: paused;
+        }
+
+        /* Audio Player invisible */
+        #bg-audio-player { display: none; }
     </style>
 </head>
 <body class="overflow-x-hidden antialiased">
 
-    <nav class="fixed top-0 left-0 w-full z-50 px-4 md:px-12 py-4 flex justify-between items-center bg-black/85 backdrop-blur-lg border-b border-white/[0.04] transition-all duration-300">
+    <iframe id="bg-audio-player" src="https://www.youtube.com/embed/cVjd8SSdgME?autoplay=1&mute=0&loop=1&playlist=cVjd8SSdgME" allow="autoplay"></iframe>
+
+    <nav class="fixed top-0 left-0 w-full z-50 px-4 md:px-12 py-4 flex justify-between items-center transition-all duration-300" style="background: rgba(10, 10, 10, 0.75); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255, 255, 255, 0.05);">
         <div class="flex items-center gap-3">
-            <img src="logo.jpeg" alt="RENTA CAR PREMIUM" class="h-12 w-auto object-contain rounded-sm">
+            <img src="logo.jpeg" alt="RENTA CAR PREMIUM" class="h-10 w-auto object-contain rounded-sm">
+            <span id="trm-indicator" class="text-[0.62rem] font-mono tracking-wider text-zinc-500 bg-zinc-900/80 px-2.5 py-1 rounded border border-white/5 flex items-center gap-1.5">
+                <span class="w-1.5 h-1.5 bg-yellow-500 rounded-full"></span> Fetching Live TRM...
+            </span>
         </div>
 
         <div class="flex items-center gap-4 md:gap-8">
-            <ul class="hidden lg:flex gap-8 text-[0.72rem] font-bold uppercase tracking-[3px] list-none">
-                <li><a href="#servicios" id="nav-servicios" class="text-white/50 hover:text-primary transition-all duration-300">Servicios</a></li>
-                <li><a href="#flota" id="nav-flota" class="text-white/50 hover:text-primary transition-all duration-300">Flota VIP</a></li>
-                <li><a href="#comparador" id="nav-comparador" class="text-white/50 hover:text-primary transition-all duration-300">Comparador</a></li>
-                <li><a href="#cotizador" id="nav-cotizador" class="text-white/50 hover:text-primary transition-all duration-300">Cotizar</a></li>
-                <li><a href="#testimonios" id="nav-testimonios" class="text-white/50 hover:text-primary transition-all duration-300">Reseñas</a></li>
-                <li><a href="#faq" id="nav-faq" class="text-white/50 hover:text-primary transition-all duration-300">FAQ</a></li>
+            <ul class="hidden lg:flex gap-8 text-[0.7rem] font-bold uppercase tracking-[2px]">
+                <li><a href="#servicios" id="nav-servicios" class="text-white/60 hover:text-primary transition-all">Servicios</a></li>
+                <li><a href="#flota" id="nav-flota" class="text-white/60 hover:text-primary transition-all">Flota VIP</a></li>
+                <li><a href="#cotizador" id="nav-cotizador" class="text-white/60 hover:text-primary transition-all">Cotizar</a></li>
+                <li><a href="#testimonios" id="nav-testimonios" class="text-white/60 hover:text-primary transition-all">Reseñas</a></li>
+                <li><a href="#faq" id="nav-faq" class="text-white/60 hover:text-primary transition-all">FAQ</a></li>
             </ul>
             
             <div class="relative">
-                <select id="langSelector" onchange="cambiarIdiomaGlobal(this.value)" class="bg-zinc-900/90 border border-white/10 text-white text-[0.68rem] font-black uppercase py-2 px-3 rounded cursor-pointer outline-none hover:border-primary/50 transition-all font-mono">
+                <select id="langSelector" onchange="changeLanguage(this.value)" class="bg-zinc-950 border border-white/10 text-white text-[0.68rem] font-bold uppercase py-2 px-3 rounded cursor-pointer outline-none focus:border-primary font-mono">
                     <option value="es" selected>ES (COP)</option>
                     <option value="en">EN (USD)</option>
+                    <option value="it">IT (EUR)</option>
+                    <option value="de">DE (EUR)</option>
+                    <option value="fr">FR (EUR)</option>
                 </select>
             </div>
 
-            <a href="#reserva" id="nav-cta" class="px-5 py-2.5 border border-primary bg-primary/5 rounded text-primary text-[0.72rem] font-black uppercase tracking-[2px] hover:bg-primary hover:text-black transition-all duration-500 shadow-lg shadow-primary/10">
+            <a href="#reserva" id="nav-cta" class="px-4 py-2 border border-primary bg-primary/5 rounded text-primary text-[0.7rem] font-bold uppercase tracking-[1px] hover:bg-primary hover:text-black transition-all">
                 Rent Now
             </a>
         </div>
     </nav>
 
-
     <section class="relative w-full h-screen flex flex-col justify-center items-center text-center bg-black overflow-hidden">
-        <video autoplay loop muted playsinline class="absolute top-1/2 left-1/2 w-full h-full object-cover -translate-x-1/2 -translate-y-1/2 z-10 opacity-70">
+        <video autoplay loop muted playsinline class="absolute top-1/2 left-1/2 w-full h-full object-cover -translate-x-1/2 -translate-y-1/2 z-10 opacity-60">
             <source src="Video.mp4" type="video/mp4">
         </video>
-        <div class="absolute inset-0 z-20 bg-gradient-to-b from-black/50 via-black/75 to-[#050505]"></div>
+        <div class="absolute inset-0 z-20 bg-gradient-to-b from-black/40 via-black/70 to-[#050505]"></div>
         
-        <div class="relative z-30 max-w-[1200px] px-6 flex flex-col items-center">
-            <div class="inline-flex items-center gap-2 px-3 py-1 border border-accent/20 bg-accent/5 rounded-full text-accent text-[0.6rem] font-bold tracking-[3px] uppercase mb-6 animate-pulse">
+        <div class="relative z-30 max-w-[1100px] px-6">
+            <span id="hero-tag" class="inline-block px-3 py-1 border border-accent/30 bg-accent/5 rounded-full text-accent text-[0.6rem] font-bold tracking-[3px] uppercase mb-6 animate-pulse">
                 👑 Elite Concierge Service
-            </div>
-            <h1 id="hero-title" class="text-3xl sm:text-5xl md:text-[4.2rem] font-black uppercase tracking-[3px] leading-[1.05] mb-6 max-w-[1000px]">
-                ALQUILER DE AUTOS DE LUXE EN <span class="text-primary drop-shadow-[0_0_15px_rgba(255,0,0,0.3)]">MEDELLÍN</span>
+            </span>
+            <h1 id="hero-title" class="text-3xl sm:text-5xl md:text-[3.8rem] font-black uppercase tracking-wide leading-[1.1] mb-6">
+                ALQUILER DE AUTOS DE LUXE EN <span class="text-primary drop-shadow-[0_0_15px_rgba(255,0,0,0.2)]">MEDELLÍN</span>
             </h1>
-            <p id="hero-subtitle" class="text-[0.75rem] sm:text-[0.88rem] font-medium tracking-[5px] uppercase text-zinc-400 mb-12 max-w-[700px] leading-relaxed">
+            <p id="hero-subtitle" class="text-[0.75rem] sm:text-[0.85rem] font-medium tracking-[4px] uppercase text-zinc-400 mb-10 max-w-[750px] mx-auto leading-relaxed">
                 EXPERIENCIAS DE CONDUCCIÓN PREMIUM DE ALTA GAMA
             </p>
-            
-            <div class="flex flex-col sm:flex-row gap-4 w-full justify-center">
-                <a href="#flota" id="hero-btn-primary" class="px-8 py-4 bg-primary text-black font-black text-[0.75rem] uppercase tracking-[2px] rounded hover:bg-white transition-all duration-500 shadow-xl shadow-primary/20">
+            <div class="flex gap-4 justify-center">
+                <a href="#flota" id="hero-btn-primary" class="px-7 py-3.5 bg-primary text-black font-bold text-[0.72rem] uppercase tracking-[2px] rounded hover:bg-white transition-all shadow-lg shadow-primary/20">
                     Explorar Catálogo
                 </a>
-                <a href="#reserva" id="hero-btn-secondary" class="px-8 py-4 border border-white/20 text-white font-bold text-[0.75rem] uppercase tracking-[2px] rounded hover:bg-white/10 backdrop-blur-sm transition-all duration-500">
-                    Contacto Directo
-                </a>
             </div>
-        </div>
-
-        <div class="absolute bottom-8 left-1/2 -translate-x-1/2 z-30 flex flex-col items-center gap-2 opacity-50">
-            <span class="text-[0.55rem] tracking-[3px] uppercase text-white font-light">Scroll Down</span>
-            <div class="w-[1px] h-8 bg-gradient-to-b from-white to-transparent"></div>
         </div>
     </section>
 
-
-    <section class="py-28 px-4 md:px-12 max-w-[1400px] mx-auto border-b border-white/[0.02]" id="servicios">
-        <div class="text-center mb-20">
-            <span id="serv-sub" class="text-[0.68rem] text-primary uppercase tracking-[5px] font-black block mb-3">EXCLUSIVIDAD</span>
-            <h2 id="serv-title" class="text-2xl md:text-[2.5rem] font-black uppercase tracking-[1px]">NUESTROS SERVICIOS VIP</h2>
-            <div class="w-16 h-[2px] bg-primary mx-auto mt-4"></div>
+    <section class="py-24 px-4 md:px-12 max-w-[1400px] mx-auto border-b border-white/[0.02]" id="servicios">
+        <div class="text-center mb-16">
+            <span id="serv-sub" class="text-[0.65rem] text-primary uppercase tracking-[4px] font-bold block mb-2">EXCLUSIVIDAD</span>
+            <h2 id="serv-title" class="text-xl md:text-3xl font-black uppercase tracking-[1px]">NUESTROS SERVICIOS VIP</h2>
+            <div class="w-12 h-[2px] bg-primary mx-auto mt-3"></div>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div class="bg-cardBg border border-white/[0.03] p-10 rounded-xl hover:border-primary/30 transition-all duration-500 group flex flex-col justify-between">
+            <div class="bg-cardBg border border-white/[0.03] p-8 rounded-xl flex flex-col justify-between">
                 <div>
-                    <div class="w-14 h-14 bg-zinc-900 border border-white/5 flex items-center justify-center text-2xl rounded-lg text-primary mb-8 group-hover:bg-primary group-hover:text-black transition-all duration-500">✈️</div>
-                    <h3 id="s1-title" class="text-[1.2rem] font-bold mb-4 uppercase tracking-[1px] text-white">Entrega Aeropuerto</h3>
-                    <p id="s1-desc" class="text-zinc-400 text-[0.88rem] font-light leading-relaxed">Despachos y recepciones directas sin costo adicional en las terminales del Aeropuerto Internacional José María Córdova de Rionegro.</p>
+                    <div class="text-xl text-primary mb-6">✈️</div>
+                    <h3 id="s1-title" class="text-[1.1rem] font-bold mb-3 uppercase tracking-[0.5px]">Entrega Aeropuerto</h3>
+                    <p id="s1-desc" class="text-zinc-400 text-[0.82rem] font-light leading-relaxed">Despachos directos sin costo en las terminales de Rionegro (Aeropuerto JMC).</p>
                 </div>
-                <span class="text-[0.6rem] tracking-[2px] text-primary uppercase font-bold mt-8 block">Complimentary →</span>
             </div>
-            <div class="bg-cardBg border border-white/[0.03] p-10 rounded-xl hover:border-primary/30 transition-all duration-500 group flex flex-col justify-between">
+            <div class="bg-cardBg border border-white/[0.03] p-8 rounded-xl flex flex-col justify-between">
                 <div>
-                    <div class="w-14 h-14 bg-zinc-900 border border-white/5 flex items-center justify-center text-2xl rounded-lg text-primary mb-8 group-hover:bg-primary group-hover:text-black transition-all duration-500">🛡️</div>
-                    <h3 id="s2-title" class="text-[1.2rem] font-bold mb-4 uppercase tracking-[1px] text-white">Seguridad Máxima</h3>
-                    <p id="s2-desc" class="text-zinc-400 text-[0.88rem] font-light leading-relaxed">Vehículos blindados con esquemas de protección balística premium y personal calificado bajo solicitud previa corporativa.</p>
+                    <div class="text-xl text-primary mb-6">🛡️</div>
+                    <h3 id="s2-title" class="text-[1.1rem] font-bold mb-3 uppercase tracking-[0.5px]">Seguridad Máxima</h3>
+                    <p id="s2-desc" class="text-zinc-400 text-[0.82rem] font-light leading-relaxed">Vehículos blindados con esquemas de protección balística premium estructural.</p>
                 </div>
-                <span class="text-[0.6rem] tracking-[2px] text-accent uppercase font-bold mt-8 block">Premium Option →</span>
             </div>
-            <div class="bg-cardBg border border-white/[0.03] p-10 rounded-xl hover:border-primary/30 transition-all duration-500 group flex flex-col justify-between">
+            <div class="bg-cardBg border border-white/[0.03] p-8 rounded-xl flex flex-col justify-between">
                 <div>
-                    <div class="w-14 h-14 bg-zinc-900 border border-white/5 flex items-center justify-center text-2xl rounded-lg text-primary mb-8 group-hover:bg-primary group-hover:text-black transition-all duration-500">🛎️</div>
-                    <h3 id="s3-title" class="text-[1.2rem] font-bold mb-4 uppercase tracking-[1px] text-white">Soporte 24/7 Concierge</h3>
-                    <p id="s3-desc" class="text-zinc-400 text-[0.88rem] font-light leading-relaxed">Asistencia en ruta inmediata, grúa preferencial y conserjería bilingüe personalizada disponible a cualquier hora del día.</p>
-                </div>
-                <span class="text-[0.6rem] tracking-[2px] text-primary uppercase font-bold mt-8 block">Full Coverage →</span>
-            </div>
-        </div>
-    </section>
-
-
-    <section class="py-24 bg-black/30 border-b border-white/[0.02]">
-        <div class="max-w-[1200px] mx-auto px-6">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
-                <div class="text-center md:text-left">
-                    <div class="text-xs text-primary font-bold tracking-[3px] mb-2">01 / RESERVA</div>
-                    <h4 class="text-sm font-bold uppercase tracking-[1px] text-white mb-2">Selecciona tu Auto</h4>
-                    <p class="text-zinc-500 text-[0.78rem]">Escoge el modelo de ensueño de nuestra flota exclusiva.</p>
-                </div>
-                <div class="text-center md:text-left">
-                    <div class="text-xs text-accent font-bold tracking-[3px] mb-2">02 / VERIFICACIÓN</div>
-                    <h4 class="text-sm font-bold uppercase tracking-[1px] text-white mb-2">Validación Comercial</h4>
-                    <p class="text-zinc-500 text-[0.78rem]">Revisamos tu documentación vía WhatsApp en 10 minutos.</p>
-                </div>
-                <div class="text-center md:text-left">
-                    <div class="text-xs text-primary font-bold tracking-[3px] mb-2">03 / GARANTÍA</div>
-                    <h4 class="text-sm font-bold uppercase tracking-[1px] text-white mb-2">Hold de Seguridad</h4>
-                    <p class="text-zinc-500 text-[0.78rem]">Pre-autorización bancaria segura antes de la entrega.</p>
-                </div>
-                <div class="text-center md:text-left">
-                    <div class="text-xs text-accent font-bold tracking-[3px] mb-2">04 / DISFRUTA</div>
-                    <h4 class="text-sm font-bold uppercase tracking-[1px] text-white mb-2">Llaves en Mano</h4>
-                    <p class="text-zinc-500 text-[0.78rem]">Recibe el vehículo limpio y tanqueado donde indiques.</p>
+                    <div class="text-xl text-primary mb-6">🛎️</div>
+                    <h3 id="s3-title" class="text-[1.1rem] font-bold mb-3 uppercase tracking-[0.5px]">Soporte 24/7 Concierge</h3>
+                    <p id="s3-desc" class="text-zinc-400 text-[0.82rem] font-light leading-relaxed">Asistencia vial inmediata y conserjería bilingüe personalizada a cualquier hora.</p>
                 </div>
             </div>
         </div>
     </section>
 
-
-    <section class="py-28 px-4 md:px-12 max-w-[1400px] mx-auto" id="flota">
-        <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-16 gap-4">
+    <section class="py-24 px-4 md:px-12 max-w-[1400px] mx-auto" id="flota">
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 gap-6">
             <div>
-                <span id="fleet-sub" class="text-[0.68rem] text-primary uppercase tracking-[5px] font-black block mb-3">COLECCIÓN EXCLUSIVA</span>
-                <h2 id="fleet-title" class="text-2xl md:text-[2.5rem] font-black uppercase tracking-[1px]">EXPLORA NUESTRA FLOTA PREMIUM</h2>
+                <span id="fleet-sub" class="text-[0.65rem] text-primary uppercase tracking-[4px] font-bold block mb-2">COLECCIÓN EXCLUSIVA</span>
+                <h2 id="fleet-title" class="text-xl md:text-3xl font-black uppercase tracking-[1px]">EXPLORA NUESTRA FLOTA PREMIUM</h2>
             </div>
-            <div class="flex gap-2 border-b border-white/5 pb-2">
-                <button onclick="filtrarFlota('todos')" class="text-[0.65rem] uppercase tracking-[2px] font-bold text-primary px-3 py-1">Todos</button>
-                <button onclick="filtrarFlota('Deportivo')" class="text-[0.65rem] uppercase tracking-[2px] font-bold text-zinc-500 hover:text-white px-3 py-1 transition-all">Deportivos</button>
-                <button onclick="filtrarFlota('SUV')" class="text-[0.65rem] uppercase tracking-[2px] font-bold text-zinc-500 hover:text-white px-3 py-1 transition-all">SUVs / Blindados</button>
+            <div class="flex gap-4 w-full md:w-auto">
+                <select id="sortSelect" onchange="sortFleetByPrice()" class="bg-zinc-900 border border-white/10 p-3 rounded text-[0.75rem] text-white outline-none focus:border-primary font-mono w-full md:w-48">
+                    <option value="default">Relevancia</option>
+                    <option value="low">Precio: Menor a Mayor</option>
+                    <option value="high">Precio: Mayor a Menor</option>
+                </select>
             </div>
         </div>
 
@@ -206,743 +200,940 @@
             </div>
     </section>
 
-
-    <section class="py-24 px-4 md:px-12 bg-zinc-950/40 border-t border-b border-white/[0.02]" id="comparador">
-        <div class="max-w-[1100px] mx-auto bg-cardBg border border-white/[0.04] p-8 md:p-14 rounded-2xl shadow-2xl">
-            <div class="text-center mb-12">
-                <span class="text-[0.65rem] text-accent uppercase tracking-[5px] font-black block mb-2">ANÁLISIS COMPARATIVO</span>
-                <h2 class="text-xl md:text-2xl font-black uppercase tracking-[1px]">COMPARADOR DE MODELOS CARA A CARA</h2>
-                <div class="w-12 h-[1px] bg-accent mx-auto mt-3"></div>
+    <section class="py-20 px-4 md:px-12 bg-zinc-950/40 border-t border-b border-white/[0.02]" id="cotizador">
+        <div class="max-w-[800px] mx-auto bg-cardBg border border-white/[0.04] p-8 md:p-12 rounded-xl shadow-2xl">
+            <div class="text-center mb-8">
+                <span id="calc-sub" class="text-[0.65rem] text-accent uppercase tracking-[4px] font-bold block mb-2">PRESUPUESTO</span>
+                <h2 id="calc-title" class="text-xl md:text-2xl font-black uppercase tracking-[1px]">CALCULADORA DE TARIFA EN VIVO</h2>
             </div>
-
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-8 mb-10">
+            <div class="space-y-6">
                 <div>
-                    <label class="block text-[0.65rem] uppercase font-bold tracking-[2px] text-zinc-500 mb-3">Selecciona Vehículo A</label>
-                    <select id="comp1" onchange="ejecutarComparacion()" class="w-full bg-black border border-white/10 p-4 rounded-lg text-[0.8rem] text-white font-medium outline-none focus:border-accent transition-all"></select>
+                    <label id="calc-label-car" class="block text-[0.68rem] font-bold uppercase tracking-[1px] text-zinc-400 mb-2">Modelo del Vehículo Premium</label>
+                    <select id="calcCar" class="w-full bg-black border border-white/10 px-4 py-3.5 text-[0.8rem] rounded-lg outline-none focus:border-primary font-mono text-white" onchange="recalculateLiveQuote()"></select>
                 </div>
                 <div>
-                    <label class="block text-[0.65rem] uppercase font-bold tracking-[2px] text-zinc-500 mb-3">Selecciona Vehículo B</label>
-                    <select id="comp2" onchange="ejecutarComparacion()" class="w-full bg-black border border-white/10 p-4 rounded-lg text-[0.8rem] text-white font-medium outline-none focus:border-accent transition-all"></select>
+                    <div class="flex justify-between items-center mb-2">
+                        <label id="calc-label-days" class="block text-[0.68rem] font-bold uppercase tracking-[1px] text-zinc-400">Días Solicitados:</label>
+                        <span id="daysLabel" class="bg-primary/10 text-primary border border-primary/20 px-2 py-0.5 rounded font-bold text-xs font-mono">1</span>
+                    </div>
+                    <input type="range" id="calcDays" min="1" max="30" value="1" class="w-full accent-primary bg-zinc-800 h-1.5 rounded-lg appearance-none cursor-pointer" oninput="recalculateLiveQuote()">
                 </div>
-            </div>
-
-            <div class="grid grid-cols-2 gap-6 border-t border-white/[0.04] pt-8 font-mono text-[0.78rem]">
-                <div id="comp1-specs" class="space-y-4 bg-black/30 p-6 rounded-xl border border-white/5 transition-all">
+                <div class="p-4 bg-black rounded-lg border border-white/[0.03] text-[0.78rem] font-mono space-y-2">
+                    <div class="flex justify-between text-zinc-500">
+                        <span>Base / Day:</span> <span id="calcUnit" class="text-white"></span>
                     </div>
-                <div id="comp2-specs" class="space-y-4 bg-black/30 p-6 rounded-xl border border-white/5 transition-all">
+                    <div class="border-t border-white/5 pt-2 flex justify-between items-center">
+                        <span class="font-bold text-white uppercase tracking-wider">TOTAL ESTIMADO:</span>
+                        <span id="calcTotal" class="text-accent font-black text-lg"></span>
                     </div>
+                </div>
             </div>
         </div>
     </section>
 
+    <section class="py-20 bg-black/60 overflow-hidden border-b border-white/[0.02]" id="testimonios">
+        <div class="text-center mb-12">
+            <span class="text-[0.65rem] text-primary uppercase tracking-[4px] font-bold block mb-2">EXPERIENCIAS</span>
+            <h3 id="title-reviews" class="text-xl font-black uppercase tracking-[1px]">LO QUE DICEN NUESTROS CLIENTES VIP</h3>
+        </div>
+        <div class="relative w-full overflow-hidden flex">
+            <div class="reviews-track" id="contenedor-testimonios">
+                </div>
+        </div>
+    </section>
 
-    <section class="py-24 px-4 md:px-12 max-w-[850px] mx-auto" id="cotizador">
-        <div class="bg-cardBg border border-white/[0.04] p-8 md:p-12 rounded-2xl shadow-2xl">
+    <section class="py-24 px-4 md:px-12 max-w-[900px] mx-auto" id="reserva">
+        <div class="bg-cardBg border border-white/[0.04] p-8 md:p-12 rounded-xl relative shadow-2xl">
             <div class="text-center mb-10">
-                <span id="calc-sub" class="text-[0.65rem] text-primary uppercase tracking-[5px] font-black block mb-2">PRESUPUESTO</span>
-                <h2 id="calc-title" class="text-xl md:text-2xl font-black uppercase tracking-[1px]">CALCULA TU TARIFA CORPORATIVA EN VIVO</h2>
+                <span id="form-sub" class="text-[0.65rem] text-primary uppercase tracking-[4px] font-bold block mb-2">SISTEMA DE RESERVAS</span>
+                <h2 id="form-title" class="text-xl md:text-2xl font-black uppercase tracking-[1px]">SOLICITA TU DISPONIBILIDAD DE INMEDIATO</h2>
             </div>
 
-            <div class="space-y-8">
-                <div>
-                    <label id="calc-label-car" class="block text-[0.68rem] font-bold uppercase tracking-[2px] text-zinc-400 mb-3">Modelo del Vehículo Premium</label>
-                    <select id="calcCar" class="w-full bg-black border border-white/10 px-4 py-4 text-[0.82rem] text-white font-medium rounded-lg outline-none focus:border-primary transition-all" onchange="recalcularTarifaTotal()"></select>
-                </div>
-
-                <div>
-                    <div class="flex justify-between items-center mb-3">
-                        <label class="block text-[0.68rem] font-bold uppercase tracking-[2px] text-zinc-400">
-                            <span id="calc-label-days">Días Comerciales Solicitados:</span>
-                        </label>
-                        <span id="daysLabel" class="bg-primary/10 text-primary border border-primary/20 px-3 py-1 rounded font-black text-sm font-mono">1</span>
-                    </div>
-                    <input type="range" id="calcDays" min="1" max="30" value="1" class="w-full accent-primary bg-zinc-800 h-2 rounded-lg appearance-none cursor-pointer" oninput="recalcularTarifaTotal()">
-                    <div class="flex justify-between text-[0.6rem] text-zinc-600 font-mono mt-1">
-                        <span>1 DÍA</span>
-                        <span>15 DÍAS</span>
-                        <span>30 DÍAS</span>
-                    </div>
-                </div>
-
-                <div class="p-6 bg-black rounded-xl border border-white/[0.03] space-y-3 font-mono text-[0.78rem]">
-                    <div class="flex justify-between text-zinc-500">
-                        <span>Valor Base por Día:</span>
-                        <span id="calcUnit" class="text-white"></span>
-                    </div>
-                    <div class="flex justify-between text-zinc-500">
-                        <span>Descuento por Volumen (>=7 Días):</span>
-                        <span id="calcDiscount" class="text-green-500">0%</span>
-                    </div>
-                    <div class="border-t border-white/5 pt-3 flex justify-between items-center text-[0.85rem]">
-                        <span class="font-bold tracking-[1px] text-white uppercase">TOTAL ESTIMADO NETO:</span>
-                        <span id="calcTotal" class="text-accent font-black text-xl drop-shadow-[0_0_10px_rgba(212,175,55,0.2)]">$0</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-
-    <div class="flex flex-col sm:flex-row flex-wrap justify-center gap-4 py-12 px-6 bg-zinc-950/80 border-t border-b border-white/[0.03] backdrop-blur-sm">
-        <button onclick="activarDespliegueModal('modalPago')" class="px-6 py-4 border border-accent/40 text-accent text-[0.72rem] font-black uppercase tracking-[2px] rounded-lg hover:bg-accent hover:text-black transition-all duration-500 bg-transparent cursor-pointer shadow-lg shadow-accent/5">
-            Pre-autorizar Depósito de Garantía
-        </button>
-        <button onclick="activarDespliegueModal('modalContrato')" class="px-6 py-4 border border-white/10 text-white text-[0.72rem] font-black uppercase tracking-[2px] rounded-lg hover:bg-white hover:text-black transition-all duration-500 bg-transparent cursor-pointer">
-            Vista Previa de Contrato Comercial
-        </button>
-    </div>
-
-
-    <section class="py-24 bg-black/60 overflow-hidden border-b border-white/[0.02]" id="testimonios">
-        <div class="text-center mb-14">
-            <span class="text-[0.65rem] text-primary uppercase tracking-[5px] font-black block mb-2">EXPERIENCIAS</span>
-            <h3 class="text-xl font-black uppercase tracking-[1px]">LO QUE DICEN NUESTROS CLIENTES VIP</h3>
-        </div>
-        
-        <div class="relative flex w-full overflow-hidden mask-gradient">
-            <div class="animate-scroll gap-6 px-4" id="contenedor-testimonios-infinito">
-                </div>
-        </div>
-    </section>
-
-
-    <section class="py-28 px-4 md:px-12 max-w-[950px] mx-auto" id="reserva">
-        <div class="bg-cardBg border border-white/[0.04] p-8 md:p-14 rounded-2xl shadow-2xl relative overflow-hidden">
-            <div class="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full blur-3xl -z-10"></div>
-            
-            <div class="text-center mb-12">
-                <span id="form-sub" class="text-[0.65rem] text-primary uppercase tracking-[5px] font-black block mb-2">SISTEMA DE RESERVAS</span>
-                <h2 id="form-title" class="text-2xl font-black uppercase tracking-[1px]">SOLICITA TU DISPONIBILIDAD DE INMEDIATO</h2>
-                <div class="w-12 h-[2px] bg-primary mx-auto mt-4"></div>
-            </div>
-
-            <form onsubmit="procesarDespachoWhatsApp(event)" class="space-y-8">
+            <form onsubmit="handleFormSubmission(event)" class="space-y-6">
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
-                        <label class="block text-[0.65rem] font-black uppercase tracking-[2px] text-zinc-400 mb-2">Selecciona tu Flota</label>
-                        <select id="formCar" class="w-full bg-black border border-white/10 px-4 py-4 text-[0.8rem] font-bold text-white rounded-lg outline-none focus:border-primary transition-all"></select>
+                        <label class="block text-[0.65rem] font-bold uppercase tracking-[1px] text-zinc-400 mb-2">Selecciona tu Flota</label>
+                        <select id="formCar" class="w-full bg-black border border-white/10 px-4 py-3.5 text-[0.8rem] rounded-lg text-white font-mono outline-none focus:border-primary"></select>
                     </div>
                     <div>
-                        <label id="form-name-label" class="block text-[0.65rem] font-black uppercase tracking-[2px] text-zinc-400 mb-2">Nombre Completo del Titular</label>
-                        <input type="text" id="formName" required placeholder="Ej: Angela Maria..." class="w-full bg-black border border-white/10 px-4 py-4 text-[0.8rem] text-white rounded-lg outline-none focus:border-primary transition-all placeholder:text-white/10">
+                        <label id="form-name-label" class="block text-[0.65rem] font-bold uppercase tracking-[1px] text-zinc-400 mb-2">Nombre Completo del Titular</label>
+                        <input type="text" id="formName" required placeholder="Ej: Angela Maria..." class="w-full bg-black border border-white/10 px-4 py-3.5 text-[0.8rem] text-white rounded-lg outline-none focus:border-primary placeholder:text-zinc-800">
                     </div>
                 </div>
-
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
-                        <label class="block text-[0.65rem] font-black uppercase tracking-[2px] text-zinc-400 mb-2">Lugar de Entrega Preferido</label>
-                        <select id="formLugar" class="w-full bg-black border border-white/10 px-4 py-4 text-[0.8rem] text-white rounded-lg outline-none focus:border-primary transition-all">
-                            <option value="Aeropuerto Rionegro (JMC)">Aeropuerto Rionegro (JMC) — Sin costo</option>
+                        <label class="block text-[0.65rem] font-bold uppercase tracking-[1px] text-zinc-400 mb-2">Lugar de Entrega Preferido</label>
+                        <select id="formLugar" class="w-full bg-black border border-white/10 px-4 py-3.5 text-[0.8rem] text-white rounded-lg outline-none focus:border-primary font-mono">
+                            <option value="Aeropuerto Rionegro (JMC)">Aeropuerto Rionegro (JMC)</option>
                             <option value="El Poblado / Medellín">El Poblado / Medellín</option>
                             <option value="Laureles / Conquistadores">Laureles / Conquistadores</option>
-                            <option value="Llanogrande / Rionegro">Llanogrande / Rionegro</option>
                         </select>
                     </div>
                     <div>
-                        <label id="form-phone-label" class="block text-[0.65rem] font-black uppercase tracking-[2px] text-zinc-400 mb-2">Teléfono de Contacto</label>
-                        <input type="tel" id="formPhone" required placeholder="Ej: 318 449 9437" class="w-full bg-black border border-white/10 px-4 py-4 text-[0.8rem] text-white rounded-lg outline-none focus:border-primary transition-all placeholder:text-white/10">
+                        <label id="form-phone-label" class="block text-[0.65rem] font-bold uppercase tracking-[1px] text-zinc-400 mb-2">Teléfono de Contacto</label>
+                        <input type="tel" id="formPhone" required placeholder="Ej: 318 449 9437" class="w-full bg-black border border-white/10 px-4 py-3.5 text-[0.8rem] text-white rounded-lg outline-none focus:border-primary placeholder:text-zinc-800">
                     </div>
                 </div>
-
                 <div>
-                    <label class="block text-[0.65rem] font-black uppercase tracking-[2px] text-zinc-400 mb-2">
-                        <span id="form-days-label">Días de Alquiler</span>: <span id="formDaysLabel" class="text-primary font-black">1</span>
+                    <label class="block text-[0.65rem] font-bold uppercase tracking-[1px] text-zinc-400 mb-2">
+                        <span id="form-days-label">Días de Alquiler</span>: <span id="formDaysLabel" class="text-primary font-bold">1</span>
                     </label>
                     <input type="range" id="formDays" min="1" max="30" value="1" class="w-full accent-primary bg-zinc-900 h-1 rounded cursor-pointer" oninput="document.getElementById('formDaysLabel').innerText = this.value">
                 </div>
 
-                <button type="submit" id="form-btn" class="w-full py-4.5 bg-primary text-black font-black text-[0.75rem] uppercase tracking-[3px] rounded-lg hover:bg-white hover:text-black transition-all duration-500 cursor-pointer border-none shadow-xl shadow-primary/10">
+                <div class="flex flex-col sm:flex-row gap-4 pt-4">
+                    <button type="button" onclick="openModal('modalPago')" class="flex-1 py-3.5 border border-accent text-accent font-bold text-[0.72rem] uppercase tracking-[1px] rounded-lg hover:bg-accent hover:text-black transition-all">
+                        ⚙️ Pre-autorizar Depósito
+                    </button>
+                    <button type="button" onclick="openContractPreview()" class="flex-1 py-3.5 border border-white/20 text-white font-bold text-[0.72rem] uppercase tracking-[1px] rounded-lg hover:bg-white/10 transition-all">
+                        📋 Ver Contrato Inteligente
+                    </button>
+                </div>
+
+                <button type="submit" id="form-btn" class="w-full py-4 bg-primary text-black font-black text-[0.75rem] uppercase tracking-[2px] rounded-lg hover:bg-white transition-all duration-300 mt-2 shadow-xl shadow-primary/10">
                     Enviar a WhatsApp VIP
                 </button>
             </form>
         </div>
     </section>
 
-
-    <section class="py-24 px-4 md:px-12 max-w-[850px] mx-auto" id="faq">
-        <div class="text-center mb-16">
-            <span id="faq-sub" class="text-[0.65rem] text-primary uppercase tracking-[5px] font-black block mb-2">SOPORTE CENTRAL</span>
+    <section class="py-20 px-4 md:px-12 max-w-[900px] mx-auto" id="faq">
+        <div class="text-center mb-12">
+            <span id="faq-sub" class="text-[0.65rem] text-primary uppercase tracking-[4px] font-bold block mb-2">SOPORTE CENTRAL</span>
             <h2 id="faq-title" class="text-xl md:text-2xl font-black uppercase tracking-[1px]">PREGUNTAS FRECUENTES</h2>
         </div>
-
-        <div class="space-y-4" id="contenedor-faq-dinamico">
+        <div class="space-y-4" id="contenedor-faq">
             </div>
     </section>
 
-
-    <div id="modalGaleria" class="fixed inset-0 bg-black/95 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
-        <div class="bg-zinc-950 border border-white/10 p-4 md:p-8 rounded-2xl max-w-[800px] w-full relative">
-            <button onclick="desactivarOcultarModal('modalGaleria')" class="absolute top-4 right-4 text-white hover:text-primary text-lg cursor-pointer font-bold bg-zinc-900 w-8 h-8 rounded-full flex items-center justify-center border border-white/10">×</button>
-            <h3 id="modalGaleriaTitulo" class="text-md font-black uppercase tracking-[2px] text-accent mb-4">Galería del Vehículo</h3>
+    <div id="modalPago" class="fixed inset-0 bg-black/95 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-zinc-950 border border-white/10 p-6 md:p-10 rounded-xl max-w-[480px] w-full text-center relative shadow-2xl">
+            <button onclick="closeModal('modalPago')" class="absolute top-4 right-4 text-white/50 hover:text-white text-lg font-bold font-mono">×</button>
+            <div class="text-3xl text-accent mb-3">💳</div>
+            <h3 class="text-sm font-black uppercase tracking-[2px] mb-2 text-white">HOLD DE GARANTÍA WOMPI / STRIPE</h3>
+            <p class="text-zinc-500 text-[0.75rem] font-light mb-6">Bloqueo preventivo de fianza de seguridad. Se libera de forma automatizada al retornar la unidad.</p>
             
-            <div class="w-full h-[300px] md:h-[450px] overflow-hidden rounded-xl bg-black border border-white/5 relative">
-                <img id="imgModalPrincipal" src="" alt="Principal" class="w-full h-full object-cover transition-all duration-500">
-                
-                <button onclick="cambiarFotoInterna(-1)" class="absolute left-3 top-1/2 -translate-y-1/2 bg-black/70 p-3 rounded-full text-white hover:text-primary font-bold border border-white/5">‹</button>
-                <button onclick="cambiarFotoInterna(1)" class="absolute right-3 top-1/2 -translate-y-1/2 bg-black/70 p-3 rounded-full text-white hover:text-primary font-bold border border-white/5">›</button>
-            </div>
-            
-            <div class="grid grid-cols-3 gap-2 mt-4" id="contenedorThumbnails">
-                </div>
-        </div>
-    </div>
-
-
-    <div id="modalPago" class="fixed inset-0 bg-black/90 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
-        <div class="bg-zinc-950 border border-white/10 p-6 md:p-10 rounded-2xl max-w-[500px] w-full text-center relative shadow-2xl">
-            <div class="text-4xl text-accent mb-4">💳</div>
-            <h3 class="text-lg font-black uppercase tracking-[1px] mb-2 text-white">HOLD DE GARANTÍA DE SEGURIDAD</h3>
-            <p class="text-zinc-400 text-[0.8rem] font-light mb-8">Bloqueo temporal preventivo en tu franquicia de tarjeta de crédito (Visa, Mastercard, Amex). Se libera de forma automática al retornar el vehículo.</p>
-            
-            <div class="space-y-4 text-left mb-6 font-mono text-[0.75rem]">
+            <div class="space-y-3.5 text-left mb-6 font-mono text-[0.72rem]">
                 <div>
-                    <label class="block text-[0.6rem] uppercase tracking-[1px] text-zinc-500 mb-1">Nombre Impreso</label>
-                    <input type="text" placeholder="Ej: ANGELA M OROZCO" class="w-full bg-black border border-white/10 p-3 rounded-lg text-white placeholder:text-white/5 uppercase">
+                    <label class="block text-zinc-500 mb-1 uppercase">Tarjetahabiente</label>
+                    <input type="text" placeholder="ANGELA M OROZCO" class="w-full bg-black border border-white/10 p-3 rounded text-white placeholder:text-zinc-800 uppercase outline-none focus:border-accent">
                 </div>
                 <div>
-                    <label class="block text-[0.6rem] uppercase tracking-[1px] text-zinc-500 mb-1">Número de Tarjeta Credencial</label>
-                    <input type="text" placeholder="**** **** **** ****" class="w-full bg-black border border-white/10 p-3 rounded-lg text-white placeholder:text-white/5">
+                    <label class="block text-zinc-500 mb-1 uppercase">Número de Credencial</label>
+                    <input type="text" placeholder="4532 •••• •••• 8843" class="w-full bg-black border border-white/10 p-3 rounded text-white placeholder:text-zinc-800 outline-none focus:border-accent">
                 </div>
                 <div class="grid grid-cols-2 gap-4">
                     <div>
-                        <label class="block text-[0.6rem] uppercase tracking-[1px] text-zinc-500 mb-1">Vencimiento</label>
-                        <input type="text" placeholder="MM/AA" class="w-full bg-black border border-white/10 p-3 rounded-lg text-white placeholder:text-white/5">
+                        <label class="block text-zinc-500 mb-1 uppercase">Expiración</label>
+                        <input type="text" placeholder="MM/AA" class="w-full bg-black border border-white/10 p-3 rounded text-white placeholder:text-zinc-800 outline-none focus:border-accent">
                     </div>
                     <div>
-                        <label class="block text-[0.6rem] uppercase tracking-[1px] text-zinc-500 mb-1">Código CVC</label>
-                        <input type="password" placeholder="***" class="w-full bg-black border border-white/10 p-3 rounded-lg text-white placeholder:text-white/5">
+                        <label class="block text-zinc-500 mb-1 uppercase">CVC</label>
+                        <input type="password" placeholder="•••" class="w-full bg-black border border-white/10 p-3 rounded text-white placeholder:text-zinc-800 outline-none focus:border-accent">
                     </div>
                 </div>
             </div>
             
-            <div class="flex justify-end gap-3 text-[0.7rem] font-bold uppercase tracking-[1px]">
-                <button onclick="desactivarOcultarModal('modalPago')" class="px-5 py-2.5 border border-white/10 text-white rounded-lg hover:bg-white/5">Cancelar</button>
-                <button onclick="alert('Hold simulado y verificado en pasarela de pruebas de forma exitosa.'); desactivarOcultarModal('modalPago')" class="px-5 py-2.5 bg-accent text-black rounded-lg hover:bg-white transition-all">Pre-Autorizar Cupo</button>
-            </div>
+            <button onclick="simulatePaymentHold()" class="w-full py-3 bg-accent text-black font-bold text-[0.72rem] uppercase tracking-[1px] rounded hover:bg-white transition-all">
+                Pre-Autorizar Fianza
+            </button>
         </div>
     </div>
 
-
-    <div id="modalContrato" class="fixed inset-0 bg-black/90 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
-        <div class="bg-zinc-950 border border-white/10 p-6 md:p-8 rounded-2xl max-w-[700px] w-full max-h-[90vh] flex flex-col justify-between shadow-2xl relative">
-            <h3 class="text-md font-black uppercase tracking-[2px] text-accent mb-4 border-b border-white/5 pb-3">CONTRATO COMERCIAL DE ARRENDAMIENTO VEHICULAR</h3>
+    <div id="modalContrato" class="fixed inset-0 bg-black/95 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-zinc-950 border border-white/10 p-6 md:p-8 rounded-xl max-w-[650px] w-full max-h-[90vh] flex flex-col justify-between shadow-2xl relative">
+            <button onclick="closeModal('modalContrato')" class="absolute top-4 right-4 text-white/50 hover:text-white text-lg font-bold font-mono">×</button>
+            <h3 class="text-xs font-black uppercase tracking-[2px] text-accent mb-4 border-b border-white/5 pb-3">DIGITAL SIGNATURE CONTRACT PREVIEW</h3>
             
-            <div class="text-[0.75rem] font-mono text-zinc-400 space-y-4 leading-relaxed bg-black p-5 rounded-xl border border-white/5 overflow-y-auto max-h-[50vh] pr-2">
-                <p><strong>CONTRATO DE ADHESIÓN REGISTRO N°:</strong> RCP-2026-MED9437</p>
-                <p><strong>ARRENDADOR:</strong> RENTA CAR PREMIUM S.A.S. (Medellín, Colombia)</p>
-                <p><strong>ARRENDATARIO:</strong> CLIENTE VIP TITULAR REGISTRADO</p>
-                <p><strong>OBJETO:</strong> El Arrendador entrega en carácter de alquiler el vehículo automotor seleccionado, en perfectas condiciones mecánicas, estéticas, con herramientas de ley y tanque de combustible lleno.</p>
-                <p><strong>OBLIGACIONES:</strong> El Arrendatario se obliga legalmente a utilizar combustible tipo Gasolina Extra (Premium) o Diésel según especificación exacta. Queda estrictamente prohibido subarrendar, participar en piques, carreras ilegales o conducir bajo efectos de sustancias alucinógenas.</p>
-                <p><strong>SEGUROS Y RASTREO:</strong> Todo vehículo cuenta con póliza todo riesgo corporativa con deducible variable. Dispone de monitoreo en tiempo real mediante sistemas de geolocalización por satélite GPS activo las 24 horas.</p>
-                <p class="text-white border-l-2 border-primary pl-3 bg-primary/5 py-2"><strong>DATO DE SUCESIÓN COMERCIAL:</strong> Eduardo falleció y la firma autorizada es de Carmen cuando salga la respectiva sucesión judicial.</p>
+            <div class="text-[0.72rem] font-mono text-zinc-400 space-y-3.5 leading-relaxed bg-black p-4 rounded border border-white/5 overflow-y-auto max-h-[45vh]" id="contractBody">
+                </div>
+
+            <div class="mt-4">
+                <label class="block text-[0.6rem] uppercase tracking-[1px] text-zinc-500 mb-1">Firma Digital del Arrendatario (Dibuja aquí)</label>
+                <div class="bg-black border border-white/10 rounded overflow-hidden">
+                    <canvas id="signatureCanvas" class="w-full h-24 bg-black cursor-crosshair"></canvas>
+                </div>
+                <button type="button" onclick="clearSignatureCanvas()" class="text-[0.6rem] font-mono text-primary uppercase mt-1 block">Limpiar Lienzo</button>
             </div>
 
-            <div class="mt-6 p-4 bg-zinc-900/60 border border-white/5 rounded-lg flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+            <div class="mt-4 pt-3 border-t border-white/5 flex justify-between items-center text-[0.7rem] font-mono">
                 <div>
-                    <p class="text-[0.55rem] uppercase tracking-[1px] text-zinc-500">Representación Comercial Autorizada</p>
-                    <p class="text-[0.8rem] font-bold text-white italic tracking-[0.5px]">Carmen (Sucesión Eduardo)</p>
+                    <span class="text-zinc-600 block text-[0.55rem] uppercase">Firma Autorizada</span>
+                    <span class="text-white italic font-bold">Carmen (Sucesión Eduardo)</span>
                 </div>
-                <button onclick="desactivarOcultarModal('modalContrato')" class="w-full sm:w-auto px-6 py-3 bg-white text-black font-black text-[0.72rem] uppercase tracking-[2px] rounded-lg hover:bg-primary hover:text-white transition-all duration-300">
-                    Aceptar Términos de Ley
+                <button onclick="acceptContractTerms()" class="px-5 py-2.5 bg-white text-black font-black uppercase tracking-[1px] rounded hover:bg-primary hover:text-white transition-all">
+                    Estampar Firma de Ley
                 </button>
             </div>
         </div>
     </div>
 
+    <section id="panelAdmin" class="py-20 px-4 md:px-12 bg-zinc-950 border-t border-white/10 hidden">
+        <div class="max-w-[1300px] mx-auto">
+            <div class="flex justify-between items-center border-b border-white/5 pb-4 mb-8">
+                <div>
+                    <h2 class="text-lg font-black tracking-wider uppercase text-white font-mono">📊 KPI DASHBOARD LIVE OPERATIONS</h2>
+                    <p class="text-[0.62rem] uppercase tracking-[1px] text-zinc-500 font-mono">Acceso administrativo restringido de JOEX</p>
+                </div>
+                <button onclick="toggleAdminPanelVisual()" class="px-3 py-1 bg-red-950/40 border border-red-500/20 text-red-500 font-mono text-xs uppercase rounded">
+                    Cerrar Panel
+                </button>
+            </div>
 
-    <div class="fixed bottom-6 right-6 z-40 flex flex-col items-end">
-        <button onclick="conmutarVisibilidadChatBot()" class="w-14 h-14 bg-primary rounded-full flex items-center justify-center text-2xl text-black shadow-2xl hover:scale-105 transition-all cursor-pointer border-none drop-shadow-[0_4px_15px_rgba(255,0,0,0.4)]">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8 font-mono">
+                <div class="bg-cardBg border border-white/5 p-5 rounded-lg">
+                    <p class="text-[0.6rem] uppercase text-zinc-500 tracking-wider">Ingresos Proyectados (Mes)</p>
+                    <p class="text-xl font-bold text-emerald-500 mt-1">$45,800,000 COP</p>
+                    <p class="text-[0.55rem] text-zinc-600 uppercase mt-0.5">Calculado con base TRM activa</p>
+                </div>
+                <div class="bg-cardBg border border-white/5 p-5 rounded-lg">
+                    <p class="text-[0.6rem] uppercase text-zinc-500 tracking-wider">Tasa de Ocupación Física</p>
+                    <p class="text-xl font-bold text-accent mt-1">82.4%</p>
+                    <div class="w-full bg-zinc-900 h-1 rounded-full mt-2 overflow-hidden">
+                        <div class="bg-accent h-full w-[82.4%]"></div>
+                    </div>
+                </div>
+                <div class="bg-cardBg border border-white/5 p-5 rounded-lg">
+                    <p class="text-[0.6rem] uppercase text-zinc-500 tracking-wider">Unidad Más Clickeada (Lead)</p>
+                    <p class="text-xl font-bold text-white mt-1 uppercase">Corvette C8</p>
+                    <p class="text-[0.55rem] text-primary uppercase mt-0.5">🔥 148 interacciones en el ChatBot</p>
+                </div>
+            </div>
+
+            <div class="bg-cardBg border border-white/5 rounded-lg overflow-hidden font-mono text-xs">
+                <div class="p-4 bg-zinc-900 border-b border-white/5 font-bold uppercase tracking-wider text-zinc-400">
+                    Control de Estado de Unidades de la Flota Real
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr class="border-b border-white/5 bg-black/30 text-zinc-500 uppercase text-[0.62rem]">
+                                <th class="p-4">Vehículo Real</th>
+                                <th class="p-4">Categoría</th>
+                                <th class="p-4">Precio Base (COP)</th>
+                                <th class="p-4">Estado Operacional</th>
+                            </tr>
+                        </thead>
+                        <tbody id="adminTableBody" class="text-zinc-300">
+                            </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="fixed bottom-6 right-6 z-50 flex flex-col items-end">
+        <button onclick="toggleChatBotBox()" class="w-14 h-14 bg-primary rounded-full flex items-center justify-center text-2xl text-black shadow-2xl hover:scale-105 transition-all border-none relative group drop-shadow-[0_4px_15px_rgba(255,0,0,0.3)]">
             💬
+            <span class="absolute inline-flex h-3 w-3 rounded-full bg-yellow-400 opacity-75 top-0 right-0 animate-ping"></span>
         </button>
         
-        <div id="cajaChatBot" class="w-[320px] sm:w-[360px] h-[450px] bg-zinc-950 border border-white/10 rounded-2xl mt-3 flex flex-col justify-between hidden shadow-2xl overflow-hidden transition-all duration-300">
-            <div class="bg-zinc-900 p-4 border-b border-white/5 flex items-center gap-3">
-                <div class="w-2.5 h-2.5 bg-green-500 rounded-full animate-ping"></div>
-                <div>
-                    <h4 class="text-[0.78rem] font-bold uppercase tracking-[1px]">Premium Concierge AI</h4>
-                    <p class="text-[0.6rem] text-zinc-500 uppercase tracking-[0.5px]">En línea en Medellín</p>
+        <div id="cajaChatBot" class="w-[325px] sm:w-[365px] h-[460px] bg-zinc-950/95 border border-white/10 rounded-xl mt-3 flex flex-col justify-between hidden shadow-2xl overflow-hidden transition-all duration-300" style="backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);">
+            <div class="bg-zinc-900/90 p-4 border-b border-white/5 flex items-center justify-between">
+                <div class="flex items-center gap-2.5">
+                    <div class="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></div>
+                    <div>
+                        <h4 class="text-[0.75rem] font-bold uppercase tracking-[1px] text-white">JOEX Virtual Assistant 🤖</h4>
+                        <p id="chat-status-label" class="text-[0.55rem] text-zinc-500 uppercase font-mono">Concierge Desk Online</p>
+                    </div>
                 </div>
+                <button onclick="toggleChatBotBox()" class="text-zinc-500 hover:text-white font-mono text-sm">✕</button>
             </div>
-            <div id="historialChat" class="p-4 flex-grow overflow-y-auto space-y-3 text-[0.78rem] font-light">
-                <div class="bg-zinc-900 p-3 rounded-lg max-w-[85%] text-zinc-300">
-                    👋 ¡Hola! Bienvenido a *Renta Car Premium*. Estoy listo para asistirte en el alquiler de tu próximo coche deportivo o blindado en Medellín y Rionegro. ¿En qué vehículo estás interesado?
+
+            <div id="historialChat" class="p-4 flex-grow overflow-y-auto space-y-3.5 text-[0.78rem] font-light leading-relaxed">
                 </div>
-            </div>
-            <div class="p-3 bg-zinc-900 border-t border-white/5 flex gap-2">
-                <input type="text" id="inputChatMsg" onkeypress="evaluarTeclaEnterChat(event)" placeholder="Escribe tu duda aquí..." class="flex-grow bg-black border border-white/10 px-3 py-2 rounded-lg text-[0.78rem] text-white outline-none focus:border-primary">
-                <button onclick="enviarMensajeUsuarioChat()" class="px-4 py-2 bg-primary text-black font-bold text-[0.75rem] uppercase rounded-lg hover:bg-white transition-all">›</button>
+
+            <div id="chatQuickOptions" class="p-2 bg-black/40 border-t border-white/[0.03] flex flex-wrap gap-1.5 justify-center">
+                </div>
+
+            <div class="p-3 bg-zinc-900/50 border-t border-white/5 flex gap-2">
+                <input type="text" id="inputChatMsg" onkeypress="handleChatEnterKey(event)" placeholder="Escribe tu duda o responde..." class="flex-grow bg-black border border-white/10 px-3 py-2 rounded text-[0.78rem] text-white outline-none focus:border-primary placeholder:text-zinc-800">
+                <button onclick="processManualUserMessage()" class="px-4 bg-primary text-black font-bold text-xs uppercase rounded hover:bg-white transition-all">›</button>
             </div>
         </div>
     </div>
 
-
-    <footer class="bg-black py-16 px-6 md:px-12 border-t border-white/[0.04] text-center">
-        <img src="logo.jpeg" alt="Logo Corporate" class="h-10 w-auto mx-auto object-contain mb-6 opacity-80 rounded-sm">
-        <div class="max-w-[600px] mx-auto text-zinc-500 text-[0.7rem] uppercase tracking-[2px] space-y-4 mb-8">
-            <p>Sede Comercial Operativa: Aeropuerto José María Córdova / El Poblado, Medellín, Colombia.</p>
-            <p class="text-[0.6rem] tracking-[1px] text-zinc-600">Contacto Directo VIP: +57 304 374 1941 | Correo de Soporte: info@rentacarpremium.co</p>
-        </div>
-        <div class="text-[0.55rem] text-zinc-700 tracking-[1px] font-mono border-t border-white/5 pt-8 max-w-[400px] mx-auto">
-            © 2026 RENTA CAR PREMIUM S.A.S. TODOS LOS DERECHOS RESERVADOS.
-        </div>
+    <footer class="bg-black py-12 px-6 border-t border-white/[0.04] text-center">
+        <img src="logo.jpeg" alt="Logo Corporate" class="h-8 w-auto mx-auto object-contain mb-4 opacity-70 rounded-sm cursor-pointer" onclick="secretTriggerAdminPanel()">
+        <p class="text-zinc-600 text-[0.62rem] uppercase tracking-[2px] font-mono">© 2026 RENTA CAR PREMIUM S.A.S. | JOEX SOFTWARE DIVISION</p>
     </footer>
 
-
     <script>
-        // BASE DE DATOS ESTRUCTURADA DE VEHÍCULOS (FLOTA)
-        const fleetData = [
-            { 
-                id: "c8", 
-                name: "Chevrolet Corvette C8 Coupe", 
-                price: 2500000, 
-                hp: "495 HP", 
-                trans: "8 Marchas Doble Embrague", 
-                fuel: "Gasolina Extra Premium", 
-                pax: "2 Pasajeros", 
-                type: "Deportivo",
-                galeria: [
-                    "https://images.unsplash.com/photo-1600712242805-5f78671b24da?w=800&q=80",
-                    "https://images.unsplash.com/photo-1552519507-da3b142c6e3d?w=800&q=80",
-                    "https://images.unsplash.com/photo-1583121274602-3e2820c69888?w=800&q=80"
-                ]
-            },
-            { 
-                id: "tahoe", 
-                name: "Chevrolet Tahoe Z71 Luxury", 
-                price: 1100000, 
-                hp: "355 HP V8", 
-                trans: "Automática de 10 Velocidades", 
-                fuel: "Gasolina Extra Premium", 
-                pax: "7 Pasajeros AWD", 
-                type: "SUV",
-                galeria: [
-                    "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?w=800&q=80",
-                    "https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=800&q=80",
-                    "https://images.unsplash.com/photo-1549399542-7e3f8b79c341?w=800&q=80"
-                ]
-            },
-            { 
-                id: "prado", 
-                name: "Toyota Prado Blindada 🛡️", 
-                price: 650000, 
-                hp: "204 HP TurboDiésel", 
-                trans: "Automática Secuencial", 
-                fuel: "Diésel (Blindaje Nivel 2+)", 
-                pax: "7 Pasajeros 4x4", 
-                type: "SUV",
-                galeria: [
-                    "https://images.unsplash.com/photo-1502877338535-766e1452684a?w=800&q=80",
-                    "https://images.unsplash.com/photo-1617469767053-d3b508a0d825?w=800&q=80",
-                    "https://images.unsplash.com/photo-1511919884226-fd3cad34687c?w=800&q=80"
-                ]
-            }
+        // BASE DE DATOS MAESTRA DE VEHÍCULOS REALES (STOCK SOLICITADO)
+        let fleetData = [
+            { id: "v1", name: "Chevrolet Corvette C8", category: "Exotic Sport", price: 2500000, trans: "Ocho Marchas", fuel: "Premium", pax: 2, spec: "495 HP / 6.2L V8 DI", label: "Hypercar", status: "Disponible" },
+            { id: "v2", name: "Chevrolet Tahoe Z71", category: "SUV Premium", price: 1100000, trans: "Automática", fuel: "Premium", pax: 7, spec: "355 HP V8", label: "Elite VIP", status: "Disponible" },
+            { id: "v3", name: "Toyota Prado TXL", category: "SUV Ejecutiva", price: 650000, trans: "Aut / Sec", fuel: "Diésel", pax: 7, spec: "4x4 Comfort", label: "4x4 Premium", status: "Disponible" },
+            { id: "v4", name: "Toyota Prado TX", category: "SUV Ejecutiva", price: 650000, trans: "Automática", fuel: "Diésel", pax: 7, spec: "4x4 Performance", label: "4x4 Elite", status: "Disponible" },
+            { id: "v5", name: "Toyota Prado 4X4", category: "SUV Ejecutiva", price: 650000, trans: "Automática", fuel: "Diésel / Gas", pax: 7, spec: "201 HP / 2.8L Turbo", label: "All-Terrain", status: "Disponible" },
+            { id: "v6", name: "Toyota Prado Blindada", category: "Seguridad VIP", price: 650000, trans: "Automática", fuel: "Diésel", pax: 7, spec: "201 HP / Blindaje Nivel 2+", label: "🛡️ Blindado 2+", status: "Disponible" },
+            { id: "v7", name: "Mazda CX-9", category: "SUV Premium", price: 550000, trans: "SkyActiv-Drive", fuel: "Premium", pax: 7, spec: "Turbo Intercooler", label: "Familiar Luxury", status: "Disponible" },
+            { id: "v8", name: "Audi Q5", category: "SUV Premium", price: 500000, trans: "S-Tronic", fuel: "Premium", pax: 5, spec: "Quattro All-Wheel Drive", label: "Euro Luxury", status: "Disponible" },
+            { id: "v9", name: "Chevrolet Equinox", category: "SUV Media", price: 400000, trans: "Automática", fuel: "Corriente", pax: 5, spec: "Eco-Mode Efficiency", label: "Confort Urbano", status: "Reservado" },
+            { id: "v10", name: "Mazda 3", category: "Sedán Premium", price: 300000, trans: "Triptónico", fuel: "Premium", pax: 5, spec: "186 HP / 2.5L SkyActiv", label: "Sport Urbano", status: "En Mantenimiento" }
         ];
 
-        // BASE DE DATOS DE RESEÑAS / TESTIMONIOS
-        const testimoniosData = [
-            { stars: "★★★★★", text: "Excelente servicio en Rionegro. Me entregaron el Corvette C8 impecable directamente en la pista privada. Conserjería premium total.", autor: "Matthew S. (Miami, USA)" },
-            { stars: "★★★★★", text: "La Tahoe Z71 estaba nueva, limpia y el proceso de hold fue transparente. Muy recomendados para ejecutivos en El Poblado.", autor: "Juan Pablo A. (Bogotá, CO)" },
-            { stars: "★★★★★", text: "Seguridad y discreción absoluta con la Prado Blindada. El soporte técnico bilingüe nos asistió 24/7 de manera magistral.", autor: "Elena R. (Madrid, ES)" }
-        ];
+        // MAPEO DE FOTOS CORREGIDAS (UNSPLASH HIGH RES AUTOMOTIVE)
+        const photoMockDB = {
+            v1: "https://images.unsplash.com/photo-1600712242805-5f78671b24da?w=800&q=80",
+            v2: "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?w=800&q=80",
+            v3: "https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=800&q=80",
+            v4: "https://images.unsplash.com/photo-1549399542-7e3f8b79c341?w=800&q=80",
+            v5: "https://images.unsplash.com/photo-1617469767053-d3b508a0d825?w=800&q=80",
+            v6: "https://images.unsplash.com/photo-1502877338535-766e1452684a?w=800&q=80",
+            v7: "https://images.unsplash.com/photo-1511919884226-fd3cad34687c?w=800&q=80",
+            v8: "https://images.unsplash.com/photo-1541899481282-d53bffe3c35d?w=800&q=80",
+            v9: "https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?w=800&q=80",
+            v10: "https://images.unsplash.com/photo-1580273916550-e323be2ae537?w=800&q=80"
+        };
 
-        // BASE DE DATOS DE PREGUNTAS FRECUENTES
-        const faqData = [
-            { q: "¿Cuáles son los requisitos obligatorios para rentar?", a: "Licencia de conducción nacional o internacional vigente, cédula de ciudadanía o pasaporte original, y contar con una tarjeta de crédito con cupo disponible para el hold temporal de la garantía de seguridad." },
-            { q: "¿Cómo opera el proceso de entrega en el aeropuerto?", a: "Coordinamos vía satélite el arribo de tu vuelo. Un conserje uniformado te espera en la puerta de desembarque del Aeropuerto José María Córdova de Rionegro con el vehículo listo en parqueadero VIP, sin filas ni trámites lentos." },
-            { q: "¿Cómo se calcula y libera el depósito de garantía?", a: "Se genera un bloqueo preventivo (hold bancario) en tu tarjeta al inicio del alquiler. Al retornar el coche en las mismas condiciones mecánicas y de combustible, nuestro sistema procesa la liberación del cupo de manera inmediata." }
-        ];
-
-        // DICCIONARIO BILINGÜE MÁSTERCARD DE TRADUCCIÓN COMPLETA
-        const diccionarioBilingue = {
+        // DICCIONARIO MAESTRO DE TRADUCCIÓN INTERNACIONAL SIMULTÁNEA
+        const translations = {
             es: {
                 navServ: "Servicios", navFleet: "Flota VIP", navBook: "Reservas", navCta: "Rent Now",
                 heroTitle: 'ALQUILER DE AUTOS DE LUXE EN <span class="text-primary">MEDELLÍN</span>',
-                heroSub: "EXPERIENCIAS DE CONDUCCIÓN PREMIUM DE ALTA GAMA", heroBtn: "Explorar Catálogo",
+                heroSubtitle: "EXPERIENCIAS DE CONDUCCIÓN PREMIUM DE ALTA GAMA", heroBtn: "Explorar Catálogo",
                 servSub: "EXCLUSIVIDAD", servTitle: "NUESTROS SERVICIOS VIP",
-                s1t: "Entrega Aeropuerto", s1d: "Despachos y recepciones directas sin costo adicional en las terminales del Aeropuerto Internacional José María Córdova de Rionegro.",
-                s2t: "Seguridad Máxima", s2d: "Vehículos blindados con esquemas de protección balística premium y personal calificado bajo solicitud previa corporativa.",
-                s3t: "Soporte 24/7 Concierge", s3d: "Asistencia en ruta inmediata, grúa preferencial y conserjería bilingüe personalizada disponible a cualquier hora del día.",
-                fleetSub: "COLECCIÓN EXCLUSIVA", fleetTitle: "EXPLORA NUESTRA FLOTA PREMIUM", priceDay: "Día",
-                calcSub: "PRESUPUESTO", calcTitle: "CALCULA TU TARIFA CORPORATIVA EN VIVO", calcCar: "Modelo del Vehículo Premium", calcDays: "Días Comerciales Solicitados:",
-                formSub: "SISTEMA DE RESERVAS", formTitle: "SOLICITA TU DISPONIBILIDAD DE INMEDIATO", formName: "Nombre Completo del Titular", formDays: "Días de Alquiler", formBtn: "Enviar a WhatsApp VIP"
+                s1t: "Entrega Aeropuerto", s1d: "Despachos directos sin costo en las terminales de Rionegro (Aeropuerto JMC).",
+                s2t: "Seguridad Máxima", s2d: "Vehículos blindados con esquemas de protección balística premium estructural.",
+                s3t: "Soporte 24/7 Concierge", s3d: "Asistencia vial inmediata y conserjería bilingüe personalizada a cualquier hora.",
+                fleetSub: "COLECCIÓN EXCLUSIVA", fleetTitle: "EXPLORA NUESTRA FLOTA PREMIUM",
+                calcSub: "PRESUPUESTO", calcTitle: "CALCULADORA DE TARIFA EN VIVO", calcCar: "Modelo del Vehículo Premium", calcDays: "Días Solicitados:",
+                formSub: "SISTEMA DE RESERVAS", formTitle: "SOLICITA TU DISPONIBILIDAD DE INMEDIATO", formName: "Nombre Completo del Titular", formDays: "Días de Alquiler", formBtn: "Enviar a WhatsApp VIP",
+                titleReviews: "LO QUE DICEN NUESTROS CLIENTES VIP",
+                lblTrans: "Transmisión", lblFuel: "Combustible", lblPax: "Pasajeros", btnBook: "Reservar Unidad",
+                lblStatusTaller: "En Taller", lblStatusReservado: "Reservado", lblRetorno: "Retorno Estimado",
+                faqSub: "SOPORTE CENTRAL", faqTitle: "PREGUNTAS FRECUENTES",
+                chatWelcome: "👋 ¡Hola! Bienvenido a *Renta Car Premium*. Estoy listo para asistirte en el alquiler de tu próximo coche premium. ¿Cuál de nuestra flota te interesa?",
+                chatAskDays: "Perfecto. ¿Cuántos días planeas utilizar el vehículo?",
+                chatCalcResult: "Haciendo las estimaciones corporativas... Para un total de {dias} días en el {carro}, el valor estimado neto es de: "
             },
             en: {
                 navServ: "Services", navFleet: "VIP Fleet", navBook: "Bookings", navCta: "Rent Now",
                 heroTitle: 'LUXURY CAR RENTAL IN <span class="text-primary">MEDELLIN</span>',
-                heroSub: "HIGH-END PREMIUM DRIVING EXPERIENCES", heroBtn: "View VIP Fleet",
+                heroSubtitle: "HIGH-END PREMIUM DRIVING EXPERIENCES", heroBtn: "View Catalog",
                 servSub: "EXCLUSIVITY", servTitle: "OUR VIP SERVICES",
-                s1t: "Airport Delivery", s1d: "Direct pick-ups and drop-offs at Rionegro Airport terminals free of any extra charges.",
-                s2t: "Maximum Security", s2d: "Armored vehicles featuring premium ballistic protection configurations and certified security staff on request.",
-                s3t: "24/7 Concierge", s3d: "Immediate roadside assistance, priority towing, and bilingual custom concierge help at any time.",
-                fleetSub: "EXCLUSIVE COLLECTION", fleetTitle: "EXPLORE OUR PREMIUM FLEET", priceDay: "Day",
-                calcSub: "BUDGET", calcTitle: "CALCULATE YOUR CORPORATE RATE LIVE", calcCar: "Premium Vehicle Model", calcDays: "Requested Rental Days:",
-                formSub: "BOOKING SYSTEM", formTitle: "REQUEST AVAILABILITY IMMEDIATELY", formName: "Full Name of Primary Driver", formDays: "Rental Days", formBtn: "Send to VIP WhatsApp"
+                s1t: "Airport Delivery", s1d: "Direct pick-ups free of extra charges at Rionegro Airport terminals (JMC).",
+                s2t: "Maximum Security", s2d: "Armored vehicles featuring heavy ballistic corporate security configurations.",
+                s3t: "24/7 Concierge Support", s3d: "Immediate roadside assistance and bilingual dedicated custom concierge help.",
+                fleetSub: "EXCLUSIVE COLLECTION", fleetTitle: "EXPLORE OUR PREMIUM FLEET",
+                calcSub: "BUDGET", calcTitle: "LIVE PRICE CALCULATOR", calcCar: "Premium Vehicle Model", calcDays: "Requested Days:",
+                formSub: "BOOKING SYSTEM", formTitle: "REQUEST AVAILABILITY IMMEDIATELY", formName: "Full Name of Primary Driver", formDays: "Rental Days", formBtn: "Send to VIP WhatsApp",
+                titleReviews: "WHAT OUR VIP CLIENTS SAY",
+                lblTrans: "Transmission", lblFuel: "Fuel", lblPax: "Passengers", btnBook: "Book Unit Now",
+                lblStatusTaller: "In Workshop", lblStatusReservado: "Booked", lblRetorno: "Estimated Return",
+                faqSub: "CENTRAL HELP", faqTitle: "FREQUENTLY ASKED QUESTIONS",
+                chatWelcome: "👋 Hello! Welcome to *Renta Car Premium*. I'm ready to assist you with your premium vehicle rental. Which car from our fleet are you interested in?",
+                chatAskDays: "Excellent choice. How many days are you planning to rent the vehicle?",
+                chatCalcResult: "Calculating corporate rates... For a total of {dias} days with the {carro}, the estimated net value is: "
+            },
+            it: {
+                navServ: "Servizi", navFleet: "Flotta VIP", navBook: "Prenotazioni", navCta: "Rent Now",
+                heroTitle: 'NOLEGGIO AUTO DI LUSSO A <span class="text-primary">MEDELLÍN</span>',
+                heroSubtitle: "ESPERIENZE DI GUIDA PREMIUM DI ALTA GAMMA", heroBtn: "Esplora Catalogo",
+                servSub: "ESCLUSIVITÀ", servTitle: "I NOSTRI SERVIZI VIP",
+                s1t: "Consegna in Aeroporto", s1d: "Spedizioni dirette senza costi aggiuntivi nei terminal dell'aeroporto di Rionegro.",
+                s2t: "Massima Sicurezza", s2d: "Veicoli blindati con schemi di protezione balistica premium aziendali.",
+                s3t: "Assistenza Concierge 24/7", s3d: "Soccorso stradale immediato e portineria bilingue personalizzata a qualsiasi ora.",
+                fleetSub: "COLLEZIONE ESCLUSIVA", fleetTitle: "ESPLORA LA NOSTRA FLOTTA PREMIUM",
+                calcSub: "PREVENTIVO", calcTitle: "CALCOLATORE DI TARIFFE IN TEMPO REALE", calcCar: "Modello di Veicolo Premium", calcDays: "Giorni Richiesti:",
+                formSub: "SISTEMA DI PRENOTAZIONE", formTitle: "RICHIEDI IMMEDIATAMENTE LA DISPONIBILITÀ", formName: "Nome Completo del Titolare", formDays: "Giorni di Noleggio", formBtn: "Invia a WhatsApp VIP",
+                titleReviews: "COSA DICONO I NOSTRI CLIENTI VIP",
+                lblTrans: "Trasmissione", lblFuel: "Carburante", lblPax: "Passeggeri", btnBook: "Prenota Unità",
+                lblStatusTaller: "In Officina", lblStatusReservado: "Riservato", lblRetorno: "Ritorno Stimato",
+                faqSub: "SUPPORTO CENTRALE", faqTitle: "DOMANDE FREQUENTI",
+                chatWelcome: "👋 Ciao! Benvenuto su *Renta Car Premium*. Sono pronto ad assisterti nel noleggio del tuo veicolo premium. Quale auto della nostra flotta ti interessa?",
+                chatAskDays: "Perfetto. Quanti giorni pensi di utilizzare il veicolo?",
+                chatCalcResult: "Elaborazione dei preventivi... Per un totale di {dias} giorni con la {carro}, il valore stimato è: "
+            },
+            de: {
+                navServ: "Dienstleistungen", navFleet: "VIP-Flotte", navBook: "Buchungen", navCta: "Rent Now",
+                heroTitle: 'LUXUSAUTOVERMIETUNG IN <span class="text-primary">MEDELLÍN</span>',
+                heroSubtitle: "PREMIUM-FAHRERLEBNISSE DER SPITZENKLASSE", heroBtn: "Katalog Ansehen",
+                servSub: "EXKLUSIVITÄT", servTitle: "UNSERE VIP-SERVICES",
+                s1t: "Flughafenlieferung", s1d: "Direkte und kostenlose Bereitstellung an den Terminals des Flughafens Rionegro.",
+                s2t: "Maximale Sicherheit", s2d: "Gepanzerte Fahrzeuge mit erstklassigen ballistischen Schutzkonfigurationen.",
+                s3t: "24/7 Concierge-Service", s3d: "Sofortige Pannenhilfe und zweisprachige persönliche Betreuung rund um die Uhr.",
+                fleetSub: "EXKLUSIVE KOLLEKTION", fleetTitle: "ENTDECKEN SIE UNSERE PREMIUM-FLOTTE",
+                calcSub: "BUDGET", calcTitle: "LIVE-TARIFRECHNER", calcCar: "Premium-Fahrzeugmodell", calcDays: "Gewünschte Tage:",
+                formSub: "BUCHUNGSSYSTEM", formTitle: "RESERVIERUNG JETZT ANFRAGEN", formName: "Vollständiger Name des Fahrers", formDays: "Mietdauer (Tage)", formBtn: "An VIP-WhatsApp Senden",
+                titleReviews: "WAS UNSERE VIP-KUNDEN SAGEN",
+                lblTrans: "Getriebe", lblFuel: "Kraftstoff", lblPax: "Passagiere", btnBook: "Einheit Buchen",
+                lblStatusTaller: "In Werkstatt", lblStatusReservado: "Reserviert", lblRetorno: "Voraussichtliche Rückkehr",
+                faqSub: "SUPPORT-ZENTRALE", faqTitle: "HÄUFIG GESTELLTE FRAGEN",
+                chatWelcome: "👋 Hallo! Willkommen bei *Renta Car Premium*. Ich stehe bereit, um Ihnen bei der Miete Ihres Premium-Fahrzeugs zu helfen. Welches Auto aus unserer Flotte interessiert Sie?",
+                chatAskDays: "Ausgezeichnet. Wie viele Tage möchten Sie das Fahrzeug mieten?",
+                chatCalcResult: "Berechnung der Firmentarife... Für insgesamt {dias} Tage mit dem {carro} beträgt der geschätzte Wert: "
+            },
+            fr: {
+                navServ: "Services", navFleet: "Flotte VIP", navBook: "Réservations", navCta: "Rent Now",
+                heroTitle: 'LOCATION DE VOITURES DE LUXE À <span class="text-primary">MEDELLÍN</span>',
+                heroSubtitle: "EXPÉRIENCES DE CONDUITE PREMIUM HAUT DE GAMME", heroBtn: "Voir le Catalogue",
+                servSub: "EXCLUSIVITÉ", servTitle: "NOS SERVICES VIP",
+                s1t: "Livraison Aéroport", s1d: "Livraisons directes sans frais aux terminaux de l'aéroport de Rionegro (JMC).",
+                s2t: "Sécurité Maximale", s2d: "Véhicules blindés dotés de structures de protection balistique premium.",
+                s3t: "Concierge Asistance 24/7", s3d: "Assistance routière immédiate et service de conciergerie bilingue personnalisé.",
+                fleetSub: "COLLECTION EXCLUSIVE", fleetTitle: "EXPLOREZ NOTRE FLOTTE PREMIUM",
+                calcSub: "BUDGET", calcTitle: "CALCULATEUR DE TARIF EN DIRECT", calcCar: "Modèle de Véhicule Premium", calcDays: "Jours Demandés:",
+                formSub: "SYSTÈME DE RÉSERVATION", formTitle: "DEMANDEZ LA DISPONIBILITÉ IMMÉDIATEMENT", formName: "Nom Complet du Titulaire", formDays: "Jours de Location", formBtn: "Envoyer à WhatsApp VIP",
+                titleReviews: "CE QUE DISENT NOS CLIENTS VIP",
+                lblTrans: "Transmission", lblFuel: "Carburant", lblPax: "Passagers", btnBook: "Réserver L'unité",
+                lblStatusTaller: "Au Garage", lblStatusReservado: "Réservé", lblRetorno: "Retour Estimé",
+                faqSub: "ASSISTANCE CENTRALE", faqTitle: "FOIRE AUX QUESTIONS",
+                chatWelcome: "👋 Bonjour! Bienvenue sur *Renta Car Premium*. Je suis prêt à vous aider à louer votre véhicule premium. Quel véhicule de notre flotte vous intéresse?",
+                chatAskDays: "Parfait. Combien de jours prévoyez-vous d'utiliser le véhicule?",
+                chatCalcResult: "Calcul des tarifs entreprise... Pour un total de {dias} jours avec la {carro}, la valeur estimée est de: "
             }
         };
 
-        // VARIABLES DE ESTADO LOCALES GLOBALIZADAS
-        let idiomaGlobal = "es";
-        let filtroSeleccionado = "todos";
-        let galeriaIndexInterno = 0;
-        let galeriaFotosActuales = [];
+        const reviewsMockData = [
+            { id: "r1", stars: "★★★★★", textEs: "Excelente servicio en Rionegro. Me entregaron el C8 impecable directamente en pista. Conserjería top.", textEn: "Excellent service in Rionegro. They delivered the C8 pristine directly on tarmac. Top concierge.", textIt: "Servizio eccellente a Rionegro. Mi hanno consegnato la C8 immacolata direttamente in pista.", textDe: "Ausgezeichneter Service in Rionegro. Der C8 wurde makellos direkt auf der Landebahn übergeben.", textFr: "Excellent service à Rionegro. Ils m'ont livré la C8 impeccable directement sur la piste.", autor: "Matthew S. (Miami)" },
+            { id: "r2", stars: "★★★★★", textEs: "La Tahoe Z71 estaba nueva y limpia. El proceso de hold fue transparente.", textEn: "The Tahoe Z71 was brand new and clean. The hold process was transparent.", textIt: "La Tahoe Z71 era nuova e pulita. Il processo di hold è stato trasparente.", textDe: "Der Tahoe Z71 war brandneu und sauber. Der Hold-Prozess war transparent.", textFr: "La Tahoe Z71 était neuve et propre. Le processus de hold était transparent.", autor: "Juan Pablo A. (Bogotá)" },
+            { id: "r3", stars: "★★★★★", textEs: "Seguridad y discreción con la Prado Blindada. Soporte bilingüe máster.", textEn: "Security and discretion with the Armored Prado. Master bilingual support.", textIt: "Sicurezza e discrezione con la Prado Blindata. Supporto bilingue magistrale.", textDe: "Sicherheit und Diskretion mit dem gepanzerten Prado. Meisterhafter zweisprachiger Support.", textFr: "Sécurité et discrétion avec la Prado Blindée. Support bilingue de maître.", autor: "Elena R. (Madrid)" }
+        ];
 
-        // RENDERIZADO PRINCIPAL AUTOMÁTICO DE LA INTERFAZ
-        function renderizarEstructuraPlataforma() {
+        const faqMockData = [
+            { qEs: "¿Cuáles son los requisitos obligatorios?", qEn: "What are the mandatory requirements?", qIt: "Quali sono i requisiti obbligatori?", qDe: "Was sind die zwingenden Voraussetzungen?", qFr: "Quelles sont les conditions obligatoires?", aEs: "Licencia de conducción vigente, documento de identidad (Pasaporte) y tarjeta de crédito para hold fianza.", aEn: "Valid driver's license, ID (Passport), and credit card for security hold deposit.", aIt: "Patente di guida valida, documento d'identità (passaporto) e carta di credito per il deposito cauzionale.", aDe: "Gültiger Führerschein, Ausweis (Reisepass) und Kreditkarte für die Kaution.", aFr: "Permis de conduire valide, pièce d'identité (passeport) et carte de crédit pour le dépôt de garantie." },
+            { qEs: "¿Cómo opera la entrega en aeropuerto?", qEn: "How does airport delivery operate?", qIt: "Come funziona la consegna in aeroporto?", qDe: "Wie funktioniert die Flughafenlieferung?", qFr: "Comment fonctionne la livraison à l'aéroport?", aEs: "Un conserje le espera en la salida de desembarque de Rionegro con la unidad lista.", aEn: "A concierge waits for you at the Rionegro arrival gate with the unit ready to drive.", aIt: "Un concierge vi aspetta all'uscita degli arrivi di Rionegro con l'unità pronta.", aDe: "Ein Concierge erwartet Sie am Ankunftsgate in Rionegro mit dem fahrbereiten Fahrzeug.", aFr: "Un concierge vous attend à la porte des arrivées de Rionegro avec le véhicule prêt." }
+        ];
+
+        // VARIABLES DE CONTROL DE MERCADO (TRM GLOBAL)
+        let exchangeRates = { USD: 4100, EUR: 4450 }; // Valores base fallback por solicitud comercial
+        let currentLang = "es";
+        let chatbotState = { step: 0, carSelected: "", days: 1 };
+
+        // INITIALIZER ENGINE
+        window.onload = async function() {
+            await fetchLiveMarketRates();
+            renderCoreUI();
+            initSignatureCanvas();
+            resetChatBotFlow();
+        };
+
+        // CONSUMO ASÍNCRONO DE LA API TRM OPEN-ER
+        async function fetchLiveMarketRates() {
+            try {
+                const response = await fetch("https://open.er-api.com/v6/latest/COP");
+                if (!response.ok) throw new Error("API Error");
+                const data = await response.json();
+                
+                // Conversión matemática inversa (1 / rate) para obtener el valor del USD/EUR en pesos
+                if (data.rates && data.rates.USD && data.rates.EUR) {
+                    exchangeRates.USD = Math.round(1 / data.rates.USD);
+                    exchangeRates.EUR = Math.round(1 / data.rates.EUR);
+                    document.getElementById('trm-indicator').innerHTML = `<span class="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-pulse"></span> Live Market Rates Authenticated 🟢`;
+                }
+            } catch (error) {
+                console.warn("Fallback de TRM activado debido a error de red o CORS: Usando base comercial 1 x 4100.");
+                document.getElementById('trm-indicator').innerHTML = `<span class="w-1.5 h-1.5 bg-yellow-500 rounded-full"></span> Backup Rate Active (1x4100) 🟡`;
+            }
+        }
+
+        // CONTROLADOR DE DIVISAS E INYECCIÓN DE FORMATO PREMIÈRE
+        function getFormattedPriceString(copPrice) {
+            if (currentLang === "es") {
+                return `$${copPrice.toLocaleString('es-CO')} COP`;
+            } else if (currentLang === "en") {
+                const converted = Math.round(copPrice / exchangeRates.USD);
+                return `U$D ${converted.toLocaleString('en-US')} / Day`;
+            } else {
+                const converted = Math.round(copPrice / exchangeRates.EUR);
+                return `€ ${converted.toLocaleString('en-US')} / Jour`;
+            }
+        }
+
+        // MOTOR DE TRADUCCIÓN GLOBAL INTERNACIONAL
+        function changeLanguage(langKey) {
+            currentLang = langKey;
+            const dict = translations[langKey];
+
+            // Navbar & Hero Labels
+            document.getElementById('nav-servicios').innerText = dict.navServ;
+            document.getElementById('nav-flota').innerText = dict.navFleet;
+            document.getElementById('nav-cotizador').innerText = dict.navCotizador;
+            document.getElementById('nav-testimonios').innerText = dict.navTestimonios;
+            document.getElementById('nav-faq').innerText = dict.navFaq;
+            document.getElementById('nav-cta').innerText = dict.navCta;
+            document.getElementById('hero-title').innerHTML = dict.heroTitle;
+            document.getElementById('hero-subtitle').innerText = dict.heroSubtitle;
+            document.getElementById('hero-btn-primary').innerText = dict.heroBtn;
+
+            // Services
+            document.getElementById('serv-sub').innerText = dict.servSub;
+            document.getElementById('serv-title').innerText = dict.servTitle;
+            document.getElementById('s1-title').innerText = dict.s1t;
+            document.getElementById('s1-desc').innerText = dict.s1d;
+            document.getElementById('s2-title').innerText = dict.s2t;
+            document.getElementById('s2-desc').innerText = dict.s2d;
+            document.getElementById('s3-title').innerText = dict.s3t;
+            document.getElementById('s3-desc').innerText = dict.s3d;
+
+            // Fleet & Calculator Labels
+            document.getElementById('fleet-sub').innerText = dict.fleetSub;
+            document.getElementById('fleet-title').innerText = dict.fleetTitle;
+            document.getElementById('calc-sub').innerText = dict.calcSub;
+            document.getElementById('calc-title').innerText = dict.calcTitle;
+            document.getElementById('calc-label-car').innerText = dict.calcCar;
+            document.getElementById('calc-label-days').innerText = dict.calcDays;
+
+            // Form
+            document.getElementById('form-sub').innerText = dict.formSub;
+            document.getElementById('form-title').innerText = dict.formTitle;
+            document.getElementById('form-name-label').innerText = dict.formName;
+            document.getElementById('form-days-label').innerText = dict.formDays;
+            document.getElementById('form-btn').innerText = dict.formBtn;
+            document.getElementById('title-reviews').innerText = dict.titleReviews;
+            document.getElementById('faq-sub').innerText = dict.faqSub;
+            document.getElementById('faq-title').innerText = dict.faqTitle;
+
+            // Re-renderizado de módulos dinámicos
+            renderCoreUI();
+            resetChatBotFlow();
+        }
+
+        // RENDERIZADO DINÁMICO DE COMPONENTES DE LA INTERFAZ CENTRAL
+        function renderCoreUI() {
             const grid = document.getElementById('grid-flota');
             const calcSelect = document.getElementById('calcCar');
             const formSelect = document.getElementById('formCar');
-            const comp1 = document.getElementById('comp1');
-            const comp2 = document.getElementById('comp2');
+            const dict = translations[currentLang];
 
-            // Limpieza estructural para re-inyección limpia
+            // Salvar selección del usuario antes de limpiar
+            const previousCalcValue = calcSelect.value;
+            const previousFormValue = formSelect.value;
+
             grid.innerHTML = "";
             calcSelect.innerHTML = "";
             formSelect.innerHTML = "";
-            comp1.innerHTML = "";
-            comp2.innerHTML = "";
 
-            // 1. ITERACIÓN Y CONSTRUCCIÓN DE FLOTA
-            fleetData.forEach((car, index) => {
-                if (filtroSeleccionado === "todos" || car.type === filtroSeleccionado) {
-                    grid.innerHTML += `
-                        <div class="bg-cardBg border border-white/[0.03] rounded-xl overflow-hidden flex flex-col h-full group transition-all duration-500 hover:border-primary/40 hover:shadow-2xl hover:shadow-primary/5">
-                            <div class="w-full h-[230px] overflow-hidden relative">
-                                <img src="${car.galeria[0]}" alt="${car.name}" class="w-full h-full object-cover transition-all duration-700 group-hover:scale-105">
-                                <button onclick="activarModalGaleria('${car.id}')" class="absolute bottom-3 right-3 bg-black/80 backdrop-blur-md border border-white/10 text-white hover:text-primary text-[0.6rem] font-bold uppercase tracking-[1px] px-3 py-1.5 rounded cursor-pointer transition-all">
-                                    📸 Ver Fotos (${car.galeria.length})
-                                </button>
-                                <span class="absolute top-3 left-3 bg-zinc-950/90 text-accent border border-accent/20 px-2 py-0.5 rounded text-[0.55rem] uppercase tracking-[1px] font-bold font-mono">
-                                    ${car.type}
-                                </span>
-                            </div>
-                            <div class="p-6 flex flex-col flex-grow justify-between">
-                                <div>
-                                    <h3 class="text-[1.15rem] font-black uppercase tracking-[0.5px] text-white group-hover:text-primary transition-colors duration-300">${car.name}</h3>
-                                    <div class="my-3 flex items-baseline gap-1">
-                                        <span class="text-white font-mono text-[1.3rem] font-black tracking-tight">${formatearPrecioGlobal(car.price)}</span>
-                                        <span class="text-zinc-500 text-[0.72rem] lowercase font-light"> / ${idiomaGlobal === 'es' ? 'día' : 'day'}</span>
-                                    </div>
-                                    
-                                    <div class="grid grid-cols-2 gap-y-2.5 gap-x-2 border-t border-white/[0.04] pt-4 mt-2 mb-6 text-[0.72rem] text-zinc-400 font-mono font-light">
-                                        <div class="flex items-center gap-1.5">🕹️ <span class="text-white/80 truncate">${car.trans}</span></div>
-                                        <div class="flex items-center gap-1.5">⛽ <span class="text-white/80 truncate">${car.fuel}</span></div>
-                                        <div class="flex items-center gap-1.5">👥 <span class="text-white/80 truncate">${car.pax}</span></div>
-                                        <div class="flex items-center gap-1.5">⚡ <span class="text-white/80 truncate">${car.hp}</span></div>
-                                    </div>
-                                </div>
-                                <a href="#reserva" onclick="asignarAutoAFormulario('${car.name}')" class="block w-full py-3.5 bg-transparent border border-white/10 text-white text-[0.68rem] font-black uppercase tracking-[2px] rounded-lg text-center hover:bg-white hover:text-black hover:border-white transition-all duration-500">
-                                    Reservar Unidad VIP
-                                </a>
-                            </div>
-                        </div>`;
+            fleetData.forEach(car => {
+                // Validación del Estado Lógico Interno del Vehículo (SaaS Architecture)
+                let statusBadgeHTML = "";
+                let cardOpacityClass = "";
+                let btnHTML = `<button onclick="assignCarToFormDirectly('${car.name}')" class="w-full py-3.5 bg-transparent border border-white/10 text-white text-[0.68rem] font-bold uppercase tracking-[1px] rounded-lg text-center hover:bg-white hover:text-black transition-all">${dict.btnBook}</button>`;
+
+                if (car.status === "Reservado") {
+                    statusBadgeHTML = `<span class="absolute top-3 right-3 bg-yellow-600/90 text-white px-2 py-0.5 rounded text-[0.55rem] uppercase font-mono font-bold">${dict.lblStatusReservado}</span>`;
+                } else if (car.status === "En Mantenimiento") {
+                    cardOpacityClass = "opacity-40 pointer-events-none";
+                    statusBadgeHTML = `<span class="absolute top-3 right-3 bg-red-600/90 text-white px-2 py-0.5 rounded text-[0.55rem] uppercase font-mono font-bold">${dict.lblStatusTaller} — ${dict.lblRetorno}: 3 Días</span>`;
+                    btnHTML = `<button disabled class="w-full py-3.5 bg-zinc-900 border border-white/5 text-zinc-600 text-[0.68rem] font-bold uppercase tracking-[1px] rounded-lg cursor-not-allowed">${dict.lblStatusTaller}</button>`;
                 }
 
-                // Inyección segura de selectores de datos
+                grid.innerHTML += `
+                    <div class="vehicle-card bg-cardBg border border-white/[0.03] rounded-xl overflow-hidden flex flex-col h-full relative ${cardOpacityClass}" data-price="${car.price}">
+                        <div class="vehicle-img-container">
+                            <img src="${photoMockDB[car.id]}" alt="${car.name}">
+                            <span class="absolute top-3 left-3 bg-black/80 text-accent border border-accent/20 px-2 py-0.5 rounded text-[0.55rem] uppercase font-bold font-mono tracking-wider">${car.label}</span>
+                            ${statusBadgeHTML}
+                        </div>
+                        <div class="p-6 flex flex-col flex-grow justify-between">
+                            <div>
+                                <div class="text-[0.6rem] font-mono text-zinc-500 uppercase tracking-wider mb-1">${car.category}</div>
+                                <h3 class="text-[1.1rem] font-black uppercase text-white tracking-wide">${car.name}</h3>
+                                <div class="my-3 font-mono">
+                                    <div class="text-white text-base font-bold">$${car.price.toLocaleString('es-CO')} <span class="text-[0.65rem] text-zinc-500 font-light">COP / Day</span></div>
+                                    <div class="vehicle-currency-price text-accent text-xs font-semibold mt-0.5">${currentLang !== 'es' ? getFormattedPriceString(car.price) : ''}</div>
+                                </div>
+                                <div class="grid grid-cols-2 gap-y-2 gap-x-3 border-t border-white/[0.04] pt-4 mt-2 mb-6 text-[0.68rem] text-zinc-400 font-mono font-light">
+                                    <div>⚡ <span class="text-white/80">${car.spec.split(' / ')[0]}</span></div>
+                                    <div>⚙️ <span class="text-white/80">${car.trans}</span></div>
+                                    <div>⛽ <span class="text-white/80">${car.fuel}</span></div>
+                                    <div>👥 <span class="text-white/80">${car.pax} Pax</span></div>
+                                </div>
+                            </div>
+                            ${btnHTML}
+                        </div>
+                    </div>`;
+
                 calcSelect.innerHTML += `<option value="${car.price}">${car.name}</option>`;
                 formSelect.innerHTML += `<option value="${car.name}">${car.name}</option>`;
-                comp1.innerHTML += `<option value="${index}">${car.name}</option>`;
-                comp2.innerHTML += `<option value="${index}" ${index === 1 ? 'selected': ''}>${car.name}</option>`;
             });
 
-            // 2. CONSTRUCCIÓN DE ACORDEÓN DE PREGUNTAS FRECUENTES (FAQ)
-            const faqContainer = document.getElementById('contenedor-faq-dinamico');
-            faqContainer.innerHTML = "";
-            faqData.forEach((item, idx) => {
-                faqContainer.innerHTML += `
-                    <div class="bg-cardBg border border-white/[0.03] rounded-xl overflow-hidden transition-all duration-300">
-                        <button onclick="conmutarAcordeonFAQ(${idx})" class="w-full text-left p-6 flex justify-between items-center text-[0.85rem] font-bold uppercase tracking-[0.5px] text-white hover:text-primary transition-all cursor-pointer bg-transparent border-none">
-                            <span>${item.q}</span>
-                            <span id="faq-icon-${idx}" class="text-zinc-500 font-mono font-bold transition-transform duration-300">+</span>
-                        </button>
-                        <div id="faq-ans-${idx}" class="hidden p-6 pt-0 border-t border-white/[0.02] text-zinc-400 text-[0.82rem] font-light leading-relaxed bg-black/10">
-                            ${item.a}
-                        </div>
-                    </div>`;
-            });
+            // Re-establecer selecciones
+            if (previousCalcValue) calcSelect.value = previousCalcValue;
+            if (previousFormValue) formSelect.value = previousFormValue;
 
-            // 3. CONSTRUCCIÓN DEL MARCO DE RESEÑAS INFINITAS (CARRUSEL INYECTADO)
-            const reviewScroll = document.getElementById('contenedor-testimonios-infinito');
-            reviewScroll.innerHTML = "";
-            // Duplicamos el array para que el scroll de CSS sea fluido y no deje huecos
-            const testimoniosDobles = [...testimoniosData, ...testimoniosData, ...testimoniosData];
-            testimoniosDobles.forEach((t) => {
-                reviewScroll.innerHTML += `
-                    <div class="bg-cardBg border border-white/[0.03] p-8 rounded-xl w-[310px] sm:w-[380px] flex flex-col justify-between shadow-lg">
+            // Renderizar opiniones en carrusel infinito
+            const track = document.getElementById('contenedor-testimonios');
+            track.innerHTML = "";
+            const doubleReviews = [...reviewsMockData, ...reviewsMockData]; // Duplicación exacta matemática
+            doubleReviews.forEach(r => {
+                let opinionTexto = r.textEs;
+                if (currentLang === "en") opinionTexto = r.textEn;
+                if (currentLang === "it") opinionTexto = r.textIt;
+                if (currentLang === "de") opinionTexto = r.textDe;
+                if (currentLang === "fr") opinionTexto = r.textFr;
+
+                track.innerHTML += `
+                    <div class="bg-cardBg border border-white/[0.03] p-6 rounded-lg w-[300px] sm:w-[360px] flex flex-col justify-between shadow-xl" data-review-id="${r.id}">
                         <div>
-                            <div class="text-accent text-[0.9rem] mb-3 font-mono tracking-tight">${t.stars}</div>
-                            <p class="text-white/80 text-[0.82rem] font-light italic leading-relaxed mb-4">"${t.text}"</p>
+                            <div class="text-accent text-[0.8rem] mb-2 font-mono">${r.stars}</div>
+                            <p class="text-white/80 text-[0.78rem] font-light italic leading-relaxed">"${opinionTexto}"</p>
                         </div>
-                        <div class="text-primary font-bold text-[0.68rem] uppercase tracking-[2px] font-mono border-l border-primary/40 pl-2">
-                            ${t.autor}
+                        <div class="text-primary font-bold text-[0.65rem] uppercase font-mono mt-4 border-l-2 border-primary pl-2">${r.autor}</div>
+                    </div>`;
+            });
+
+            // Renderizar listado de FAQs
+            const faqBox = document.getElementById('contenedor-faq');
+            faqBox.innerHTML = "";
+            faqMockData.forEach((f, idx) => {
+                let qText = f.qEs, aText = f.aEs;
+                if (currentLang === "en") { qText = f.qEn; aText = f.aEn; }
+                if (currentLang === "it") { qText = f.qIt; aText = f.aIt; }
+                if (currentLang === "de") { qText = f.qDe; aText = f.aDe; }
+                if (currentLang === "fr") { qText = f.qFr; aText = f.aFr; }
+
+                faqBox.innerHTML += `
+                    <div class="bg-cardBg border border-white/[0.03] rounded-lg overflow-hidden">
+                        <button onclick="toggleFaqAccordionNode(${idx})" class="w-full text-left p-5 flex justify-between items-center text-[0.8rem] font-bold uppercase text-white hover:text-primary bg-transparent border-none outline-none cursor-pointer">
+                            <span>${qText}</span> <span id="faq-ico-${idx}" class="text-zinc-600 font-mono text-base">+</span>
+                        </button>
+                        <div id="faq-ans-${idx}" class="hidden p-5 pt-0 text-zinc-400 text-[0.78rem] font-light leading-relaxed border-t border-white/[0.01]">
+                            ${aText}
                         </div>
                     </div>`;
             });
 
-            // Ejecuciones en cadena para sincronizar cálculos iniciales
-            recalcularTarifaTotal();
-            ejecutarComparacion();
+            recalculateLiveQuote();
+            renderAdminDashboardTable();
         }
 
-        // CONTROLADORES DE PRECIO Y DIVISAS BILINGÜES
-        function formatearPrecioGlobal(copValue) {
-            if (idiomaGlobal === 'es') {
-                return '$' + copValue.toLocaleString('es-CO');
-            } else {
-                // Conversión de tasa fija comercial controlada de $4.000 COP por 1 USD
-                const usdValue = Math.round(copValue / 4000);
-                return 'USD $' + usdValue.toLocaleString('en-US');
-            }
-        }
+        // CORRECCIÓN DEL MOTOR DE ORDENACIÓN DE PRECIOS DOM
+        function sortFleetByPrice() {
+            const orderType = document.getElementById('sortSelect').value;
+            if (orderType === "default") return;
 
-        function cambiarIdiomaGlobal(lenguajeCod) {
-            idiomaGlobal = lenguajeCod;
-            const traduccion = diccionarioBilingue[lenguajeCod];
+            const grid = document.getElementById('grid-flota');
+            const cardsArray = Array.from(grid.children);
 
-            // Inyección masiva de etiquetas del diccionario bilingüe en el DOM
-            document.getElementById('nav-servicios').innerText = traduccion.navServ;
-            document.getElementById('nav-flota').innerText = traduccion.navFleet;
-            document.getElementById('nav-reserva').innerText = traduccion.navBook;
-            document.getElementById('nav-cta').innerText = traduccion.navCta;
-            document.getElementById('hero-title').innerHTML = traduccion.heroTitle;
-            document.getElementById('hero-subtitle').innerText = traduccion.heroSub;
-            document.getElementById('hero-btn-primary').innerText = traduccion.heroBtn;
-            document.getElementById('serv-sub').innerText = traduccion.servSub;
-            document.getElementById('serv-title').innerText = traduccion.servTitle;
-            document.getElementById('s1-title').innerText = traduccion.s1t;
-            document.getElementById('s1-desc').innerText = traduccion.s1d;
-            document.getElementById('s2-title').innerText = traduccion.s2t;
-            document.getElementById('s2-desc').innerText = traduccion.s2d;
-            document.getElementById('s3-title').innerText = traduccion.s3t;
-            document.getElementById('s3-desc').innerText = traduccion.s3d;
-            document.getElementById('fleet-sub').innerText = traduccion.fleetSub;
-            document.getElementById('fleet-title').innerText = traduccion.fleetTitle;
-            document.getElementById('calc-sub').innerText = traduccion.calcSub;
-            document.getElementById('calc-title').innerText = traduccion.calcTitle;
-            document.getElementById('calc-label-car').innerText = traduccion.calcCar;
-            document.getElementById('calc-label-days').innerText = traduccion.calcDays;
-            document.getElementById('form-sub').innerText = traduccion.formSub;
-            document.getElementById('form-title').innerText = traduccion.formTitle;
-            document.getElementById('form-name-label').innerText = traduccion.formName;
-            document.getElementById('form-days-label').innerText = traduccion.formDays;
-            document.getElementById('form-btn').innerText = traduccion.formBtn;
-
-            // Renderizado estructural con el nuevo set de divisas e idioma activo
-            renderizarEstructuraPlataforma();
-        }
-
-        // FILTRADO DE COMPONENTES POR TIPO DE FLOTA
-        function filtrarFlota(tipoCod) {
-            filtroSeleccionado = tipoCod;
-            renderizarEstructuraPlataforma();
-        }
-
-        // ASIGNACIÓN DE CLICS DE TARJETAS AL FORMULARIO COMERCIAL
-        function asignarAutoAFormulario(nombreAuto) {
-            document.getElementById('formCar').value = nombreAuto;
-        }
-
-        // LÓGICA LOGÍSTICA DEL COTIZADOR DINÁMICO
-        function recalcularTarifaTotal() {
-            const precioBase = parseInt(document.getElementById('calcCar').value);
-            const numeroDias = parseInt(document.getElementById('calcDays').value);
-            
-            document.getElementById('daysLabel').innerText = numeroDias;
-            document.getElementById('calcUnit').innerText = formatearPrecioGlobal(precioBase);
-
-            let factorDescuento = 0;
-            // Regla comercial de volumen corporativo: más de 7 días otorga 10% de descuento
-            if (numeroDias >= 7) {
-                factorDescuento = 0.10;
-                document.getElementById('calcDiscount').innerText = "10% VIP Apply";
-                document.getElementById('calcDiscount').className = "text-green-500 font-bold";
-            } else {
-                document.getElementById('calcDiscount').innerText = "0%";
-                document.getElementById('calcDiscount').className = "text-zinc-600";
-            }
-
-            const valorBruto = precioBase * numeroDias;
-            const valorNetoFinal = valorBruto - (valorBruto * factorDescuento);
-
-            document.getElementById('calcTotal').innerText = formatearPrecioGlobal(valorNetoFinal);
-        }
-
-        // COMPARADOR DE CARROS CARA A CARA
-        function ejecutarComparacion() {
-            const indexA = document.getElementById('comp1').value;
-            const indexB = document.getElementById('comp2').value;
-
-            if (indexA === undefined || indexB === undefined || fleetData.length === 0) return;
-
-            const carA = fleetData[indexA];
-            const carB = fleetData[indexB];
-
-            document.getElementById('comp1-specs').innerHTML = `
-                <p class="text-primary font-black uppercase text-[0.85rem] tracking-[0.5px] mb-3">${carA.name}</p>
-                <div class="space-y-1.5 text-zinc-400">
-                    <p><span class="text-zinc-600">Potencia:</span> ${carA.hp}</p>
-                    <p><span class="text-zinc-600">Transmisión:</span> ${carA.trans}</p>
-                    <p><span class="text-zinc-600">Combustible:</span> ${carA.fuel}</p>
-                    <p><span class="text-zinc-600">Capacidad:</span> ${carA.pax}</p>
-                    <p class="text-accent font-black pt-2 border-t border-white/5 mt-2 text-[0.82rem]">${formatearPrecioGlobal(carA.price)}/Día</p>
-                </div>`;
-
-            document.getElementById('comp2-specs').innerHTML = `
-                <p class="text-accent font-black uppercase text-[0.85rem] tracking-[0.5px] mb-3">${carB.name}</p>
-                <div class="space-y-1.5 text-zinc-400">
-                    <p><span class="text-zinc-600">Potencia:</span> ${carB.hp}</p>
-                    <p><span class="text-zinc-600">Transmisión:</span> ${carB.trans}</p>
-                    <p><span class="text-zinc-600">Combustible:</span> ${carB.fuel}</p>
-                    <p><span class="text-zinc-600">Capacidad:</span> ${carB.pax}</p>
-                    <p class="text-primary font-black pt-2 border-t border-white/5 mt-2 text-[0.82rem]">${formatearPrecioGlobal(carB.price)}/Día</p>
-                </div>`;
-        }
-
-        // INTERACTIVIDAD ACORDEÓN PREGUNTAS FRECUENTES (FAQ)
-        function conmutarAcordeonFAQ(indiceFAQ) {
-            const panelRespuesta = document.getElementById(`faq-ans-${indiceFAQ}`);
-            const indicadorIcono = document.getElementById(`faq-icon-${indiceFAQ}`);
-
-            if (panelRespuesta.classList.contains('hidden')) {
-                panelRespuesta.classList.remove('hidden');
-                indicadorIcono.innerText = "−";
-                indicadorIcono.className = "text-primary font-bold";
-            } else {
-                panelRespuesta.classList.add('hidden');
-                indicadorIcono.innerText = "+";
-                indicadorIcono.className = "text-zinc-500 font-bold";
-            }
-        }
-
-        // CONTROLADORES DE MODALES COMPONENTIZADOS NATIVOS
-        function activarDespliegueModal(idModal) {
-            document.getElementById(idModal).classList.remove('hidden');
-            document.body.classList.add('overflow-hidden');
-        }
-
-        function desactivarOcultarModal(idModal) {
-            document.getElementById(idModal).classList.add('hidden');
-            document.body.classList.remove('overflow-hidden');
-        }
-
-        // LÓGICA AVANZADA DE GALERÍA DE FOTOS INTERNA MODAL
-        function activarModalGaleria(idVehiculo) {
-            const carEncontrado = fleetData.find(c => c.id === idVehiculo);
-            if (!carEncontrado) return;
-
-            galeriaFotosActuales = carEncontrado.galeria;
-            galeriaIndexInterno = 0;
-
-            document.getElementById('modalGaleriaTitulo').innerText = carEncontrado.name;
-            document.getElementById('imgModalPrincipal').src = galeriaFotosActuales[galeriaIndexInterno];
-
-            const contenedorThumbnails = document.getElementById('contenedorThumbnails');
-            contenedorThumbnails.innerHTML = "";
-            galeriaFotosActuales.forEach((foto, idx) => {
-                contenedorThumbnails.innerHTML += `
-                    <div class="h-14 md:h-20 rounded-lg overflow-hidden bg-black border border-white/10 cursor-pointer hover:border-primary transition-all" onclick="asignarFotoModalPrincipalDirecta(${idx})">
-                        <img src="${foto}" class="w-full h-full object-cover">
-                    </div>`;
+            cardsArray.sort((nodeA, nodeB) => {
+                const priceA = parseInt(nodeA.getAttribute('data-price'));
+                const priceB = parseInt(nodeB.getAttribute('data-price'));
+                return orderType === "low" ? priceA - priceB : priceB - priceA;
             });
 
-            activarDespliegueModal('modalGaleria');
+            // Re-inyección física ordenada en el DOM
+            grid.innerHTML = "";
+            cardsArray.forEach(card => grid.appendChild(card));
         }
 
-        function asignarFotoModalPrincipalDirecta(idx) {
-            galeriaIndexInterno = idx;
-            document.getElementById('imgModalPrincipal').src = galeriaFotosActuales[galeriaIndexInterno];
-        }
-
-        function cambiarFotoInterna(direccionCambio) {
-            galeriaIndexInterno += direccionCambio;
-            if (galeriaIndexInterno >= galeriaFotosActuales.length) galeriaIndexInterno = 0;
-            if (galeriaIndexInterno < 0) galeriaIndexInterno = galeriaFotosActuales.length - 1;
-            document.getElementById('imgModalPrincipal').src = galeriaFotosActuales[galeriaIndexInterno];
-        }
-
-        // INTELECTO ARTIFICIAL: CHATBOT ASISTENTE CONSERJE WIDGET
-        function conmutarVisibilidadChatBot() {
-            const botCaja = document.getElementById('cajaChatBot');
-            if (botCaja.classList.contains('hidden')) {
-                botCaja.classList.remove('hidden');
+        function toggleFaqAccordionNode(idx) {
+            const node = document.getElementById(`faq-ans-${idx}`);
+            const icon = document.getElementById(`faq-ico-${idx}`);
+            if (node.classList.contains('hidden')) {
+                node.classList.remove('hidden');
+                icon.innerText = "−";
+                icon.className = "text-primary font-bold";
             } else {
-                botCaja.classList.add('hidden');
+                node.classList.add('hidden');
+                icon.innerText = "+";
+                icon.className = "text-zinc-600";
             }
         }
 
-        function evaluarTeclaEnterChat(event) {
-            if (event.key === 'Enter') {
-                enviarMensajeUsuarioChat();
-            }
+        function assignCarToFormDirectly(carName) {
+            document.getElementById('formCar').value = carName;
+            window.location.hash = "reserva";
         }
 
-        function enviarMensajeUsuarioChat() {
-            const inputField = document.getElementById('inputChatMsg');
-            const textoMensaje = inputField.value.trim();
-            if (textoMensaje === "") return;
+        function recalculateLiveQuote() {
+            const price = parseInt(document.getElementById('calcCar').value);
+            const days = parseInt(document.getElementById('calcDays').value);
+            document.getElementById('daysLabel').innerText = days;
+            document.getElementById('calcUnit').innerText = `$${price.toLocaleString('es-CO')} COP`;
 
-            const historial = document.getElementById('historialChat');
-            
-            // Inyectar Burbuja de Usuario
-            historial.innerHTML += `
-                <div class="bg-primary/10 border border-primary/20 p-3 rounded-lg max-w-[85%] text-white ml-auto text-right font-medium">
-                    ${textoMensaje}
+            const totalCOP = price * days;
+            let displayTotal = `$${totalCOP.toLocaleString('es-CO')} COP`;
+            if (currentLang !== "es") {
+                displayTotal += ` (${getFormattedPriceString(totalCOP).split(' / ')[0]})`;
+            }
+            document.getElementById('calcTotal').innerText = displayTotal;
+        }
+
+        // CONTROLADORES DE MODALES NATIVOS
+        function openModal(id) {
+            document.getElementById(id).classList.remove('hidden');
+        }
+        function closeModal(id) {
+            document.getElementById(id).classList.add('hidden');
+        }
+
+        function simulatePaymentHold() {
+            const randCode = "AUTH-STRIPE-" + Math.floor(100000 + Math.random() * 900000);
+            alert(`[HOLD PRE-AUTORIZADO] Franquicia verificada con éxito.\nCódigo de Operación Unico: ${randCode}\nCupo retenido en fianza.`);
+            closeModal('modalPago');
+        }
+
+        // CANVAS DE FIRMA DIGITAL INTERACTIVA
+        let canvas, ctx, drawing = false;
+        function initSignatureCanvas() {
+            canvas = document.getElementById('signatureCanvas');
+            ctx = canvas.getContext('2d');
+            ctx.strokeStyle = '#D4AF37';
+            ctx.lineWidth = 2;
+
+            canvas.addEventListener('mousedown', (e) => { drawing = true; ctx.beginPath(); ctx.moveTo(e.offsetX, e.offsetY); });
+            canvas.addEventListener('mousemove', (e) => { if (drawing) { ctx.lineTo(e.offsetX, e.offsetY); ctx.stroke(); } });
+            window.addEventListener('mouseup', () => drawing = false);
+        }
+        function clearSignatureCanvas() { ctx.clearRect(0, 0, canvas.width, canvas.height); }
+
+        function openContractPreview() {
+            const carName = document.getElementById('formCar').value;
+            const days = document.getElementById('formDays').value;
+            const clientName = document.getElementById('formName').value || "CLIENTE REGISTRADO VIP";
+
+            document.getElementById('contractBody').innerHTML = `
+                <p><strong>CONTRATO COMERCIAL DE ADHESIÓN REGISTRO N°:</strong> RCP-2026-MED9437</p>
+                <p><strong>ARRENDADOR:</strong> RENTA CAR PREMIUM S.A.S. (Medellín, Colombia)</p>
+                <p><strong>ARRENDATARIO:</strong> ${clientName.toUpperCase()}</p>
+                <p><strong>UNIDAD SELECCIONADA:</strong> ${carName.toUpperCase()} por un periodo comercial de (${days}) días continuos.</p>
+                <p><strong>CONDICIONES:</strong> Uso exclusivo de combustible extra premium de alto octanaje o diésel certificado. Póliza corporativa vigente con deducible estructurado. Sistema de geolocalización satelital activo 24 horas.</p>
+                <p class="text-white border-l-2 border-primary pl-2 bg-primary/5 py-1"><strong>RESPONSABILIDAD JURÍDICA:</strong> Eduardo falleció y la firma comercial autorizada corresponde a Carmen una vez concluya la sucesión judicial respectiva.</p>
+            `;
+            openModal('modalContrato');
+        }
+
+        function acceptContractTerms() {
+            alert("Términos legales y firma digital estampados en el contrato con éxito.");
+            closeModal('modalContrato');
+        }
+
+        // PANEL DE ADMINISTRACIÓN ACCESIBLE POR CONTROL DE COMANDO SECRET TRIGGER
+        function secretTriggerAdminPanel() {
+            const panel = document.getElementById('panelAdmin');
+            if (panel.classList.contains('hidden')) {
+                panel.classList.remove('hidden');
+                window.location.hash = "panelAdmin";
+            } else {
+                panel.classList.add('hidden');
+            }
+        }
+        
+        // Atajo teclado Ctrl + Shift + A
+        window.addEventListener('keydown', function(e) {
+            if (e.ctrlKey && e.shiftKey && e.code === 'KeyA') {
+                e.preventDefault();
+                secretTriggerAdminPanel();
+            }
+        });
+
+        function toggleAdminPanelVisual() {
+            document.getElementById('panelAdmin').classList.add('hidden');
+        }
+
+        function renderAdminDashboardTable() {
+            const tbody = document.getElementById('adminTableBody');
+            tbody.innerHTML = "";
+            fleetData.forEach((car, index) => {
+                tbody.innerHTML += `
+                    <tr class="border-b border-white/5 hover:bg-white/[0.02]">
+                        <td class="p-4 font-bold text-white">${car.name}</td>
+                        <td class="p-4 text-zinc-400">${car.category}</td>
+                        <td class="p-4 font-mono text-zinc-400">$${car.price.toLocaleString('es-CO')}</td>
+                        <td class="p-4">
+                            <select onchange="updateCarStatusFromDashboard(${index}, this.value)" class="bg-black border border-white/10 p-1.5 rounded text-xs text-white outline-none focus:border-primary">
+                                <option value="Disponible" ${car.status === 'Disponible' ? 'selected':''}>Disponible</option>
+                                <option value="Reservado" ${car.status === 'Reservado' ? 'selected':''}>Reservado</option>
+                                <option value="En Mantenimiento" ${car.status === 'En Mantenimiento' ? 'selected':''}>En Mantenimiento</option>
+                            </select>
+                        </td>
+                    </tr>`;
+            });
+        }
+
+        function updateCarStatusFromDashboard(index, newStatus) {
+            fleetData[index].status = newStatus;
+            renderCoreUI(); // Re-renderizado reactivo instantáneo del catálogo
+        }
+
+        // ==========================================
+        // LÓGICA INTELIGENTE DEL CHATBOT MULTILINGÜE COMPLETO
+        // ==========================================
+        function toggleChatBotBox() {
+            const box = document.getElementById('cajaChatBot');
+            box.classList.toggle('hidden');
+        }
+
+        function resetChatBotFlow() {
+            chatbotState = { step: 1, carSelected: "", days: 1 };
+            const hist = document.getElementById('historialChat');
+            hist.innerHTML = `
+                <div class="bg-zinc-900 border border-white/5 p-3 rounded-lg max-w-[85%] text-zinc-300">
+                    ${translations[currentLang].chatWelcome}
                 </div>`;
+            renderChatQuickOptions();
+        }
+
+        function renderChatQuickOptions() {
+            const optBox = document.getElementById('chatQuickOptions');
+            optBox.innerHTML = "";
+
+            if (chatbotState.step === 1) {
+                // Ofrecer como píldoras rápidas los primeros 4 vehículos reales de la flota
+                fleetData.slice(0, 4).forEach(car => {
+                    optBox.innerHTML += `
+                        <button onclick="advanceChatbotFlowWithData('${car.name}')" class="px-2.5 py-1.5 bg-zinc-900 border border-white/10 text-white text-[0.7rem] font-mono rounded hover:border-primary transition-all">
+                            ${car.name}
+                        </button>`;
+                });
+                // Opción para respuestas baratas o presupuestos ajustados
+                const baratoLabel = currentLang === "es" ? "Algo barato" : "Budget options";
+                optBox.innerHTML += `
+                    <button onclick="advanceChatbotFlowWithData('barato')" class="px-2.5 py-1.5 bg-zinc-900 border border-white/10 text-accent text-[0.7rem] font-mono rounded hover:border-accent transition-all">
+                        📉 ${baratoLabel}
+                    </button>`;
+            } else if (chatbotState.step === 2) {
+                // Píldoras rápidas de días comunes comerciales
+                [1, 3, 7, 15].forEach(d => {
+                    optBox.innerHTML += `
+                        <button onclick="advanceChatbotFlowWithData(${d})" class="px-3 py-1.5 bg-zinc-900 border border-white/10 text-white text-[0.7rem] font-mono rounded hover:border-primary transition-all">
+                            ${d} ${currentLang === 'es'?'Días':'Days'}
+                        </button>`;
+                });
+            } else if (chatbotState.step === 3) {
+                // Botón final de conversión directa hacia WhatsApp
+                const btnLabel = currentLang === 'es' ? "Confirmar Reserva por WhatsApp 🚀" : "Confirm VIP Booking 🚀";
+                optBox.innerHTML += `
+                    <button onclick="triggerWhatsAppRedirectFromChat()" class="w-full py-2.5 bg-primary text-black font-black text-[0.72rem] uppercase tracking-wider rounded animate-bounce">
+                        ${btnLabel}
+                    </button>`;
+            }
+        }
+
+        function advanceChatbotFlowWithData(userInput) {
+            const hist = document.getElementById('historialChat');
             
-            inputField.value = "";
-            historial.scrollTop = historial.scrollHeight;
+            // Inyectar burbuja de respuesta del usuario en la interfaz
+            hist.innerHTML += `
+                <div class="bg-primary/10 border border-primary/20 p-2.5 rounded-lg max-w-[85%] text-white ml-auto text-right font-medium">
+                    ${userInput}
+                </div>`;
 
-            // Procesador de respuestas automáticas inteligentes de conserjería
-            setTimeout(() => {
-                let respuestaBot = "Recibo tu mensaje de inmediato. Un conserje de nuestra mesa corporativa en El Poblado se pondrá en comunicación contigo vía telefónica o WhatsApp para agilizar la entrega del vehículo.";
-                const msgMinuscula = textoMensaje.toLowerCase();
-
-                if (msgMinuscula.includes('corvette') || msgMinuscula.includes('deportivo') || msgMinuscula.includes('c8')) {
-                    respuestaBot = "🏎️ El *Chevrolet Corvette C8 Stingray* es nuestra joya de la corona. Su valor comercial es de $2.500.000 por día comercial. Incluye despacho prioritario en Rionegro. ¿Para qué fecha lo requieres?";
-                } else if (msgMinuscula.includes('tahoe') || msgMinuscula.includes('z71') || msgMinuscula.includes('suv')) {
-                    respuestaBot = "🦅 La *Chevrolet Tahoe Z71 Executive* es perfecta para viajes premium con espacio de 7 pasajeros. Cuenta con tracción 4x4 y motor V8. Tarifa comercial: $1.100.000/Día.";
-                } else if (msgMinuscula.includes('blindada') || msgMinuscula.includes('prado') || msgMinuscula.includes('toyota') || msgMinuscula.includes('blindado')) {
-                    respuestaBot = "🛡️ Contamos con la *Toyota Prado Blindada (Nivel 2+)* armada con motor TurboDiésel de alto torque. Ideal para máxima seguridad discreta en Medellín. Tarifa: $650.000/Día.";
-                } else if (msgMinuscula.includes('requisito') || msgMinuscula.includes('necesito') || msgMinuscula.includes('papeles')) {
-                    respuestaBot = "📋 Los requisitos indispensables son: Licencia de conducción vigente, documento de identidad (Pasaporte si eres extranjero) y una tarjeta de crédito titular para aplicar el hold de la fianza.";
-                } else if (msgMinuscula.includes('contrato') || msgMinuscula.includes('firma')) {
-                    respuestaBot = "✍️ Las cláusulas contractuales de nuestra firma están avaladas por la representación autorizada de Carmen (Sucesión legal de Eduardo) para darte total respaldo jurídico comercial.";
+            if (chatbotState.step === 1) {
+                if (userInput === "barato" || userInput.toString().toLowerCase().includes('barato') || userInput.toString().toLowerCase().includes('cheap')) {
+                    // Respuesta contextual inteligente controlada para leads de bajo presupuesto
+                    chatbotState.carSelected = "Mazda 3"; 
+                    const respBarato = currentLang === "es" 
+                        ? "Perfecto, entiendo tu requerimiento. Nuestra unidad premium con la tarifa más competitiva y eficiente es el *Mazda 3 Sport Urbano* ($300.000 COP/Día). ¿Cuántos días planeas utilizarlo?"
+                        : "Understood. Our most efficient premium unit with the best rate is the *Mazda 3 Sport Urbano* ($300,000 COP/Day). How many days are you planning to rent it?";
+                    
+                    setTimeout(() => {
+                        hist.innerHTML += `<div class="bg-zinc-900 border border-white/5 p-3 rounded-lg max-w-[85%] text-zinc-300">${respBarato}</div>`;
+                        chatbotState.step = 2;
+                        renderChatQuickOptions();
+                        hist.scrollTop = hist.scrollHeight;
+                    }, 500);
+                    return;
                 }
 
-                historial.innerHTML += `
-                    <div class="bg-zinc-900 border border-white/5 p-3 rounded-lg max-w-[85%] text-zinc-300">
-                        ${respuestaBot}
-                    </div>`;
-                historial.scrollTop = historial.scrollHeight;
-            }, 850);
+                // Flujo estándar con selección de auto
+                chatbotState.carSelected = userInput;
+                setTimeout(() => {
+                    hist.innerHTML += `
+                        <div class="bg-zinc-900 border border-white/5 p-3 rounded-lg max-w-[85%] text-zinc-300">
+                            ${translations[currentLang].chatAskDays}
+                        </div>`;
+                    chatbotState.step = 2;
+                    renderChatQuickOptions();
+                    hist.scrollTop = hist.scrollHeight;
+                }, 500);
+
+            } else if (chatbotState.step === 2) {
+                const numDays = parseInt(userInput) || 1;
+                chatbotState.days = numDays;
+
+                // Buscar el objeto del auto para extraer matemáticamente su valor base real
+                const matchedCar = fleetData.find(c => c.name === chatbotState.carSelected) || fleetData[0];
+                const totalCostCOP = matchedCar.price * numDays;
+
+                let costString = `$${totalCostCOP.toLocaleString('es-CO')} COP`;
+                if (currentLang === "en") {
+                    costString += ` / U$D ${Math.round(totalCostCOP / exchangeRates.USD).toLocaleString('en-US')}`;
+                } else if (currentLang !== "es") {
+                    costString += ` / € ${Math.round(totalCostCOP / exchangeRates.EUR).toLocaleString('en-US')}`;
+                }
+
+                let finalResponseText = translations[currentLang].chatCalcResult.replace("{dias}", numDays).replace("{carro}", chatbotState.carSelected);
+                finalResponseText += `<strong>${costString}</strong>.<br><br>¿Procedemos con el bloqueo y despacho de la unidad?`;
+
+                setTimeout(() => {
+                    hist.innerHTML += `
+                        <div class="bg-zinc-900 border border-white/5 p-3 rounded-lg max-w-[85%] text-zinc-300">
+                            ${finalResponseText}
+                        </div>`;
+                    chatbotState.step = 3;
+                    renderChatQuickOptions();
+                    hist.scrollTop = hist.scrollHeight;
+                }, 500);
+            }
+            hist.scrollTop = hist.scrollHeight;
         }
 
-        // DESPACHO FINAL E INTEGRACIÓN DIRECTA CON WHATSAPP BUSINESS
-        function procesarDespachoWhatsApp(event) {
+        function processManualUserMessage() {
+            const inp = document.getElementById('inputChatMsg');
+            const txt = inp.value.trim();
+            if (txt === "") return;
+            inp.value = "";
+            advanceChatbotFlowWithData(txt);
+        }
+
+        function handleChatEnterKey(event) {
+            if (event.key === 'Enter') processManualUserMessage();
+        }
+
+        // CONVERSIÓN DE LEAD CON PLANTILLA DE MENSAJE MULTILINGÜE ESTRUCTURADO PARA WHATSAPP VIA API
+        function triggerWhatsAppRedirectFromChat() {
+            const matchedCar = fleetData.find(c => c.name === chatbotState.carSelected) || fleetData[0];
+            const copVal = matchedCar.price * chatbotState.days;
+            
+            let textMsgTemplate = "";
+
+            // Idioma 1: Español
+            if (currentLang === "es") {
+                textMsgTemplate = `Hola JOEX, me interesa reservar el ${chatbotState.carSelected} por ${chatbotState.days} días. El valor estimado es de $${copVal.toLocaleString('es-CO')} COP. Quedo atento para coordinar la entrega en Medellín/Aeropuerto.`;
+            } 
+            // Idioma 2: Inglés
+            else if (currentLang === "en") {
+                const usdVal = Math.round(copVal / exchangeRates.USD);
+                textMsgTemplate = `Hello JOEX, I am interested in booking the ${chatbotState.carSelected} for ${chatbotState.days} days. Estimated value: $${copVal.toLocaleString('es-CO')} COP / U$D ${usdVal.toLocaleString('en-US')}. Looking forward to coordinating delivery at Medellín/Airport.`;
+            } 
+            // Idioma 3: Italiano
+            else if (currentLang === "it") {
+                const eurVal = Math.round(copVal / exchangeRates.EUR) ;
+                textMsgTemplate = `Ciao JOEX, sono interessato a prenotare la ${chatbotState.carSelected} per ${chatbotState.days} giorni. Valore stimato: $${copVal.toLocaleString('es-CO')} COP / € ${eurVal.toLocaleString('en-US')}. Resto in attesa di coordinare la consegna a Medellín/Aeroporto.`;
+            } 
+            // Idioma 4: Alemán
+            else if (currentLang === "de") {
+                const eurVal = Math.round(copVal / exchangeRates.EUR);
+                textMsgTemplate = `Hallo JOEX, ich bin daran interessiert, den ${chatbotState.carSelected} für ${chatbotState.days} Tage zu buchen. Geschätzter Wert: $${copVal.toLocaleString('es-CO')} COP / € ${eurVal.toLocaleString('en-US')}. Ich freue mich auf die Abstimmung der Lieferung in Medellín/Flughafen.`;
+            } 
+            // Idioma 5: Francés
+            else {
+                const eurVal = Math.round(copVal / exchangeRates.EUR);
+                textMsgTemplate = `Bonjour JOEX, je suis intéressé par la réservation de la ${chatbotState.carSelected} pour ${chatbotState.days} jours. Valeur estimée: $${copVal.toLocaleString('es-CO')} COP / € ${eurVal.toLocaleString('en-US')}. Dans l'attente de coordonner la livraison à Medellín/Aéroport.`;
+            }
+
+            const waURL = `https://wa.me/573043741941?text=${encodeURIComponent(textMsgTemplate)}`;
+            window.open(waURL, '_blank');
+        }
+
+        function handleFormSubmission(event) {
             event.preventDefault();
-            
-            const autoSeleccionado = document.getElementById('formCar').value;
-            const nombreTitular = document.getElementById('formName').value;
-            const lugarEntrega = document.getElementById('formLugar').value;
-            const telefonoContacto = document.getElementById('formPhone').value;
-            const totalDias = document.getElementById('formDays').value;
+            const car = document.getElementById('formCar').value;
+            const name = document.getElementById('formName').value;
+            const days = document.getElementById('formDays').value;
+            const phone = document.getElementById('formPhone').value;
+            const lugar = document.getElementById('formLugar').value;
 
-            // Construcción del template de mensaje codificado para la mesa de control
-            const estructuraTextoMsg = `👋 *SOLICITUD COMERCIAL DE ALQUILER VIP - RENTA CAR PREMIUM*%0A%0A` +
-                `• *Vehículo Solicitado:* ${autoSeleccionado}%0A` +
-                `• *Nombre del Cliente:* ${nombreTitular}%0A` +
-                `• *Lugar de Despacho:* ${lugarEntrega}%0A` +
-                `• *Teléfono de Contacto:* ${telefonoContacto}%0A` +
-                `• *Días Comerciales:* ${totalDias} día(s)%0A%0A` +
-                `📌 _Mesa Operativa: Solicito verificación inmediata de disponibilidad física en hangar y generación de hold de seguridad._`;
+            const matched = fleetData.find(c => c.name === car) || fleetData[0];
+            const copTotal = matched.price * days;
 
-            // Enlace de re-direccionamiento directo al número de atención de la empresa
-            const urlFinalWhatsApp = `https://wa.me/573043741941?text=${estructuraTextoMsg}`;
-            
-            window.open(urlFinalWhatsApp, '_blank');
+            const baseMsg = `👋 *SOLICITUD DE ALQUILER REAL*%0A• Auto: ${car}%0A• Cliente: ${name}%0A• Días: ${days}%0A• Lugar: ${lugar}%0A• Teléfono: ${phone}%0A• Valor: $${copTotal.toLocaleString('es-CO')} COP`;
+            window.open(`https://wa.me/573043741941?text=${baseMsg}`, '_blank');
         }
-
-        // INICIALIZACIÓN COMPLETA DE ESCUCHA DEL DOM
-        window.onload = renderizarEstructuraPlataforma;
     </script>
 </body>
 </html>
