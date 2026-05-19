@@ -1,30 +1,948 @@
-<!doctype html>
-<html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="manifest" href="/manifest.json" />
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RENTA CAR PREMIUM — Alquiler de Autos de Lujo en Medellín</title>
-    <meta name="description" content="Alquila los mejores autos de lujo en Medellín: Corvette C8, Tahoe Z71, Toyota Prado Blindada, Audi Q5 y más. Entrega a domicilio y aeropuerto. Atención 24/7." />
-    <meta name="keywords" content="renta de autos lujo medellín, alquiler carros deportivos medellín, corvette renta medellín, toyota prado alquiler, renta car premium" />
-    <meta name="author" content="RENTA CAR PREMIUM" />
-    <meta name="robots" content="index, follow" />
-    <link rel="canonical" href="https://rentacarpremium.co" />
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://rentacarpremium.co" />
-    <meta property="og:title" content="RENTA CAR PREMIUM — Lujo sobre ruedas en Medellín" />
-    <meta property="og:description" content="La mejor flota de autos de lujo en Medellín. Corvette C8, Tahoe Z71, Prado Blindada y más. Entrega VIP en aeropuerto." />
-    <meta property="og:image" content="https://images.unsplash.com/photo-1600712242805-5f78671b24da?auto=format&fit=crop&w=1200&q=80" />
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="RENTA CAR PREMIUM — Lujo sobre ruedas en Medellín" />
-    <meta name="twitter:description" content="La mejor flota de autos de lujo en Medellín. Entrega VIP en aeropuerto. Atención 24/7." />
-    <meta name="twitter:image" content="https://images.unsplash.com/photo-1600712242805-5f78671b24da?auto=format&fit=crop&w=1200&q=80" />
-    <link rel="icon" type="image/jpeg" href="/logo.jpeg" />
-    <link rel="apple-touch-icon" href="/logo.jpeg" />
-    <meta name="theme-color" content="#000000" />
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
-  </body>
+    <meta name="description" content="Alquila los mejores autos de lujo y deportivos en Medellín: Corvette C8, Tahoe Z71, Toyota Prado Blindada, Audi Q5 y más.">
+    <meta name="keywords" content="renta de autos lujo medellín, alquiler carros deportivos medellín, corvette renta medellín, toyota prado alquiler">
+    
+    <link rel="icon" type="image/jpeg" href="logo.jpeg">
+    <link rel="apple-touch-icon" href="logo.jpeg">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { montserrat: ['Montserrat', 'sans-serif'] },
+                    colors: {
+                        primary: '#FF0000',    /* Rojo Deportivo */
+                        accent: '#D4AF37',     /* Dorado VIP */
+                        darkBg: '#050505',     /* Fondo Ultra Negro */
+                        cardBg: '#0D0D0D'      /* Fondo de Tarjetas */
+                    },
+                    letterSpacing: {
+                        superWide: '4px',
+                        ultraWide: '6px'
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #050505;
+            color: #ffffff;
+        }
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #050505; }
+        ::-webkit-scrollbar-thumb { background: #1a1a1a; border-radius: 3px; }
+        ::-webkit-scrollbar-thumb:hover { background: #FF0000; }
+
+        /* Animaciones del carrusel infinito de testimonios */
+        @keyframes scrollReviews {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        .animate-scroll {
+            display: flex;
+            width: max-content;
+            animation: scrollReviews 35s linear infinite;
+        }
+        .animate-scroll:hover { animation-play-state: paused; }
+    </style>
+</head>
+<body class="overflow-x-hidden antialiased">
+
+    <nav class="fixed top-0 left-0 w-full z-50 px-4 md:px-12 py-4 flex justify-between items-center bg-black/85 backdrop-blur-lg border-b border-white/[0.04] transition-all duration-300">
+        <div class="flex items-center gap-3">
+            <img src="logo.jpeg" alt="RENTA CAR PREMIUM" class="h-12 w-auto object-contain rounded-sm">
+        </div>
+
+        <div class="flex items-center gap-4 md:gap-8">
+            <ul class="hidden lg:flex gap-8 text-[0.72rem] font-bold uppercase tracking-[3px] list-none">
+                <li><a href="#servicios" id="nav-servicios" class="text-white/50 hover:text-primary transition-all duration-300">Servicios</a></li>
+                <li><a href="#flota" id="nav-flota" class="text-white/50 hover:text-primary transition-all duration-300">Flota VIP</a></li>
+                <li><a href="#comparador" id="nav-comparador" class="text-white/50 hover:text-primary transition-all duration-300">Comparador</a></li>
+                <li><a href="#cotizador" id="nav-cotizador" class="text-white/50 hover:text-primary transition-all duration-300">Cotizar</a></li>
+                <li><a href="#testimonios" id="nav-testimonios" class="text-white/50 hover:text-primary transition-all duration-300">Reseñas</a></li>
+                <li><a href="#faq" id="nav-faq" class="text-white/50 hover:text-primary transition-all duration-300">FAQ</a></li>
+            </ul>
+            
+            <div class="relative">
+                <select id="langSelector" onchange="cambiarIdiomaGlobal(this.value)" class="bg-zinc-900/90 border border-white/10 text-white text-[0.68rem] font-black uppercase py-2 px-3 rounded cursor-pointer outline-none hover:border-primary/50 transition-all font-mono">
+                    <option value="es" selected>ES (COP)</option>
+                    <option value="en">EN (USD)</option>
+                </select>
+            </div>
+
+            <a href="#reserva" id="nav-cta" class="px-5 py-2.5 border border-primary bg-primary/5 rounded text-primary text-[0.72rem] font-black uppercase tracking-[2px] hover:bg-primary hover:text-black transition-all duration-500 shadow-lg shadow-primary/10">
+                Rent Now
+            </a>
+        </div>
+    </nav>
+
+
+    <section class="relative w-full h-screen flex flex-col justify-center items-center text-center bg-black overflow-hidden">
+        <video autoplay loop muted playsinline class="absolute top-1/2 left-1/2 w-full h-full object-cover -translate-x-1/2 -translate-y-1/2 z-10 opacity-70">
+            <source src="Video.mp4" type="video/mp4">
+        </video>
+        <div class="absolute inset-0 z-20 bg-gradient-to-b from-black/50 via-black/75 to-[#050505]"></div>
+        
+        <div class="relative z-30 max-w-[1200px] px-6 flex flex-col items-center">
+            <div class="inline-flex items-center gap-2 px-3 py-1 border border-accent/20 bg-accent/5 rounded-full text-accent text-[0.6rem] font-bold tracking-[3px] uppercase mb-6 animate-pulse">
+                👑 Elite Concierge Service
+            </div>
+            <h1 id="hero-title" class="text-3xl sm:text-5xl md:text-[4.2rem] font-black uppercase tracking-[3px] leading-[1.05] mb-6 max-w-[1000px]">
+                ALQUILER DE AUTOS DE LUXE EN <span class="text-primary drop-shadow-[0_0_15px_rgba(255,0,0,0.3)]">MEDELLÍN</span>
+            </h1>
+            <p id="hero-subtitle" class="text-[0.75rem] sm:text-[0.88rem] font-medium tracking-[5px] uppercase text-zinc-400 mb-12 max-w-[700px] leading-relaxed">
+                EXPERIENCIAS DE CONDUCCIÓN PREMIUM DE ALTA GAMA
+            </p>
+            
+            <div class="flex flex-col sm:flex-row gap-4 w-full justify-center">
+                <a href="#flota" id="hero-btn-primary" class="px-8 py-4 bg-primary text-black font-black text-[0.75rem] uppercase tracking-[2px] rounded hover:bg-white transition-all duration-500 shadow-xl shadow-primary/20">
+                    Explorar Catálogo
+                </a>
+                <a href="#reserva" id="hero-btn-secondary" class="px-8 py-4 border border-white/20 text-white font-bold text-[0.75rem] uppercase tracking-[2px] rounded hover:bg-white/10 backdrop-blur-sm transition-all duration-500">
+                    Contacto Directo
+                </a>
+            </div>
+        </div>
+
+        <div class="absolute bottom-8 left-1/2 -translate-x-1/2 z-30 flex flex-col items-center gap-2 opacity-50">
+            <span class="text-[0.55rem] tracking-[3px] uppercase text-white font-light">Scroll Down</span>
+            <div class="w-[1px] h-8 bg-gradient-to-b from-white to-transparent"></div>
+        </div>
+    </section>
+
+
+    <section class="py-28 px-4 md:px-12 max-w-[1400px] mx-auto border-b border-white/[0.02]" id="servicios">
+        <div class="text-center mb-20">
+            <span id="serv-sub" class="text-[0.68rem] text-primary uppercase tracking-[5px] font-black block mb-3">EXCLUSIVIDAD</span>
+            <h2 id="serv-title" class="text-2xl md:text-[2.5rem] font-black uppercase tracking-[1px]">NUESTROS SERVICIOS VIP</h2>
+            <div class="w-16 h-[2px] bg-primary mx-auto mt-4"></div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="bg-cardBg border border-white/[0.03] p-10 rounded-xl hover:border-primary/30 transition-all duration-500 group flex flex-col justify-between">
+                <div>
+                    <div class="w-14 h-14 bg-zinc-900 border border-white/5 flex items-center justify-center text-2xl rounded-lg text-primary mb-8 group-hover:bg-primary group-hover:text-black transition-all duration-500">✈️</div>
+                    <h3 id="s1-title" class="text-[1.2rem] font-bold mb-4 uppercase tracking-[1px] text-white">Entrega Aeropuerto</h3>
+                    <p id="s1-desc" class="text-zinc-400 text-[0.88rem] font-light leading-relaxed">Despachos y recepciones directas sin costo adicional en las terminales del Aeropuerto Internacional José María Córdova de Rionegro.</p>
+                </div>
+                <span class="text-[0.6rem] tracking-[2px] text-primary uppercase font-bold mt-8 block">Complimentary →</span>
+            </div>
+            <div class="bg-cardBg border border-white/[0.03] p-10 rounded-xl hover:border-primary/30 transition-all duration-500 group flex flex-col justify-between">
+                <div>
+                    <div class="w-14 h-14 bg-zinc-900 border border-white/5 flex items-center justify-center text-2xl rounded-lg text-primary mb-8 group-hover:bg-primary group-hover:text-black transition-all duration-500">🛡️</div>
+                    <h3 id="s2-title" class="text-[1.2rem] font-bold mb-4 uppercase tracking-[1px] text-white">Seguridad Máxima</h3>
+                    <p id="s2-desc" class="text-zinc-400 text-[0.88rem] font-light leading-relaxed">Vehículos blindados con esquemas de protección balística premium y personal calificado bajo solicitud previa corporativa.</p>
+                </div>
+                <span class="text-[0.6rem] tracking-[2px] text-accent uppercase font-bold mt-8 block">Premium Option →</span>
+            </div>
+            <div class="bg-cardBg border border-white/[0.03] p-10 rounded-xl hover:border-primary/30 transition-all duration-500 group flex flex-col justify-between">
+                <div>
+                    <div class="w-14 h-14 bg-zinc-900 border border-white/5 flex items-center justify-center text-2xl rounded-lg text-primary mb-8 group-hover:bg-primary group-hover:text-black transition-all duration-500">🛎️</div>
+                    <h3 id="s3-title" class="text-[1.2rem] font-bold mb-4 uppercase tracking-[1px] text-white">Soporte 24/7 Concierge</h3>
+                    <p id="s3-desc" class="text-zinc-400 text-[0.88rem] font-light leading-relaxed">Asistencia en ruta inmediata, grúa preferencial y conserjería bilingüe personalizada disponible a cualquier hora del día.</p>
+                </div>
+                <span class="text-[0.6rem] tracking-[2px] text-primary uppercase font-bold mt-8 block">Full Coverage →</span>
+            </div>
+        </div>
+    </section>
+
+
+    <section class="py-24 bg-black/30 border-b border-white/[0.02]">
+        <div class="max-w-[1200px] mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div class="text-center md:text-left">
+                    <div class="text-xs text-primary font-bold tracking-[3px] mb-2">01 / RESERVA</div>
+                    <h4 class="text-sm font-bold uppercase tracking-[1px] text-white mb-2">Selecciona tu Auto</h4>
+                    <p class="text-zinc-500 text-[0.78rem]">Escoge el modelo de ensueño de nuestra flota exclusiva.</p>
+                </div>
+                <div class="text-center md:text-left">
+                    <div class="text-xs text-accent font-bold tracking-[3px] mb-2">02 / VERIFICACIÓN</div>
+                    <h4 class="text-sm font-bold uppercase tracking-[1px] text-white mb-2">Validación Comercial</h4>
+                    <p class="text-zinc-500 text-[0.78rem]">Revisamos tu documentación vía WhatsApp en 10 minutos.</p>
+                </div>
+                <div class="text-center md:text-left">
+                    <div class="text-xs text-primary font-bold tracking-[3px] mb-2">03 / GARANTÍA</div>
+                    <h4 class="text-sm font-bold uppercase tracking-[1px] text-white mb-2">Hold de Seguridad</h4>
+                    <p class="text-zinc-500 text-[0.78rem]">Pre-autorización bancaria segura antes de la entrega.</p>
+                </div>
+                <div class="text-center md:text-left">
+                    <div class="text-xs text-accent font-bold tracking-[3px] mb-2">04 / DISFRUTA</div>
+                    <h4 class="text-sm font-bold uppercase tracking-[1px] text-white mb-2">Llaves en Mano</h4>
+                    <p class="text-zinc-500 text-[0.78rem]">Recibe el vehículo limpio y tanqueado donde indiques.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <section class="py-28 px-4 md:px-12 max-w-[1400px] mx-auto" id="flota">
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-16 gap-4">
+            <div>
+                <span id="fleet-sub" class="text-[0.68rem] text-primary uppercase tracking-[5px] font-black block mb-3">COLECCIÓN EXCLUSIVA</span>
+                <h2 id="fleet-title" class="text-2xl md:text-[2.5rem] font-black uppercase tracking-[1px]">EXPLORA NUESTRA FLOTA PREMIUM</h2>
+            </div>
+            <div class="flex gap-2 border-b border-white/5 pb-2">
+                <button onclick="filtrarFlota('todos')" class="text-[0.65rem] uppercase tracking-[2px] font-bold text-primary px-3 py-1">Todos</button>
+                <button onclick="filtrarFlota('Deportivo')" class="text-[0.65rem] uppercase tracking-[2px] font-bold text-zinc-500 hover:text-white px-3 py-1 transition-all">Deportivos</button>
+                <button onclick="filtrarFlota('SUV')" class="text-[0.65rem] uppercase tracking-[2px] font-bold text-zinc-500 hover:text-white px-3 py-1 transition-all">SUVs / Blindados</button>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="grid-flota">
+            </div>
+    </section>
+
+
+    <section class="py-24 px-4 md:px-12 bg-zinc-950/40 border-t border-b border-white/[0.02]" id="comparador">
+        <div class="max-w-[1100px] mx-auto bg-cardBg border border-white/[0.04] p-8 md:p-14 rounded-2xl shadow-2xl">
+            <div class="text-center mb-12">
+                <span class="text-[0.65rem] text-accent uppercase tracking-[5px] font-black block mb-2">ANÁLISIS COMPARATIVO</span>
+                <h2 class="text-xl md:text-2xl font-black uppercase tracking-[1px]">COMPARADOR DE MODELOS CARA A CARA</h2>
+                <div class="w-12 h-[1px] bg-accent mx-auto mt-3"></div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-8 mb-10">
+                <div>
+                    <label class="block text-[0.65rem] uppercase font-bold tracking-[2px] text-zinc-500 mb-3">Selecciona Vehículo A</label>
+                    <select id="comp1" onchange="ejecutarComparacion()" class="w-full bg-black border border-white/10 p-4 rounded-lg text-[0.8rem] text-white font-medium outline-none focus:border-accent transition-all"></select>
+                </div>
+                <div>
+                    <label class="block text-[0.65rem] uppercase font-bold tracking-[2px] text-zinc-500 mb-3">Selecciona Vehículo B</label>
+                    <select id="comp2" onchange="ejecutarComparacion()" class="w-full bg-black border border-white/10 p-4 rounded-lg text-[0.8rem] text-white font-medium outline-none focus:border-accent transition-all"></select>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-2 gap-6 border-t border-white/[0.04] pt-8 font-mono text-[0.78rem]">
+                <div id="comp1-specs" class="space-y-4 bg-black/30 p-6 rounded-xl border border-white/5 transition-all">
+                    </div>
+                <div id="comp2-specs" class="space-y-4 bg-black/30 p-6 rounded-xl border border-white/5 transition-all">
+                    </div>
+            </div>
+        </div>
+    </section>
+
+
+    <section class="py-24 px-4 md:px-12 max-w-[850px] mx-auto" id="cotizador">
+        <div class="bg-cardBg border border-white/[0.04] p-8 md:p-12 rounded-2xl shadow-2xl">
+            <div class="text-center mb-10">
+                <span id="calc-sub" class="text-[0.65rem] text-primary uppercase tracking-[5px] font-black block mb-2">PRESUPUESTO</span>
+                <h2 id="calc-title" class="text-xl md:text-2xl font-black uppercase tracking-[1px]">CALCULA TU TARIFA CORPORATIVA EN VIVO</h2>
+            </div>
+
+            <div class="space-y-8">
+                <div>
+                    <label id="calc-label-car" class="block text-[0.68rem] font-bold uppercase tracking-[2px] text-zinc-400 mb-3">Modelo del Vehículo Premium</label>
+                    <select id="calcCar" class="w-full bg-black border border-white/10 px-4 py-4 text-[0.82rem] text-white font-medium rounded-lg outline-none focus:border-primary transition-all" onchange="recalcularTarifaTotal()"></select>
+                </div>
+
+                <div>
+                    <div class="flex justify-between items-center mb-3">
+                        <label class="block text-[0.68rem] font-bold uppercase tracking-[2px] text-zinc-400">
+                            <span id="calc-label-days">Días Comerciales Solicitados:</span>
+                        </label>
+                        <span id="daysLabel" class="bg-primary/10 text-primary border border-primary/20 px-3 py-1 rounded font-black text-sm font-mono">1</span>
+                    </div>
+                    <input type="range" id="calcDays" min="1" max="30" value="1" class="w-full accent-primary bg-zinc-800 h-2 rounded-lg appearance-none cursor-pointer" oninput="recalcularTarifaTotal()">
+                    <div class="flex justify-between text-[0.6rem] text-zinc-600 font-mono mt-1">
+                        <span>1 DÍA</span>
+                        <span>15 DÍAS</span>
+                        <span>30 DÍAS</span>
+                    </div>
+                </div>
+
+                <div class="p-6 bg-black rounded-xl border border-white/[0.03] space-y-3 font-mono text-[0.78rem]">
+                    <div class="flex justify-between text-zinc-500">
+                        <span>Valor Base por Día:</span>
+                        <span id="calcUnit" class="text-white"></span>
+                    </div>
+                    <div class="flex justify-between text-zinc-500">
+                        <span>Descuento por Volumen (>=7 Días):</span>
+                        <span id="calcDiscount" class="text-green-500">0%</span>
+                    </div>
+                    <div class="border-t border-white/5 pt-3 flex justify-between items-center text-[0.85rem]">
+                        <span class="font-bold tracking-[1px] text-white uppercase">TOTAL ESTIMADO NETO:</span>
+                        <span id="calcTotal" class="text-accent font-black text-xl drop-shadow-[0_0_10px_rgba(212,175,55,0.2)]">$0</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <div class="flex flex-col sm:flex-row flex-wrap justify-center gap-4 py-12 px-6 bg-zinc-950/80 border-t border-b border-white/[0.03] backdrop-blur-sm">
+        <button onclick="activarDespliegueModal('modalPago')" class="px-6 py-4 border border-accent/40 text-accent text-[0.72rem] font-black uppercase tracking-[2px] rounded-lg hover:bg-accent hover:text-black transition-all duration-500 bg-transparent cursor-pointer shadow-lg shadow-accent/5">
+            Pre-autorizar Depósito de Garantía
+        </button>
+        <button onclick="activarDespliegueModal('modalContrato')" class="px-6 py-4 border border-white/10 text-white text-[0.72rem] font-black uppercase tracking-[2px] rounded-lg hover:bg-white hover:text-black transition-all duration-500 bg-transparent cursor-pointer">
+            Vista Previa de Contrato Comercial
+        </button>
+    </div>
+
+
+    <section class="py-24 bg-black/60 overflow-hidden border-b border-white/[0.02]" id="testimonios">
+        <div class="text-center mb-14">
+            <span class="text-[0.65rem] text-primary uppercase tracking-[5px] font-black block mb-2">EXPERIENCIAS</span>
+            <h3 class="text-xl font-black uppercase tracking-[1px]">LO QUE DICEN NUESTROS CLIENTES VIP</h3>
+        </div>
+        
+        <div class="relative flex w-full overflow-hidden mask-gradient">
+            <div class="animate-scroll gap-6 px-4" id="contenedor-testimonios-infinito">
+                </div>
+        </div>
+    </section>
+
+
+    <section class="py-28 px-4 md:px-12 max-w-[950px] mx-auto" id="reserva">
+        <div class="bg-cardBg border border-white/[0.04] p-8 md:p-14 rounded-2xl shadow-2xl relative overflow-hidden">
+            <div class="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full blur-3xl -z-10"></div>
+            
+            <div class="text-center mb-12">
+                <span id="form-sub" class="text-[0.65rem] text-primary uppercase tracking-[5px] font-black block mb-2">SISTEMA DE RESERVAS</span>
+                <h2 id="form-title" class="text-2xl font-black uppercase tracking-[1px]">SOLICITA TU DISPONIBILIDAD DE INMEDIATO</h2>
+                <div class="w-12 h-[2px] bg-primary mx-auto mt-4"></div>
+            </div>
+
+            <form onsubmit="procesarDespachoWhatsApp(event)" class="space-y-8">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label class="block text-[0.65rem] font-black uppercase tracking-[2px] text-zinc-400 mb-2">Selecciona tu Flota</label>
+                        <select id="formCar" class="w-full bg-black border border-white/10 px-4 py-4 text-[0.8rem] font-bold text-white rounded-lg outline-none focus:border-primary transition-all"></select>
+                    </div>
+                    <div>
+                        <label id="form-name-label" class="block text-[0.65rem] font-black uppercase tracking-[2px] text-zinc-400 mb-2">Nombre Completo del Titular</label>
+                        <input type="text" id="formName" required placeholder="Ej: Angela Maria..." class="w-full bg-black border border-white/10 px-4 py-4 text-[0.8rem] text-white rounded-lg outline-none focus:border-primary transition-all placeholder:text-white/10">
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label class="block text-[0.65rem] font-black uppercase tracking-[2px] text-zinc-400 mb-2">Lugar de Entrega Preferido</label>
+                        <select id="formLugar" class="w-full bg-black border border-white/10 px-4 py-4 text-[0.8rem] text-white rounded-lg outline-none focus:border-primary transition-all">
+                            <option value="Aeropuerto Rionegro (JMC)">Aeropuerto Rionegro (JMC) — Sin costo</option>
+                            <option value="El Poblado / Medellín">El Poblado / Medellín</option>
+                            <option value="Laureles / Conquistadores">Laureles / Conquistadores</option>
+                            <option value="Llanogrande / Rionegro">Llanogrande / Rionegro</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label id="form-phone-label" class="block text-[0.65rem] font-black uppercase tracking-[2px] text-zinc-400 mb-2">Teléfono de Contacto</label>
+                        <input type="tel" id="formPhone" required placeholder="Ej: 318 449 9437" class="w-full bg-black border border-white/10 px-4 py-4 text-[0.8rem] text-white rounded-lg outline-none focus:border-primary transition-all placeholder:text-white/10">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-[0.65rem] font-black uppercase tracking-[2px] text-zinc-400 mb-2">
+                        <span id="form-days-label">Días de Alquiler</span>: <span id="formDaysLabel" class="text-primary font-black">1</span>
+                    </label>
+                    <input type="range" id="formDays" min="1" max="30" value="1" class="w-full accent-primary bg-zinc-900 h-1 rounded cursor-pointer" oninput="document.getElementById('formDaysLabel').innerText = this.value">
+                </div>
+
+                <button type="submit" id="form-btn" class="w-full py-4.5 bg-primary text-black font-black text-[0.75rem] uppercase tracking-[3px] rounded-lg hover:bg-white hover:text-black transition-all duration-500 cursor-pointer border-none shadow-xl shadow-primary/10">
+                    Enviar a WhatsApp VIP
+                </button>
+            </form>
+        </div>
+    </section>
+
+
+    <section class="py-24 px-4 md:px-12 max-w-[850px] mx-auto" id="faq">
+        <div class="text-center mb-16">
+            <span id="faq-sub" class="text-[0.65rem] text-primary uppercase tracking-[5px] font-black block mb-2">SOPORTE CENTRAL</span>
+            <h2 id="faq-title" class="text-xl md:text-2xl font-black uppercase tracking-[1px]">PREGUNTAS FRECUENTES</h2>
+        </div>
+
+        <div class="space-y-4" id="contenedor-faq-dinamico">
+            </div>
+    </section>
+
+
+    <div id="modalGaleria" class="fixed inset-0 bg-black/95 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-zinc-950 border border-white/10 p-4 md:p-8 rounded-2xl max-w-[800px] w-full relative">
+            <button onclick="desactivarOcultarModal('modalGaleria')" class="absolute top-4 right-4 text-white hover:text-primary text-lg cursor-pointer font-bold bg-zinc-900 w-8 h-8 rounded-full flex items-center justify-center border border-white/10">×</button>
+            <h3 id="modalGaleriaTitulo" class="text-md font-black uppercase tracking-[2px] text-accent mb-4">Galería del Vehículo</h3>
+            
+            <div class="w-full h-[300px] md:h-[450px] overflow-hidden rounded-xl bg-black border border-white/5 relative">
+                <img id="imgModalPrincipal" src="" alt="Principal" class="w-full h-full object-cover transition-all duration-500">
+                
+                <button onclick="cambiarFotoInterna(-1)" class="absolute left-3 top-1/2 -translate-y-1/2 bg-black/70 p-3 rounded-full text-white hover:text-primary font-bold border border-white/5">‹</button>
+                <button onclick="cambiarFotoInterna(1)" class="absolute right-3 top-1/2 -translate-y-1/2 bg-black/70 p-3 rounded-full text-white hover:text-primary font-bold border border-white/5">›</button>
+            </div>
+            
+            <div class="grid grid-cols-3 gap-2 mt-4" id="contenedorThumbnails">
+                </div>
+        </div>
+    </div>
+
+
+    <div id="modalPago" class="fixed inset-0 bg-black/90 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-zinc-950 border border-white/10 p-6 md:p-10 rounded-2xl max-w-[500px] w-full text-center relative shadow-2xl">
+            <div class="text-4xl text-accent mb-4">💳</div>
+            <h3 class="text-lg font-black uppercase tracking-[1px] mb-2 text-white">HOLD DE GARANTÍA DE SEGURIDAD</h3>
+            <p class="text-zinc-400 text-[0.8rem] font-light mb-8">Bloqueo temporal preventivo en tu franquicia de tarjeta de crédito (Visa, Mastercard, Amex). Se libera de forma automática al retornar el vehículo.</p>
+            
+            <div class="space-y-4 text-left mb-6 font-mono text-[0.75rem]">
+                <div>
+                    <label class="block text-[0.6rem] uppercase tracking-[1px] text-zinc-500 mb-1">Nombre Impreso</label>
+                    <input type="text" placeholder="Ej: ANGELA M OROZCO" class="w-full bg-black border border-white/10 p-3 rounded-lg text-white placeholder:text-white/5 uppercase">
+                </div>
+                <div>
+                    <label class="block text-[0.6rem] uppercase tracking-[1px] text-zinc-500 mb-1">Número de Tarjeta Credencial</label>
+                    <input type="text" placeholder="**** **** **** ****" class="w-full bg-black border border-white/10 p-3 rounded-lg text-white placeholder:text-white/5">
+                </div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-[0.6rem] uppercase tracking-[1px] text-zinc-500 mb-1">Vencimiento</label>
+                        <input type="text" placeholder="MM/AA" class="w-full bg-black border border-white/10 p-3 rounded-lg text-white placeholder:text-white/5">
+                    </div>
+                    <div>
+                        <label class="block text-[0.6rem] uppercase tracking-[1px] text-zinc-500 mb-1">Código CVC</label>
+                        <input type="password" placeholder="***" class="w-full bg-black border border-white/10 p-3 rounded-lg text-white placeholder:text-white/5">
+                    </div>
+                </div>
+            </div>
+            
+            <div class="flex justify-end gap-3 text-[0.7rem] font-bold uppercase tracking-[1px]">
+                <button onclick="desactivarOcultarModal('modalPago')" class="px-5 py-2.5 border border-white/10 text-white rounded-lg hover:bg-white/5">Cancelar</button>
+                <button onclick="alert('Hold simulado y verificado en pasarela de pruebas de forma exitosa.'); desactivarOcultarModal('modalPago')" class="px-5 py-2.5 bg-accent text-black rounded-lg hover:bg-white transition-all">Pre-Autorizar Cupo</button>
+            </div>
+        </div>
+    </div>
+
+
+    <div id="modalContrato" class="fixed inset-0 bg-black/90 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-zinc-950 border border-white/10 p-6 md:p-8 rounded-2xl max-w-[700px] w-full max-h-[90vh] flex flex-col justify-between shadow-2xl relative">
+            <h3 class="text-md font-black uppercase tracking-[2px] text-accent mb-4 border-b border-white/5 pb-3">CONTRATO COMERCIAL DE ARRENDAMIENTO VEHICULAR</h3>
+            
+            <div class="text-[0.75rem] font-mono text-zinc-400 space-y-4 leading-relaxed bg-black p-5 rounded-xl border border-white/5 overflow-y-auto max-h-[50vh] pr-2">
+                <p><strong>CONTRATO DE ADHESIÓN REGISTRO N°:</strong> RCP-2026-MED9437</p>
+                <p><strong>ARRENDADOR:</strong> RENTA CAR PREMIUM S.A.S. (Medellín, Colombia)</p>
+                <p><strong>ARRENDATARIO:</strong> CLIENTE VIP TITULAR REGISTRADO</p>
+                <p><strong>OBJETO:</strong> El Arrendador entrega en carácter de alquiler el vehículo automotor seleccionado, en perfectas condiciones mecánicas, estéticas, con herramientas de ley y tanque de combustible lleno.</p>
+                <p><strong>OBLIGACIONES:</strong> El Arrendatario se obliga legalmente a utilizar combustible tipo Gasolina Extra (Premium) o Diésel según especificación exacta. Queda estrictamente prohibido subarrendar, participar en piques, carreras ilegales o conducir bajo efectos de sustancias alucinógenas.</p>
+                <p><strong>SEGUROS Y RASTREO:</strong> Todo vehículo cuenta con póliza todo riesgo corporativa con deducible variable. Dispone de monitoreo en tiempo real mediante sistemas de geolocalización por satélite GPS activo las 24 horas.</p>
+                <p class="text-white border-l-2 border-primary pl-3 bg-primary/5 py-2"><strong>DATO DE SUCESIÓN COMERCIAL:</strong> Eduardo falleció y la firma autorizada es de Carmen cuando salga la respectiva sucesión judicial.</p>
+            </div>
+
+            <div class="mt-6 p-4 bg-zinc-900/60 border border-white/5 rounded-lg flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+                <div>
+                    <p class="text-[0.55rem] uppercase tracking-[1px] text-zinc-500">Representación Comercial Autorizada</p>
+                    <p class="text-[0.8rem] font-bold text-white italic tracking-[0.5px]">Carmen (Sucesión Eduardo)</p>
+                </div>
+                <button onclick="desactivarOcultarModal('modalContrato')" class="w-full sm:w-auto px-6 py-3 bg-white text-black font-black text-[0.72rem] uppercase tracking-[2px] rounded-lg hover:bg-primary hover:text-white transition-all duration-300">
+                    Aceptar Términos de Ley
+                </button>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="fixed bottom-6 right-6 z-40 flex flex-col items-end">
+        <button onclick="conmutarVisibilidadChatBot()" class="w-14 h-14 bg-primary rounded-full flex items-center justify-center text-2xl text-black shadow-2xl hover:scale-105 transition-all cursor-pointer border-none drop-shadow-[0_4px_15px_rgba(255,0,0,0.4)]">
+            💬
+        </button>
+        
+        <div id="cajaChatBot" class="w-[320px] sm:w-[360px] h-[450px] bg-zinc-950 border border-white/10 rounded-2xl mt-3 flex flex-col justify-between hidden shadow-2xl overflow-hidden transition-all duration-300">
+            <div class="bg-zinc-900 p-4 border-b border-white/5 flex items-center gap-3">
+                <div class="w-2.5 h-2.5 bg-green-500 rounded-full animate-ping"></div>
+                <div>
+                    <h4 class="text-[0.78rem] font-bold uppercase tracking-[1px]">Premium Concierge AI</h4>
+                    <p class="text-[0.6rem] text-zinc-500 uppercase tracking-[0.5px]">En línea en Medellín</p>
+                </div>
+            </div>
+            <div id="historialChat" class="p-4 flex-grow overflow-y-auto space-y-3 text-[0.78rem] font-light">
+                <div class="bg-zinc-900 p-3 rounded-lg max-w-[85%] text-zinc-300">
+                    👋 ¡Hola! Bienvenido a *Renta Car Premium*. Estoy listo para asistirte en el alquiler de tu próximo coche deportivo o blindado en Medellín y Rionegro. ¿En qué vehículo estás interesado?
+                </div>
+            </div>
+            <div class="p-3 bg-zinc-900 border-t border-white/5 flex gap-2">
+                <input type="text" id="inputChatMsg" onkeypress="evaluarTeclaEnterChat(event)" placeholder="Escribe tu duda aquí..." class="flex-grow bg-black border border-white/10 px-3 py-2 rounded-lg text-[0.78rem] text-white outline-none focus:border-primary">
+                <button onclick="enviarMensajeUsuarioChat()" class="px-4 py-2 bg-primary text-black font-bold text-[0.75rem] uppercase rounded-lg hover:bg-white transition-all">›</button>
+            </div>
+        </div>
+    </div>
+
+
+    <footer class="bg-black py-16 px-6 md:px-12 border-t border-white/[0.04] text-center">
+        <img src="logo.jpeg" alt="Logo Corporate" class="h-10 w-auto mx-auto object-contain mb-6 opacity-80 rounded-sm">
+        <div class="max-w-[600px] mx-auto text-zinc-500 text-[0.7rem] uppercase tracking-[2px] space-y-4 mb-8">
+            <p>Sede Comercial Operativa: Aeropuerto José María Córdova / El Poblado, Medellín, Colombia.</p>
+            <p class="text-[0.6rem] tracking-[1px] text-zinc-600">Contacto Directo VIP: +57 304 374 1941 | Correo de Soporte: info@rentacarpremium.co</p>
+        </div>
+        <div class="text-[0.55rem] text-zinc-700 tracking-[1px] font-mono border-t border-white/5 pt-8 max-w-[400px] mx-auto">
+            © 2026 RENTA CAR PREMIUM S.A.S. TODOS LOS DERECHOS RESERVADOS.
+        </div>
+    </footer>
+
+
+    <script>
+        // BASE DE DATOS ESTRUCTURADA DE VEHÍCULOS (FLOTA)
+        const fleetData = [
+            { 
+                id: "c8", 
+                name: "Chevrolet Corvette C8 Coupe", 
+                price: 2500000, 
+                hp: "495 HP", 
+                trans: "8 Marchas Doble Embrague", 
+                fuel: "Gasolina Extra Premium", 
+                pax: "2 Pasajeros", 
+                type: "Deportivo",
+                galeria: [
+                    "https://images.unsplash.com/photo-1600712242805-5f78671b24da?w=800&q=80",
+                    "https://images.unsplash.com/photo-1552519507-da3b142c6e3d?w=800&q=80",
+                    "https://images.unsplash.com/photo-1583121274602-3e2820c69888?w=800&q=80"
+                ]
+            },
+            { 
+                id: "tahoe", 
+                name: "Chevrolet Tahoe Z71 Luxury", 
+                price: 1100000, 
+                hp: "355 HP V8", 
+                trans: "Automática de 10 Velocidades", 
+                fuel: "Gasolina Extra Premium", 
+                pax: "7 Pasajeros AWD", 
+                type: "SUV",
+                galeria: [
+                    "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?w=800&q=80",
+                    "https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=800&q=80",
+                    "https://images.unsplash.com/photo-1549399542-7e3f8b79c341?w=800&q=80"
+                ]
+            },
+            { 
+                id: "prado", 
+                name: "Toyota Prado Blindada 🛡️", 
+                price: 650000, 
+                hp: "204 HP TurboDiésel", 
+                trans: "Automática Secuencial", 
+                fuel: "Diésel (Blindaje Nivel 2+)", 
+                pax: "7 Pasajeros 4x4", 
+                type: "SUV",
+                galeria: [
+                    "https://images.unsplash.com/photo-1502877338535-766e1452684a?w=800&q=80",
+                    "https://images.unsplash.com/photo-1617469767053-d3b508a0d825?w=800&q=80",
+                    "https://images.unsplash.com/photo-1511919884226-fd3cad34687c?w=800&q=80"
+                ]
+            }
+        ];
+
+        // BASE DE DATOS DE RESEÑAS / TESTIMONIOS
+        const testimoniosData = [
+            { stars: "★★★★★", text: "Excelente servicio en Rionegro. Me entregaron el Corvette C8 impecable directamente en la pista privada. Conserjería premium total.", autor: "Matthew S. (Miami, USA)" },
+            { stars: "★★★★★", text: "La Tahoe Z71 estaba nueva, limpia y el proceso de hold fue transparente. Muy recomendados para ejecutivos en El Poblado.", autor: "Juan Pablo A. (Bogotá, CO)" },
+            { stars: "★★★★★", text: "Seguridad y discreción absoluta con la Prado Blindada. El soporte técnico bilingüe nos asistió 24/7 de manera magistral.", autor: "Elena R. (Madrid, ES)" }
+        ];
+
+        // BASE DE DATOS DE PREGUNTAS FRECUENTES
+        const faqData = [
+            { q: "¿Cuáles son los requisitos obligatorios para rentar?", a: "Licencia de conducción nacional o internacional vigente, cédula de ciudadanía o pasaporte original, y contar con una tarjeta de crédito con cupo disponible para el hold temporal de la garantía de seguridad." },
+            { q: "¿Cómo opera el proceso de entrega en el aeropuerto?", a: "Coordinamos vía satélite el arribo de tu vuelo. Un conserje uniformado te espera en la puerta de desembarque del Aeropuerto José María Córdova de Rionegro con el vehículo listo en parqueadero VIP, sin filas ni trámites lentos." },
+            { q: "¿Cómo se calcula y libera el depósito de garantía?", a: "Se genera un bloqueo preventivo (hold bancario) en tu tarjeta al inicio del alquiler. Al retornar el coche en las mismas condiciones mecánicas y de combustible, nuestro sistema procesa la liberación del cupo de manera inmediata." }
+        ];
+
+        // DICCIONARIO BILINGÜE MÁSTERCARD DE TRADUCCIÓN COMPLETA
+        const diccionarioBilingue = {
+            es: {
+                navServ: "Servicios", navFleet: "Flota VIP", navBook: "Reservas", navCta: "Rent Now",
+                heroTitle: 'ALQUILER DE AUTOS DE LUXE EN <span class="text-primary">MEDELLÍN</span>',
+                heroSub: "EXPERIENCIAS DE CONDUCCIÓN PREMIUM DE ALTA GAMA", heroBtn: "Explorar Catálogo",
+                servSub: "EXCLUSIVIDAD", servTitle: "NUESTROS SERVICIOS VIP",
+                s1t: "Entrega Aeropuerto", s1d: "Despachos y recepciones directas sin costo adicional en las terminales del Aeropuerto Internacional José María Córdova de Rionegro.",
+                s2t: "Seguridad Máxima", s2d: "Vehículos blindados con esquemas de protección balística premium y personal calificado bajo solicitud previa corporativa.",
+                s3t: "Soporte 24/7 Concierge", s3d: "Asistencia en ruta inmediata, grúa preferencial y conserjería bilingüe personalizada disponible a cualquier hora del día.",
+                fleetSub: "COLECCIÓN EXCLUSIVA", fleetTitle: "EXPLORA NUESTRA FLOTA PREMIUM", priceDay: "Día",
+                calcSub: "PRESUPUESTO", calcTitle: "CALCULA TU TARIFA CORPORATIVA EN VIVO", calcCar: "Modelo del Vehículo Premium", calcDays: "Días Comerciales Solicitados:",
+                formSub: "SISTEMA DE RESERVAS", formTitle: "SOLICITA TU DISPONIBILIDAD DE INMEDIATO", formName: "Nombre Completo del Titular", formDays: "Días de Alquiler", formBtn: "Enviar a WhatsApp VIP"
+            },
+            en: {
+                navServ: "Services", navFleet: "VIP Fleet", navBook: "Bookings", navCta: "Rent Now",
+                heroTitle: 'LUXURY CAR RENTAL IN <span class="text-primary">MEDELLIN</span>',
+                heroSub: "HIGH-END PREMIUM DRIVING EXPERIENCES", heroBtn: "View VIP Fleet",
+                servSub: "EXCLUSIVITY", servTitle: "OUR VIP SERVICES",
+                s1t: "Airport Delivery", s1d: "Direct pick-ups and drop-offs at Rionegro Airport terminals free of any extra charges.",
+                s2t: "Maximum Security", s2d: "Armored vehicles featuring premium ballistic protection configurations and certified security staff on request.",
+                s3t: "24/7 Concierge", s3d: "Immediate roadside assistance, priority towing, and bilingual custom concierge help at any time.",
+                fleetSub: "EXCLUSIVE COLLECTION", fleetTitle: "EXPLORE OUR PREMIUM FLEET", priceDay: "Day",
+                calcSub: "BUDGET", calcTitle: "CALCULATE YOUR CORPORATE RATE LIVE", calcCar: "Premium Vehicle Model", calcDays: "Requested Rental Days:",
+                formSub: "BOOKING SYSTEM", formTitle: "REQUEST AVAILABILITY IMMEDIATELY", formName: "Full Name of Primary Driver", formDays: "Rental Days", formBtn: "Send to VIP WhatsApp"
+            }
+        };
+
+        // VARIABLES DE ESTADO LOCALES GLOBALIZADAS
+        let idiomaGlobal = "es";
+        let filtroSeleccionado = "todos";
+        let galeriaIndexInterno = 0;
+        let galeriaFotosActuales = [];
+
+        // RENDERIZADO PRINCIPAL AUTOMÁTICO DE LA INTERFAZ
+        function renderizarEstructuraPlataforma() {
+            const grid = document.getElementById('grid-flota');
+            const calcSelect = document.getElementById('calcCar');
+            const formSelect = document.getElementById('formCar');
+            const comp1 = document.getElementById('comp1');
+            const comp2 = document.getElementById('comp2');
+
+            // Limpieza estructural para re-inyección limpia
+            grid.innerHTML = "";
+            calcSelect.innerHTML = "";
+            formSelect.innerHTML = "";
+            comp1.innerHTML = "";
+            comp2.innerHTML = "";
+
+            // 1. ITERACIÓN Y CONSTRUCCIÓN DE FLOTA
+            fleetData.forEach((car, index) => {
+                if (filtroSeleccionado === "todos" || car.type === filtroSeleccionado) {
+                    grid.innerHTML += `
+                        <div class="bg-cardBg border border-white/[0.03] rounded-xl overflow-hidden flex flex-col h-full group transition-all duration-500 hover:border-primary/40 hover:shadow-2xl hover:shadow-primary/5">
+                            <div class="w-full h-[230px] overflow-hidden relative">
+                                <img src="${car.galeria[0]}" alt="${car.name}" class="w-full h-full object-cover transition-all duration-700 group-hover:scale-105">
+                                <button onclick="activarModalGaleria('${car.id}')" class="absolute bottom-3 right-3 bg-black/80 backdrop-blur-md border border-white/10 text-white hover:text-primary text-[0.6rem] font-bold uppercase tracking-[1px] px-3 py-1.5 rounded cursor-pointer transition-all">
+                                    📸 Ver Fotos (${car.galeria.length})
+                                </button>
+                                <span class="absolute top-3 left-3 bg-zinc-950/90 text-accent border border-accent/20 px-2 py-0.5 rounded text-[0.55rem] uppercase tracking-[1px] font-bold font-mono">
+                                    ${car.type}
+                                </span>
+                            </div>
+                            <div class="p-6 flex flex-col flex-grow justify-between">
+                                <div>
+                                    <h3 class="text-[1.15rem] font-black uppercase tracking-[0.5px] text-white group-hover:text-primary transition-colors duration-300">${car.name}</h3>
+                                    <div class="my-3 flex items-baseline gap-1">
+                                        <span class="text-white font-mono text-[1.3rem] font-black tracking-tight">${formatearPrecioGlobal(car.price)}</span>
+                                        <span class="text-zinc-500 text-[0.72rem] lowercase font-light"> / ${idiomaGlobal === 'es' ? 'día' : 'day'}</span>
+                                    </div>
+                                    
+                                    <div class="grid grid-cols-2 gap-y-2.5 gap-x-2 border-t border-white/[0.04] pt-4 mt-2 mb-6 text-[0.72rem] text-zinc-400 font-mono font-light">
+                                        <div class="flex items-center gap-1.5">🕹️ <span class="text-white/80 truncate">${car.trans}</span></div>
+                                        <div class="flex items-center gap-1.5">⛽ <span class="text-white/80 truncate">${car.fuel}</span></div>
+                                        <div class="flex items-center gap-1.5">👥 <span class="text-white/80 truncate">${car.pax}</span></div>
+                                        <div class="flex items-center gap-1.5">⚡ <span class="text-white/80 truncate">${car.hp}</span></div>
+                                    </div>
+                                </div>
+                                <a href="#reserva" onclick="asignarAutoAFormulario('${car.name}')" class="block w-full py-3.5 bg-transparent border border-white/10 text-white text-[0.68rem] font-black uppercase tracking-[2px] rounded-lg text-center hover:bg-white hover:text-black hover:border-white transition-all duration-500">
+                                    Reservar Unidad VIP
+                                </a>
+                            </div>
+                        </div>`;
+                }
+
+                // Inyección segura de selectores de datos
+                calcSelect.innerHTML += `<option value="${car.price}">${car.name}</option>`;
+                formSelect.innerHTML += `<option value="${car.name}">${car.name}</option>`;
+                comp1.innerHTML += `<option value="${index}">${car.name}</option>`;
+                comp2.innerHTML += `<option value="${index}" ${index === 1 ? 'selected': ''}>${car.name}</option>`;
+            });
+
+            // 2. CONSTRUCCIÓN DE ACORDEÓN DE PREGUNTAS FRECUENTES (FAQ)
+            const faqContainer = document.getElementById('contenedor-faq-dinamico');
+            faqContainer.innerHTML = "";
+            faqData.forEach((item, idx) => {
+                faqContainer.innerHTML += `
+                    <div class="bg-cardBg border border-white/[0.03] rounded-xl overflow-hidden transition-all duration-300">
+                        <button onclick="conmutarAcordeonFAQ(${idx})" class="w-full text-left p-6 flex justify-between items-center text-[0.85rem] font-bold uppercase tracking-[0.5px] text-white hover:text-primary transition-all cursor-pointer bg-transparent border-none">
+                            <span>${item.q}</span>
+                            <span id="faq-icon-${idx}" class="text-zinc-500 font-mono font-bold transition-transform duration-300">+</span>
+                        </button>
+                        <div id="faq-ans-${idx}" class="hidden p-6 pt-0 border-t border-white/[0.02] text-zinc-400 text-[0.82rem] font-light leading-relaxed bg-black/10">
+                            ${item.a}
+                        </div>
+                    </div>`;
+            });
+
+            // 3. CONSTRUCCIÓN DEL MARCO DE RESEÑAS INFINITAS (CARRUSEL INYECTADO)
+            const reviewScroll = document.getElementById('contenedor-testimonios-infinito');
+            reviewScroll.innerHTML = "";
+            // Duplicamos el array para que el scroll de CSS sea fluido y no deje huecos
+            const testimoniosDobles = [...testimoniosData, ...testimoniosData, ...testimoniosData];
+            testimoniosDobles.forEach((t) => {
+                reviewScroll.innerHTML += `
+                    <div class="bg-cardBg border border-white/[0.03] p-8 rounded-xl w-[310px] sm:w-[380px] flex flex-col justify-between shadow-lg">
+                        <div>
+                            <div class="text-accent text-[0.9rem] mb-3 font-mono tracking-tight">${t.stars}</div>
+                            <p class="text-white/80 text-[0.82rem] font-light italic leading-relaxed mb-4">"${t.text}"</p>
+                        </div>
+                        <div class="text-primary font-bold text-[0.68rem] uppercase tracking-[2px] font-mono border-l border-primary/40 pl-2">
+                            ${t.autor}
+                        </div>
+                    </div>`;
+            });
+
+            // Ejecuciones en cadena para sincronizar cálculos iniciales
+            recalcularTarifaTotal();
+            ejecutarComparacion();
+        }
+
+        // CONTROLADORES DE PRECIO Y DIVISAS BILINGÜES
+        function formatearPrecioGlobal(copValue) {
+            if (idiomaGlobal === 'es') {
+                return '$' + copValue.toLocaleString('es-CO');
+            } else {
+                // Conversión de tasa fija comercial controlada de $4.000 COP por 1 USD
+                const usdValue = Math.round(copValue / 4000);
+                return 'USD $' + usdValue.toLocaleString('en-US');
+            }
+        }
+
+        function cambiarIdiomaGlobal(lenguajeCod) {
+            idiomaGlobal = lenguajeCod;
+            const traduccion = diccionarioBilingue[lenguajeCod];
+
+            // Inyección masiva de etiquetas del diccionario bilingüe en el DOM
+            document.getElementById('nav-servicios').innerText = traduccion.navServ;
+            document.getElementById('nav-flota').innerText = traduccion.navFleet;
+            document.getElementById('nav-reserva').innerText = traduccion.navBook;
+            document.getElementById('nav-cta').innerText = traduccion.navCta;
+            document.getElementById('hero-title').innerHTML = traduccion.heroTitle;
+            document.getElementById('hero-subtitle').innerText = traduccion.heroSub;
+            document.getElementById('hero-btn-primary').innerText = traduccion.heroBtn;
+            document.getElementById('serv-sub').innerText = traduccion.servSub;
+            document.getElementById('serv-title').innerText = traduccion.servTitle;
+            document.getElementById('s1-title').innerText = traduccion.s1t;
+            document.getElementById('s1-desc').innerText = traduccion.s1d;
+            document.getElementById('s2-title').innerText = traduccion.s2t;
+            document.getElementById('s2-desc').innerText = traduccion.s2d;
+            document.getElementById('s3-title').innerText = traduccion.s3t;
+            document.getElementById('s3-desc').innerText = traduccion.s3d;
+            document.getElementById('fleet-sub').innerText = traduccion.fleetSub;
+            document.getElementById('fleet-title').innerText = traduccion.fleetTitle;
+            document.getElementById('calc-sub').innerText = traduccion.calcSub;
+            document.getElementById('calc-title').innerText = traduccion.calcTitle;
+            document.getElementById('calc-label-car').innerText = traduccion.calcCar;
+            document.getElementById('calc-label-days').innerText = traduccion.calcDays;
+            document.getElementById('form-sub').innerText = traduccion.formSub;
+            document.getElementById('form-title').innerText = traduccion.formTitle;
+            document.getElementById('form-name-label').innerText = traduccion.formName;
+            document.getElementById('form-days-label').innerText = traduccion.formDays;
+            document.getElementById('form-btn').innerText = traduccion.formBtn;
+
+            // Renderizado estructural con el nuevo set de divisas e idioma activo
+            renderizarEstructuraPlataforma();
+        }
+
+        // FILTRADO DE COMPONENTES POR TIPO DE FLOTA
+        function filtrarFlota(tipoCod) {
+            filtroSeleccionado = tipoCod;
+            renderizarEstructuraPlataforma();
+        }
+
+        // ASIGNACIÓN DE CLICS DE TARJETAS AL FORMULARIO COMERCIAL
+        function asignarAutoAFormulario(nombreAuto) {
+            document.getElementById('formCar').value = nombreAuto;
+        }
+
+        // LÓGICA LOGÍSTICA DEL COTIZADOR DINÁMICO
+        function recalcularTarifaTotal() {
+            const precioBase = parseInt(document.getElementById('calcCar').value);
+            const numeroDias = parseInt(document.getElementById('calcDays').value);
+            
+            document.getElementById('daysLabel').innerText = numeroDias;
+            document.getElementById('calcUnit').innerText = formatearPrecioGlobal(precioBase);
+
+            let factorDescuento = 0;
+            // Regla comercial de volumen corporativo: más de 7 días otorga 10% de descuento
+            if (numeroDias >= 7) {
+                factorDescuento = 0.10;
+                document.getElementById('calcDiscount').innerText = "10% VIP Apply";
+                document.getElementById('calcDiscount').className = "text-green-500 font-bold";
+            } else {
+                document.getElementById('calcDiscount').innerText = "0%";
+                document.getElementById('calcDiscount').className = "text-zinc-600";
+            }
+
+            const valorBruto = precioBase * numeroDias;
+            const valorNetoFinal = valorBruto - (valorBruto * factorDescuento);
+
+            document.getElementById('calcTotal').innerText = formatearPrecioGlobal(valorNetoFinal);
+        }
+
+        // COMPARADOR DE CARROS CARA A CARA
+        function ejecutarComparacion() {
+            const indexA = document.getElementById('comp1').value;
+            const indexB = document.getElementById('comp2').value;
+
+            if (indexA === undefined || indexB === undefined || fleetData.length === 0) return;
+
+            const carA = fleetData[indexA];
+            const carB = fleetData[indexB];
+
+            document.getElementById('comp1-specs').innerHTML = `
+                <p class="text-primary font-black uppercase text-[0.85rem] tracking-[0.5px] mb-3">${carA.name}</p>
+                <div class="space-y-1.5 text-zinc-400">
+                    <p><span class="text-zinc-600">Potencia:</span> ${carA.hp}</p>
+                    <p><span class="text-zinc-600">Transmisión:</span> ${carA.trans}</p>
+                    <p><span class="text-zinc-600">Combustible:</span> ${carA.fuel}</p>
+                    <p><span class="text-zinc-600">Capacidad:</span> ${carA.pax}</p>
+                    <p class="text-accent font-black pt-2 border-t border-white/5 mt-2 text-[0.82rem]">${formatearPrecioGlobal(carA.price)}/Día</p>
+                </div>`;
+
+            document.getElementById('comp2-specs').innerHTML = `
+                <p class="text-accent font-black uppercase text-[0.85rem] tracking-[0.5px] mb-3">${carB.name}</p>
+                <div class="space-y-1.5 text-zinc-400">
+                    <p><span class="text-zinc-600">Potencia:</span> ${carB.hp}</p>
+                    <p><span class="text-zinc-600">Transmisión:</span> ${carB.trans}</p>
+                    <p><span class="text-zinc-600">Combustible:</span> ${carB.fuel}</p>
+                    <p><span class="text-zinc-600">Capacidad:</span> ${carB.pax}</p>
+                    <p class="text-primary font-black pt-2 border-t border-white/5 mt-2 text-[0.82rem]">${formatearPrecioGlobal(carB.price)}/Día</p>
+                </div>`;
+        }
+
+        // INTERACTIVIDAD ACORDEÓN PREGUNTAS FRECUENTES (FAQ)
+        function conmutarAcordeonFAQ(indiceFAQ) {
+            const panelRespuesta = document.getElementById(`faq-ans-${indiceFAQ}`);
+            const indicadorIcono = document.getElementById(`faq-icon-${indiceFAQ}`);
+
+            if (panelRespuesta.classList.contains('hidden')) {
+                panelRespuesta.classList.remove('hidden');
+                indicadorIcono.innerText = "−";
+                indicadorIcono.className = "text-primary font-bold";
+            } else {
+                panelRespuesta.classList.add('hidden');
+                indicadorIcono.innerText = "+";
+                indicadorIcono.className = "text-zinc-500 font-bold";
+            }
+        }
+
+        // CONTROLADORES DE MODALES COMPONENTIZADOS NATIVOS
+        function activarDespliegueModal(idModal) {
+            document.getElementById(idModal).classList.remove('hidden');
+            document.body.classList.add('overflow-hidden');
+        }
+
+        function desactivarOcultarModal(idModal) {
+            document.getElementById(idModal).classList.add('hidden');
+            document.body.classList.remove('overflow-hidden');
+        }
+
+        // LÓGICA AVANZADA DE GALERÍA DE FOTOS INTERNA MODAL
+        function activarModalGaleria(idVehiculo) {
+            const carEncontrado = fleetData.find(c => c.id === idVehiculo);
+            if (!carEncontrado) return;
+
+            galeriaFotosActuales = carEncontrado.galeria;
+            galeriaIndexInterno = 0;
+
+            document.getElementById('modalGaleriaTitulo').innerText = carEncontrado.name;
+            document.getElementById('imgModalPrincipal').src = galeriaFotosActuales[galeriaIndexInterno];
+
+            const contenedorThumbnails = document.getElementById('contenedorThumbnails');
+            contenedorThumbnails.innerHTML = "";
+            galeriaFotosActuales.forEach((foto, idx) => {
+                contenedorThumbnails.innerHTML += `
+                    <div class="h-14 md:h-20 rounded-lg overflow-hidden bg-black border border-white/10 cursor-pointer hover:border-primary transition-all" onclick="asignarFotoModalPrincipalDirecta(${idx})">
+                        <img src="${foto}" class="w-full h-full object-cover">
+                    </div>`;
+            });
+
+            activarDespliegueModal('modalGaleria');
+        }
+
+        function asignarFotoModalPrincipalDirecta(idx) {
+            galeriaIndexInterno = idx;
+            document.getElementById('imgModalPrincipal').src = galeriaFotosActuales[galeriaIndexInterno];
+        }
+
+        function cambiarFotoInterna(direccionCambio) {
+            galeriaIndexInterno += direccionCambio;
+            if (galeriaIndexInterno >= galeriaFotosActuales.length) galeriaIndexInterno = 0;
+            if (galeriaIndexInterno < 0) galeriaIndexInterno = galeriaFotosActuales.length - 1;
+            document.getElementById('imgModalPrincipal').src = galeriaFotosActuales[galeriaIndexInterno];
+        }
+
+        // INTELECTO ARTIFICIAL: CHATBOT ASISTENTE CONSERJE WIDGET
+        function conmutarVisibilidadChatBot() {
+            const botCaja = document.getElementById('cajaChatBot');
+            if (botCaja.classList.contains('hidden')) {
+                botCaja.classList.remove('hidden');
+            } else {
+                botCaja.classList.add('hidden');
+            }
+        }
+
+        function evaluarTeclaEnterChat(event) {
+            if (event.key === 'Enter') {
+                enviarMensajeUsuarioChat();
+            }
+        }
+
+        function enviarMensajeUsuarioChat() {
+            const inputField = document.getElementById('inputChatMsg');
+            const textoMensaje = inputField.value.trim();
+            if (textoMensaje === "") return;
+
+            const historial = document.getElementById('historialChat');
+            
+            // Inyectar Burbuja de Usuario
+            historial.innerHTML += `
+                <div class="bg-primary/10 border border-primary/20 p-3 rounded-lg max-w-[85%] text-white ml-auto text-right font-medium">
+                    ${textoMensaje}
+                </div>`;
+            
+            inputField.value = "";
+            historial.scrollTop = historial.scrollHeight;
+
+            // Procesador de respuestas automáticas inteligentes de conserjería
+            setTimeout(() => {
+                let respuestaBot = "Recibo tu mensaje de inmediato. Un conserje de nuestra mesa corporativa en El Poblado se pondrá en comunicación contigo vía telefónica o WhatsApp para agilizar la entrega del vehículo.";
+                const msgMinuscula = textoMensaje.toLowerCase();
+
+                if (msgMinuscula.includes('corvette') || msgMinuscula.includes('deportivo') || msgMinuscula.includes('c8')) {
+                    respuestaBot = "🏎️ El *Chevrolet Corvette C8 Stingray* es nuestra joya de la corona. Su valor comercial es de $2.500.000 por día comercial. Incluye despacho prioritario en Rionegro. ¿Para qué fecha lo requieres?";
+                } else if (msgMinuscula.includes('tahoe') || msgMinuscula.includes('z71') || msgMinuscula.includes('suv')) {
+                    respuestaBot = "🦅 La *Chevrolet Tahoe Z71 Executive* es perfecta para viajes premium con espacio de 7 pasajeros. Cuenta con tracción 4x4 y motor V8. Tarifa comercial: $1.100.000/Día.";
+                } else if (msgMinuscula.includes('blindada') || msgMinuscula.includes('prado') || msgMinuscula.includes('toyota') || msgMinuscula.includes('blindado')) {
+                    respuestaBot = "🛡️ Contamos con la *Toyota Prado Blindada (Nivel 2+)* armada con motor TurboDiésel de alto torque. Ideal para máxima seguridad discreta en Medellín. Tarifa: $650.000/Día.";
+                } else if (msgMinuscula.includes('requisito') || msgMinuscula.includes('necesito') || msgMinuscula.includes('papeles')) {
+                    respuestaBot = "📋 Los requisitos indispensables son: Licencia de conducción vigente, documento de identidad (Pasaporte si eres extranjero) y una tarjeta de crédito titular para aplicar el hold de la fianza.";
+                } else if (msgMinuscula.includes('contrato') || msgMinuscula.includes('firma')) {
+                    respuestaBot = "✍️ Las cláusulas contractuales de nuestra firma están avaladas por la representación autorizada de Carmen (Sucesión legal de Eduardo) para darte total respaldo jurídico comercial.";
+                }
+
+                historial.innerHTML += `
+                    <div class="bg-zinc-900 border border-white/5 p-3 rounded-lg max-w-[85%] text-zinc-300">
+                        ${respuestaBot}
+                    </div>`;
+                historial.scrollTop = historial.scrollHeight;
+            }, 850);
+        }
+
+        // DESPACHO FINAL E INTEGRACIÓN DIRECTA CON WHATSAPP BUSINESS
+        function procesarDespachoWhatsApp(event) {
+            event.preventDefault();
+            
+            const autoSeleccionado = document.getElementById('formCar').value;
+            const nombreTitular = document.getElementById('formName').value;
+            const lugarEntrega = document.getElementById('formLugar').value;
+            const telefonoContacto = document.getElementById('formPhone').value;
+            const totalDias = document.getElementById('formDays').value;
+
+            // Construcción del template de mensaje codificado para la mesa de control
+            const estructuraTextoMsg = `👋 *SOLICITUD COMERCIAL DE ALQUILER VIP - RENTA CAR PREMIUM*%0A%0A` +
+                `• *Vehículo Solicitado:* ${autoSeleccionado}%0A` +
+                `• *Nombre del Cliente:* ${nombreTitular}%0A` +
+                `• *Lugar de Despacho:* ${lugarEntrega}%0A` +
+                `• *Teléfono de Contacto:* ${telefonoContacto}%0A` +
+                `• *Días Comerciales:* ${totalDias} día(s)%0A%0A` +
+                `📌 _Mesa Operativa: Solicito verificación inmediata de disponibilidad física en hangar y generación de hold de seguridad._`;
+
+            // Enlace de re-direccionamiento directo al número de atención de la empresa
+            const urlFinalWhatsApp = `https://wa.me/573043741941?text=${estructuraTextoMsg}`;
+            
+            window.open(urlFinalWhatsApp, '_blank');
+        }
+
+        // INICIALIZACIÓN COMPLETA DE ESCUCHA DEL DOM
+        window.onload = renderizarEstructuraPlataforma;
+    </script>
+</body>
 </html>
